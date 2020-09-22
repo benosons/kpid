@@ -61,4 +61,4 @@ $route['^(dashboard|saveUser|listUser|updateUser|formUser|listDataUser|deleteUse
 
 $route['^(listaduan|listDataPangan|deletePangan|savePangan|updatePangan|formPangan|dataDetailPangan)(/:any)?$'] = "aduan/$0";
 
-$route['^(listtelevisi|listradio|deletePangan|savePangan|updatePangan|formPangan|dataDetailPangan)(/:any)?$'] = "siaran/$0";
+$route['^(listtelevisi|listradio|listDataSiaran|savePangan|updatePangan|formPangan|dataDetailPangan)(/:any)?$'] = "siaran/$0";

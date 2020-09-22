@@ -161,15 +161,15 @@
 			<ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 						 with font-awesome or any other icon font library -->
-				<li class="nav-item menu-open">
-					<a href="{{base_url}}dashboard" class="nav-link active">
+				<li class="nav-item" id="dash">
+					<a href="{{base_url}}dashboard" class="nav-link">
 						<i class="nav-icon fas fa-chart-pie"></i>
 						<p>
 							Dashboard
 						</p>
 					</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" id="siar">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-satellite-dish"></i>
 						<p>
@@ -179,13 +179,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="{{base_url}}listtelevisi" class="nav-link">
+							<a href="{{base_url}}listtelevisi" class="nav-link" id="tv">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Televisi</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+							<a href="pages/layout/top-nav-sidebar.html" class="nav-link" id="radio">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Radio</p>
 							</a>
