@@ -30,40 +30,40 @@ class Auth extends CI_Controller {
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 		);
-		
+
 	}
 
 
 	public function index()
 	{
-		if ( $this->logged) 
+		if ( $this->logged)
 		{
 			redirect("/");
 		}
-		else 
+		else
 		{
 			if($_POST)
 			{
 				$params = (object)$this->input->post();
 				$valid = $this->Model_auth->loginAuth($params->username, $params->password);
-				
+
 				if ($valid)
-					redirect("Dashboard");
+					redirect("dashboard");
 				else
 					// jang status muncul alert
 					redirect("logout");
 			}
-	
+
 			$this->twig->display("admin/login.html", $this->content);
 		}
-		
+
 	}
 
 	public function logout()
 	{
 		$valid = $this->session->sess_destroy();
 		// session_destroy();
-		redirect("/");			
+		redirect("/");
 	}
 
 

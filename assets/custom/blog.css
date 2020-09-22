@@ -20,7 +20,7 @@
 }
 .blog-grid .blog-img .date {
   position: absolute;
-  background: #fc5356;
+  background: #dc3545;
   color: #ffffff;
   padding: 8px 15px;
   left: 10px;
@@ -271,3 +271,8 @@ img {
     vertical-align: middle;
     border-style: none;
 } */
+
+.tutor {
+    height: 20em;
+    width: 100%;
+}
