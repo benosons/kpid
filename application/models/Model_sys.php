@@ -12,32 +12,32 @@ class Model_sys extends CI_Model {
 
 
     // server side
-    
+
     private function _get_datatables_query()
     {
         $id = $this->db->escape_str('admin');
         $this->db->from('muser');
         $this->db->where('kategori',$id);
-        
-        
+
+
 
         $i = 0;
-    
-        foreach ($this->column as $item) // loop column 
+
+        foreach ($this->column as $item) // loop column
     {
          if($_POST['search']['value']) // if datatable send POST for search
          {
-    
+
             if($i===0) // first loop
             {
-               $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND. 
+               $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
                $this->db->like($item, $_POST['search']['value']);
             }
             else
             {
                $this->db->or_like($item, $_POST['search']['value']);
             }
-    
+
             if(count($this->column) - 1 == $i) //last loop
                $this->db->group_end(); //close bracket
          }
@@ -48,7 +48,7 @@ class Model_sys extends CI_Model {
         if(isset($_POST['order'])) // here order processing
         {
             $this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
+        }
         else if(isset($this->order))
         {
             $order = $this->order;
@@ -71,7 +71,7 @@ class Model_sys extends CI_Model {
         $query = $this->db->get();
         return $query->num_rows();
     }
-    
+
     public function count_all()
     {
         $this->db->from($this->table);
@@ -84,7 +84,7 @@ class Model_sys extends CI_Model {
         return $query;
     }
 
-    
+
     public function save($params = NULL)
     {
         $valid = false;
@@ -95,7 +95,7 @@ class Model_sys extends CI_Model {
         $this->db->set("kategori", 'admin');
         $this->db->set("created_by", $this->session->userdata('username'));
         $this->db->set("created_at", date("Y-m-d H:i:s"));
-        $valid = $this->db->insert('muser'); 
+        $valid = $this->db->insert('muser');
 
         return $valid;
 
@@ -107,7 +107,7 @@ class Model_sys extends CI_Model {
 
         $pass = $params->password;
         $query = $this->db->query("select password, id from muser where id = '".$params->id."' ")->row();
-        
+
         if ($pass != $query->password) {
             $this->db->set("password", md5($params->password));
         }
@@ -116,7 +116,7 @@ class Model_sys extends CI_Model {
         $this->db->set("updated_by", $this->session->userdata('username'));
         $this->db->set("updated_at", date("Y-m-d H:i:s"));
         $this->db->where('id', $params->id);
-        $valid = $this->db->update('muser'); 
+        $valid = $this->db->update('muser');
 
         return $valid;
 
@@ -128,5 +128,5 @@ class Model_sys extends CI_Model {
         $this->db->where('id', $idx);
         $this->db->delete('muser');
     }
-    
+
 }

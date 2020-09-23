@@ -36,14 +36,11 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
-		if ( $this->logged)
+		if ($this->logged)
 		{
 			redirect("/");
-		}
-		else
-		{
-			if($_POST)
-			{
+		} else {
+			if($_POST){
 				$params = (object)$this->input->post();
 				$valid = $this->Model_auth->loginAuth($params->username, $params->password);
 
@@ -61,6 +58,7 @@ class Auth extends CI_Controller {
 
 	public function logout()
 	{
+		$this->Model_auth->updateislogin($this->session->userdata('id'));
 		$valid = $this->session->sess_destroy();
 		// session_destroy();
 		redirect("/");
