@@ -152,6 +152,6 @@ function autoPlayYouTubeModal(url) {
   });
 
 
-  $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
-  // $('#iframe-video').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
+  // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
+  $('#iframe-video').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
 }
