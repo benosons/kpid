@@ -28,19 +28,20 @@ $( document ).ready(function() {
                       aoColumns: [
                           { 'mDataProp': 'id'},
                           { 'mDataProp': 'namaBadanHukum'},
-                          { 'mDataProp': 'noIPP'},
                           { 'mDataProp': 'sebutanDiUdara'},
-                          { 'mDataProp': 'pimpinan'},
+                          { 'mDataProp': 'wilayahLayanan'},
                           { 'mDataProp': 'alamat'},
+                          { 'mDataProp': 'pimpinan'},
                           { 'mDataProp': 'email'},
                           { 'mDataProp': 'frekuensi'},
-                          { 'mDataProp': 'wilayahLayanan'},
+                          { 'mDataProp': 'noIPP'},
                           { 'mDataProp': 'kontak'},
+                          { 'mDataProp': 'koor'},
                       ],
                       order: [[0, 'ASC']],
                       aoColumnDefs:[
                           {
-                              "targets": [ 5,6,7,8,9 ],
+                              "targets": [ 5,6,7,8,9,10 ],
                               "visible": false
                           },
                           {
@@ -49,7 +50,7 @@ $( document ).ready(function() {
                                       $rowData += `
                                                 <div class="row">
                                                   <div class="col-md-4">
-                                                    <button onclick="modaldetail('`+row.namaBadanHukum+`','`+row.pimpinan+`','`+row.alamat+`','`+row.email+`','`+row.frekuensi+`','`+row.wilayahLayanan+`','`+row.kontak+`')" type="button" class="btn btn-block btn-success btn-sm"><i class="far fa-eye"></i></button>
+                                                    <button onclick="modaldetail('`+row.namaBadanHukum+`','`+row.pimpinan+`','`+row.alamat+`','`+row.email+`','`+row.frekuensi+`','`+row.wilayahLayanan+`','`+row.kontak+`','`+row.koor+`')" type="button" class="btn btn-block btn-success btn-sm"><i class="far fa-eye"></i></button>
                                                   </div>
                                                   <div class="col-md-4">
                                                     <button type="button" class="btn btn-block btn-warning btn-sm"><i class="far fa-edit"></i></button>
@@ -167,9 +168,10 @@ $( document ).ready(function() {
                     }
                 });
             }
+
 });
 
-function modaldetail(nama, pimpinan, alamat, email, frekuensi, wilayah, kontak){
+function modaldetail(nama, pimpinan, alamat, email, frekuensi, wilayah, kontak, koor){
 
     $('#modal-default').modal({
       show: true
@@ -177,10 +179,13 @@ function modaldetail(nama, pimpinan, alamat, email, frekuensi, wilayah, kontak){
 
     $('.modal-title').html('<b>'+nama+'</b>');
     $('#pimpinan').val(pimpinan);
-    $('#alamat').val(alamat);
+    $('#koor').val(koor);
     $('#email').val(email);
     $('#frekuensi').val(frekuensi);
-    $('#wilayah').val(wilayah);
+    $('#alamat').val(alamat);
     $('#kontak').val(kontak);
-  // alert(nama)
+    $('#maps').html(`<iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+      src = "https://maps.google.com/maps?q=`+koor+`&hl=es;z=14&amp;output=embed"></iframe>`
+    );
+
 }

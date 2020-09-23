@@ -125,6 +125,7 @@ class Siaran extends CI_Controller {
 				$row['frekuensi'] = (!empty($proses->frekuensi) ? $proses->frekuensi : "NULL");
 				$row['wilayahLayanan'] = (!empty($proses->wilayahLayanan) ? $proses->wilayahLayanan : "NULL");
 				$row['kontak'] = (!empty($proses->kontak) ? $proses->kontak : "NULL");
+				$row['koor'] = (!empty($proses->koor) ? $proses->koor : "NULL");
 
 				// if ($this->kategori == 'superAdmin') {
 					// $row[] = '<a href="'.base_url().'formPangan/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
