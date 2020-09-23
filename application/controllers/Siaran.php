@@ -45,6 +45,16 @@ class Siaran extends CI_Controller {
 		}
 	}
 
+	public function listradio()
+	{
+		if ( $this->logged && $this->kategori == 'admin' || $this->kategori == 'superAdmin')
+		{
+			$this->twig->display('admin/listradio.html', $this->content);
+		}else{
+			redirect("dashboard");
+		}
+	}
+
 	public function formPangan()
 	{
 		if ( $this->logged && $this->kategori == 'admin' || $this->kategori == 'superAdmin')

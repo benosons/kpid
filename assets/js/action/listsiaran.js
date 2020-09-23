@@ -2,9 +2,15 @@ $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
   $('#siar').attr('class','menu-open nav-item');
   $('#siar > a').attr('class','nav-link active');
-  $('#tv').attr('class','nav-link active');
-  $('#tv > i').attr('class','far fa-circle nav-icon text-danger');
+
   const param = $("#param").val();
+  if(param == 'Televisi'){
+    $('#tv').attr('class','nav-link active');
+    $('#tv > i').attr('class','far fa-circle nav-icon text-danger');
+  }else if(param == 'Radio'){
+    $('#radio').attr('class','nav-link active');
+    $('#radio > i').attr('class','far fa-circle nav-icon text-danger');
+  }
 
   loaddatauser();
   function loaddatauser(){
