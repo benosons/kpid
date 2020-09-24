@@ -26,6 +26,7 @@ class Sys extends CI_Controller {
 		$this->logs = $this->session->all_userdata();
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
+		$this->role = $this->session->userdata('role');
 		$this->kotaKab = $this->session->userdata('kotaKab');
 		$this->content = array(
 			"base_url" => base_url(),
@@ -67,33 +68,25 @@ class Sys extends CI_Controller {
 		}
 	}
 
-	public function listUser()
-	{
-		if ($this->logged && $this->kategori == 'superAdmin') {
-			$this->twig->display('admin/listUser.html', $this->content);
-		}else{
-			redirect("logout");
-		}
-	}
-
-	public function listDataUser()
-	{
-		if ($this->logged && $this->kategori == 'superAdmin')
+	public function loadkota(){
+		if ($this->logged && $this->kategori == 'admin' || $this->kategori == 'superAdmin')
 		{
 			$params = $columns = $totalRecords = $data = array();
 			$params = $_REQUEST;
-			$query = $this->Model_sys->get_datatables();
+			$postData = $this->input->post('param');
+
+			$query = $this->Model_sys->loadkota($postData);
 			$x = 0;
 			$i=0;
 			foreach ($query as $proses) {
 				$x++;
 				$row = array();
-				$row[] = (!empty($proses->username) ? $proses->username : "NULL");
-				$row[] = (!empty($proses->kategori) ? $proses->kategori : "NULL");
-				$row[] = (!empty($proses->kotaKab) ? $proses->kotaKab : "NULL");
+				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['id_provinsi'] = (!empty($proses->id_provinsi) ? $proses->id_provinsi : "NULL");
+				$row['nama'] = (!empty($proses->nama) ? $proses->nama : "NULL");
 
 				// if ($this->kategori == 'superAdmin') {
-					$row[] = '<a href="'.base_url().'formUser/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
+					// $row[] = '<a href="'.base_url().'formPangan/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
 				// }else{
 				// 	$row[] = '<a href="javascript:void(0)" class="btn btn-sm btn-success" title="Hasil" onclick="view('."'".$proses->id."'".')" id="view"><i class="fa fa-eye"></i> View </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
 				// }
@@ -104,16 +97,81 @@ class Sys extends CI_Controller {
 				$data[] = $row;
 			}
 
-                $output = array(
-    			                "draw" => $_POST['draw'],
-                                "recordsTotal" => $this->Model_sys->count_all(),
-                                "recordsFiltered" => $this->Model_sys->count_filtered(),
-    	                         "data" => $data
-    	                         );
-			//output to json format
-			echo json_encode($output);
+      //           $output = array(
+    	// 		                "draw" => $_POST['draw'],
+      //                           "recordsTotal" => $this->Model_siaran->count_all(),
+      //                           "recordsFiltered" => $this->Model_siaran->count_filtered(),
+    	//                          "data" => $data
+    	//                          );
+			// //output to json format
+			header('Content-Type: application/json');
+			echo json_encode($data);
 		}else{
-			redirect("Dashboard");
+			redirect("dashboard");
+		}
+
+	}
+
+	public function listUser()
+	{
+		if ($this->logged) {
+			if($this->role == '10'){
+				$this->twig->display('admin/listUser.html', $this->content);
+			}else{
+				redirect("dashboard");
+			}
+		}else{
+			redirect("login");
+		}
+	}
+
+	public function listDataUser()
+	{
+		if ($this->logged && $this->role == '10')
+		{
+			$params = $columns = $totalRecords = $data = array();
+			$params = $_REQUEST;
+			$postData = $this->input->post('param');
+
+			$query = $this->Model_sys->listDataUsers($postData);
+			$x = 0;
+			$i=0;
+			foreach ($query as $proses) {
+				$x++;
+				$row = array();
+				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['username'] = (!empty($proses->username) ? $proses->username : "NULL");
+				$row['kategori'] = (!empty($proses->kategori) ? $proses->kategori : "NULL");
+				$row['kotaKab'] = (!empty($proses->kotaKab) ? $proses->kotaKab : "NULL");
+				$row['nama_kotakab'] = (!empty($proses->nama_kotakab) ? $proses->nama_kotakab : "NULL");
+				$row['status'] = (!empty($proses->status) ? $proses->status : "NULL");
+				$row['islogin'] = (!empty($proses->islogin) ? $proses->islogin : "NULL");
+				$row['role'] = (!empty($proses->role) ? $proses->role : "NULL");
+				$row['role_desc'] = (!empty($proses->role_desc) ? $proses->role_desc : "NULL");
+
+				// if ($this->kategori == 'superAdmin') {
+					// $row[] = '<a href="'.base_url().'formPangan/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
+				// }else{
+				// 	$row[] = '<a href="javascript:void(0)" class="btn btn-sm btn-success" title="Hasil" onclick="view('."'".$proses->id."'".')" id="view"><i class="fa fa-eye"></i> View </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
+				// }
+
+
+
+				//add html for action
+				$data[] = $row;
+			}
+
+      //           $output = array(
+    	// 		                "draw" => $_POST['draw'],
+      //                           "recordsTotal" => $this->Model_siaran->count_all(),
+      //                           "recordsFiltered" => $this->Model_siaran->count_filtered(),
+    	//                          "data" => $data
+    	//                          );
+			// //output to json format
+			header('Content-Type: application/json');
+			echo json_encode($data);
+		}else{
+			redirect("dashboard");
 		}
 
 
@@ -123,6 +181,7 @@ class Sys extends CI_Controller {
 	{
 		$params = (object)$this->input->post();
 		$data = $this->Model_sys->save($params);
+		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));
 
 	}
@@ -131,13 +190,17 @@ class Sys extends CI_Controller {
 	{
 		$params = (object)$this->input->post();
 		$data = $this->Model_sys->update($params);
+		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));
 
 	}
 
-	public function deleteUser($id = NULL)
+	public function deleteUser()
 	{
-		$this->Model_sys->delete($id);
+		
+		$params = (object)$this->input->post();
+		$this->Model_sys->delete($params);
+		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));
 	}
 

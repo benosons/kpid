@@ -19,7 +19,8 @@ class Model_auth extends CI_Model {
                     'username' => $data->username,
                     'kategori' => $data->kategori,
                     'password' => $data->password,
-                    'kotaKab' => $data->kotaKab,
+                    'kotaKab'   => $data->kotaKab,
+                    'role'   => $data->role,
                     'userLogged' => TRUE
                 );
                 $valid = TRUE;

@@ -1,83 +1,157 @@
 {% extends "admin/layout.html" %} {% block content %}
-<div class="page-header page-header-default" id="page-header">
 
-  <div class="breadcrumb-line bg-hejo">
-    <ul class="breadcrumb">
-      <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-      <li class="active">List User</li>
-    </ul>
-
-    <ul class="breadcrumb-elements">
-      <li><a href="#"><i class="icon-comment-discussion position-left"></i> Support</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-gear position-left"></i>
-          Settings
-          <span class="caret"></span>
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
-          <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
-          <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
-          <li class="divider"></li>
-          <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="content">
-      <div class="panel panel-flat">
-        <div class="panel-heading bg-koneng">
-          <h5 class="panel-title">List User</h5>
-          <div class="heading-elements">
-              <a href="{{base_url}}formUser"><button type="button" class="btn btn-primary heading-btn" title="Add" ><i class="icon-add"></i> Add</button></a>
-            </div>
-        </div>
-
-        <div class="panel-body">
-        <table class="table datatable-basic" id="dataTables">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Level</th>
-              <th>Kota / Kabupaten</th>
-              <th class="text-center">Actions</th>
-            </tr>
-          </thead>
-        </table>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>List User</h1>
       </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">User</a></li>
+          <li class="breadcrumb-item active">List User</li>
+        </ol>
       </div>
-  </div>  
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
 
-      <!-- Bootstrap modal -->
-      <div class="modal fade" id="modal_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"></h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                   <!-- sesudah di rubah -->
-                    <div id="dataDetail"></div>
-                </div>
-                <div class="modal-footer">
-                 
-                </div>
+<!-- Main content -->
+<section class="content">
+
+  <!-- Default box -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-danger card-outline">
+          <div class="card-header">
+            <h3 class="card-title"></h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm">
+                  <div class="btn btn-info" id="add-users">
+                    <i class="fas fa-plus"></i><span> User</span>
+                  </div>
               </div>
             </div>
           </div>
-      <!-- End Bootstrap modal -->
+          <div class="card-body">
+            <input id="param" value="User" hidden>
+            <table class="table table-bordered table-hover" id="listuser">
+                <thead>
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Level
+                        </th>
+                        <th>
+                            Kota/ Kabupaten
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            login
+                        </th>
+                        <th>
+                            action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog modal-lg card card-danger card-outline">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detail</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input id="id" hidden>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Username</label>
+              <input id="username" name="user-input" type="text" class="form-control" placeholder="Username ...">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Password</label>
+            <div class="input-group input-group-xs">
+              <input id="password" name="user-input" type="password" class="form-control" placeholder="Password ..." >
+              <div class="input-group-append">
+                <div class="btn btn-info" id="btn-view-pass">
+                  <i class="far fa-eye"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Kota/ Kabupaten</label>
+              <select id="kota-kab" class="form-control select2" style="width: 100%;">
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label>Status</label>
+            <div class="form-group">
+              <input id="stat" type="checkbox" name="user-input" checked data-bootstrap-switch data-off-color="warning" data-on-color="primary" data-on-label="Ready" data-off-label="Not Ready">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label>Kategori</label>
+
+            <div class="form-group">
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="super-admin" name="role" value="10" >
+                <label for="super-admin">
+                  Super Admin
+                </label>
+              </div>
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="admin" name="role" value="20" checked>
+                <label for="admin">
+                  Admin
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Tutup</button> -->
+        <button id="save-user" type="button" class="btn btn-success" data-dismiss="modal"><i class="fas fa-check"> </i> Simpan</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
 
 
-
-      <!-- Gagal -->
-    
 <!-- End Bootstrap modal -->
 
 {% endblock %}

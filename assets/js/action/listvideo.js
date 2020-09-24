@@ -159,7 +159,7 @@ $( document ).ready(function() {
 
 //FUNCTION TO GET AND AUTO PLAY YOUTUBE VIDEO FROM DATATAG
 function autoPlayYouTubeModal(url) {
-
+  $('.modal-title').html('Preview Video Tutorial');
   $('#videoModal').modal({
     show: true
   });
@@ -168,7 +168,6 @@ function autoPlayYouTubeModal(url) {
 }
 
 function playvideo(url) {
-
   // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
   $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
 }

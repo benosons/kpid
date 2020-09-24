@@ -30,22 +30,26 @@ class Users extends CI_Controller {
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 		);
-		
+
 	}
 
 
 	public function index()
-	{		
-		
+	{
+		if ($this->logged)
+		{
+			redirect("dashboard");
+		}else{
 			$this->twig->display("users/index.html", $this->content);
-		
+		}
+
 	}
 
 	public function logout()
 	{
 		$valid = $this->session->sess_destroy();
 		// session_destroy();
-		redirect("/");			
+		redirect("/");
 	}
 
 

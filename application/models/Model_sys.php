@@ -95,6 +95,9 @@ class Model_sys extends CI_Model {
         $this->db->set("kategori", 'admin');
         $this->db->set("created_by", $this->session->userdata('username'));
         $this->db->set("created_at", date("Y-m-d H:i:s"));
+        $this->db->set("role", $params->role);
+        $this->db->set("islogin", 0);
+        $this->db->set("status", $params->status);
         $valid = $this->db->insert('muser');
 
         return $valid;
@@ -105,16 +108,18 @@ class Model_sys extends CI_Model {
     {
         $valid = false;
 
-        $pass = $params->password;
-        $query = $this->db->query("select password, id from muser where id = '".$params->id."' ")->row();
-
-        if ($pass != $query->password) {
-            $this->db->set("password", md5($params->password));
-        }
+        // $pass = $params->password;
+        // $query = $this->db->query("select password, id from muser where id = '".$params->id."' ")->row();
+        //
+        // if ($pass != $query->password) {
+        //     $this->db->set("password", md5($params->password));
+        // }
         $this->db->set("username", $params->username);
         $this->db->set("kotaKab", $params->kotaKab);
         $this->db->set("updated_by", $this->session->userdata('username'));
         $this->db->set("updated_at", date("Y-m-d H:i:s"));
+        $this->db->set("role", $params->role);
+        $this->db->set("status", $params->status);
         $this->db->where('id', $params->id);
         $valid = $this->db->update('muser');
 
@@ -124,9 +129,39 @@ class Model_sys extends CI_Model {
 
     public function delete($id)
     {
-        $idx = $this->db->escape_str($id);
-        $this->db->where('id', $idx);
+        // $idx = $this->db->escape_str($id);
+        $this->db->where('id', $id->id);
         $this->db->delete('muser');
+    }
+
+    public function listDataUsers($param)
+    {
+        $nama = $this->session->userdata('id');
+        $kategori = $this->session->userdata('kategori');
+        $role = $this->session->userdata('role');
+        $id = $this->db->escape_str($nama);
+        if ($role == '10') {
+            $query = $this->db->query(" select
+                                        m.*,
+                                        k.nama as nama_kotakab,
+                                        r.role_desc as role_desc
+                                        from muser m
+                                        INNER JOIN kabupaten_kota k on k.id = m.kotaKab
+                                        INNER JOIN role r on r.id_role = m.role where m.id != '".$id."' order by m.id desc")->result();
+        }else{
+            $query = $this->db->query("select * from pangan where created_by = '".$id."' order by id desc")->result();
+        }
+        return $query;
+    }
+
+    public function loadkota($param)
+    {
+        $nama = $this->session->userdata('id');
+        $kategori = $this->session->userdata('kategori');
+        $id = $this->db->escape_str($nama);
+        $query = $this->db->query("select * from kabupaten_kota order by id desc")->result();
+
+        return $query;
     }
 
 }

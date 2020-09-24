@@ -11,8 +11,8 @@ $( document ).ready(function() {
     $('#radio > i').attr('class','far fa-circle nav-icon text-danger');
   }
 
-  loaddatauser();
-  function loaddatauser(){
+  loadsiaran();
+  function loadsiaran(){
 
       $.ajax({
           type: 'post',

@@ -36,9 +36,10 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
+
 		if ($this->logged)
 		{
-			redirect("/");
+			redirect("dashboard");
 		} else {
 			if($_POST){
 				$params = (object)$this->input->post();

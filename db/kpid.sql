@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 24/09/2020 01:22:10
+ Date: 25/09/2020 02:02:16
 */
 
 SET NAMES utf8mb4;
@@ -469,15 +469,26 @@ CREATE TABLE `muser`  (
   `updated_at` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `role` int(16) NULL DEFAULT NULL,
   `islogin` int(1) NULL DEFAULT NULL,
+  `status` int(5) NULL DEFAULT NULL COMMENT '0 = nonactive, 1= active,',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 21 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of muser
 -- ----------------------------
-INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', 'superAdmin', NULL, NULL, NULL, NULL, 10, 1);
-INSERT INTO `muser` VALUES (5, 'saya', '827ccb0eea8a706c4c34a16891f84e7b', 'Kabupaten Bekasi', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', '2020-09-09 17:35:20', 20, 0);
-INSERT INTO `muser` VALUES (6, 'user', '827ccb0eea8a706c4c34a16891f84e7b', 'Kota Bandung', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', NULL, 30, 0);
+INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', 'superAdmin', NULL, NULL, NULL, NULL, 10, 1, 1);
+INSERT INTO `muser` VALUES (5, 'saya', '827ccb0eea8a706c4c34a16891f84e7b', '3204', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', '2020-09-09 17:35:20', 20, 0, 0);
+INSERT INTO `muser` VALUES (6, 'user', '827ccb0eea8a706c4c34a16891f84e7b', '3273', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', NULL, 20, 1, 1);
+INSERT INTO `muser` VALUES (7, 'sayaadalah', '827ccb0eea8a706c4c34a16891f84e7b', '3279', 'admin', 'admin', NULL, '2020-09-24 17:03:22', NULL, 20, 0, 1);
+INSERT INTO `muser` VALUES (11, 'test4', '827ccb0eea8a706c4c34a16891f84e7b', '3216', 'admin', 'admin', NULL, '2020-09-24 17:15:37', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (12, 'test5', '827ccb0eea8a706c4c34a16891f84e7b', '3211', 'admin', 'admin', NULL, '2020-09-24 17:16:58', NULL, 20, 0, 1);
+INSERT INTO `muser` VALUES (13, 'test6', '827ccb0eea8a706c4c34a16891f84e7b', '3278', 'admin', 'admin', NULL, '2020-09-24 17:21:40', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (14, 'test7', '827ccb0eea8a706c4c34a16891f84e7b', '3214', 'admin', 'admin', NULL, '2020-09-24 17:22:20', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (15, 'test8', '827ccb0eea8a706c4c34a16891f84e7b', '3279', 'admin', 'admin', NULL, '2020-09-24 17:23:39', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (16, 'test9', '827ccb0eea8a706c4c34a16891f84e7b', '3213', 'admin', 'admin', NULL, '2020-09-24 17:24:15', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (17, 'test10', '827ccb0eea8a706c4c34a16891f84e7b', '3210', 'admin', 'admin', NULL, '2020-09-24 17:25:29', NULL, 20, 0, 0);
+INSERT INTO `muser` VALUES (18, 'sons', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', 'superAdmin', 'admin', 'admin', '2020-09-24 17:26:48', '2020-09-24 18:19:36', 10, 0, 1);
+INSERT INTO `muser` VALUES (19, 'benosons', '2d0e971d4f2b6a781c937bcfc9b8e6db', '3273', 'admin', 'admin', NULL, '2020-09-24 18:23:39', NULL, 10, 0, 1);
 
 -- ----------------------------
 -- Table structure for pangan
@@ -533,7 +544,7 @@ CREATE TABLE `videotutorial`  (
   `create_date` datetime(0) NULL DEFAULT NULL,
   `update_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of videotutorial
