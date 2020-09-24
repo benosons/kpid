@@ -134,10 +134,16 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="form-group">
-                <label>Video Youtube</label>
-                 <input id="url" name="video-input" type="text" class="form-control" placeholder="Enter ..." >
+              <label>Video Youtube</label>
+              <div class="input-group input-group-xs">
+                <input id="url" name="video-input" type="text" class="form-control" placeholder="Enter ..." >
+                <div class="input-group-append">
+                  <div class="btn btn-danger" id="btn-play-vid">
+                    <i class="fas fa-play"></i>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
           <div class="row">
@@ -148,8 +154,15 @@
                 </div>
             </div>
           </div>
+          <div class="row">
+              <div class="col-md-12">
+                <label>Preview Video</label>
+                <div id="iframe-video-add"></div>
+            </div>
+          </div>
           <div class="modal-footer">
           <!-- <button type="button" class="btn btn-primary">Tutup</button> -->
+          <button type="button" class="btn btn-danger" id="btn-clear-iframe">Clear Video</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn-simpan-video">Simpan</button>
         </div>
      </div>

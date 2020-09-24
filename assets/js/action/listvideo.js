@@ -6,7 +6,9 @@ $( document ).ready(function() {
     $('#modal-add-video').modal({
       show: true
     });
+    $('.modal-title').html('Tambah Video Tutorial');
     $("[name='video-input']").val('');
+    $('#iframe-video-add').empty();
   });
 
 
@@ -15,6 +17,16 @@ $( document ).ready(function() {
   });
 
     loadvideo();
+
+    $('#btn-play-vid').on('click', function(){
+      if($('#url').val()){
+        playvideo($('#url').val());
+      }
+    });
+
+    $('#btn-clear-iframe').on('click', function(){
+      $('#iframe-video-add').empty();
+    })
   });
 
   function simpanvideo(){
@@ -137,6 +149,7 @@ $( document ).ready(function() {
 
   function editvideo(id, judul, url, desc){
     $('#add-video').trigger('click');
+    $('.modal-title').html('Edit Video Tutorial');
     $('#id').val(id);
     $('#judul').val(judul);
     $('#url').val(url);
@@ -150,8 +163,12 @@ function autoPlayYouTubeModal(url) {
   $('#videoModal').modal({
     show: true
   });
-
-
   // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
   $('#iframe-video').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
+}
+
+function playvideo(url) {
+
+  // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
+  $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
 }
