@@ -26,9 +26,12 @@ class Users extends CI_Controller {
 		$this->logs = $this->session->all_userdata();
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
+		$this->username = $this->session->userdata('username');
+		$this->role = $this->session->userdata('role');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
+			"username" => $this->username,
 		);
 
 	}

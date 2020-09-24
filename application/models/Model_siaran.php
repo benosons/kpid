@@ -88,8 +88,9 @@ class Model_siaran extends CI_Model {
     {
         $nama = $this->session->userdata('username');
         $kategori = $this->session->userdata('kategori');
+        $role = $this->session->userdata('role');
         $id = $this->db->escape_str($nama);
-        if ($kategori == 'superAdmin') {
+        if ($role == '10') {
             $query = $this->db->query("select * from mperizinan where jenisLP like '%".$param."%' order by id desc")->result();
         }else{
             $query = $this->db->query("select * from pangan where created_by = '".$id."' order by id desc")->result();

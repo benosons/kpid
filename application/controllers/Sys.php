@@ -50,31 +50,10 @@ class Sys extends CI_Controller {
 		}
 	}
 
-	public function formUser()
-	{
-		if ( $this->logged && $this->kategori == 'superAdmin')
-		{
-
-			$data = NULL;
-			$id = $this->input->get('id');
-			$idx = $this->db->escape_str($id);
-            $KodeEdit = $idx;
-            if (!empty($KodeEdit)) {
-                $q = $this->db->get_where("muser", array("id" => $KodeEdit));
-                $data = $q->row();
-            }
-
-            $this->content['kotaKab'] = $this->Model_sys->kotaKab();
-            $this->content['data'] = $data;
-			$this->twig->display('admin/user.html', $this->content);
-		}else{
-			redirect("Dashboard");
-		}
-	}
-
 	public function loadkota(){
-		if ($this->logged && $this->kategori == 'admin' || $this->kategori == 'superAdmin')
+		if ($this->logged)
 		{
+			if($this->role == '10' || $this->role == '20'){
 			$params = $columns = $totalRecords = $data = array();
 			$params = $_REQUEST;
 			$postData = $this->input->post('param');
@@ -110,6 +89,8 @@ class Sys extends CI_Controller {
 			// //output to json format
 			header('Content-Type: application/json');
 			echo json_encode($data);
+		}
+
 		}else{
 			redirect("dashboard");
 		}

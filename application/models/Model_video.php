@@ -88,8 +88,9 @@ class Model_video extends CI_Model {
     {
         $nama = $this->session->userdata('id');
         $kategori = $this->session->userdata('kategori');
+        $role = $this->session->userdata('role');
         $id = $this->db->escape_str($nama);
-        if ($kategori == 'superAdmin') {
+        if ($role == '10') {
             $query = $this->db->query("select * from videotutorial order by id desc")->result();
         }else{
             $query = $this->db->query("select * from videotutorial where create_by = '".$id."' order by id desc")->result();
