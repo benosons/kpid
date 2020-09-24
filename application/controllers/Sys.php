@@ -27,10 +27,12 @@ class Sys extends CI_Controller {
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
 		$this->role = $this->session->userdata('role');
+		$this->username = $this->session->userdata('username');
 		$this->kotaKab = $this->session->userdata('kotaKab');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
+			"username" => $this->username
 		);
 
 	}
@@ -38,9 +40,11 @@ class Sys extends CI_Controller {
 
 	public function dashboard()
 	{
-		if ( $this->logged && $this->kategori == 'admin' || $this->kategori == 'superAdmin')
+		if ( $this->logged)
 		{
-			$this->twig->display('admin/index.html', $this->content);
+			if( $this->role == '10' || $this->role == '20'){
+				$this->twig->display('admin/index.html', $this->content);
+			}
 		}else{
 			redirect("logout");
 		}
@@ -197,7 +201,7 @@ class Sys extends CI_Controller {
 
 	public function deleteUser()
 	{
-		
+
 		$params = (object)$this->input->post();
 		$this->Model_sys->delete($params);
 		header('Content-Type: application/json');
