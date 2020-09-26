@@ -92,7 +92,9 @@ class Model_aduan extends CI_Model {
         $role = $this->session->userdata('role');
         $id = $this->db->escape_str($nama);
         if ($role == '10') {
-            $query = $this->db->query("select * from videotutorial order by id desc")->result();
+            $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota order by a.id desc")->result();
         }else if ($role == '20'){
             $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
@@ -112,6 +114,7 @@ class Model_aduan extends CI_Model {
     {
         $query = $this->db->query("select a.*, m.name from aduan a
                                    inner join muser m on m.id = a.id_user order by a.id desc")->result();
+
         return $query;
     }
 

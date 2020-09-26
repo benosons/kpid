@@ -3,7 +3,6 @@ $( document ).ready(function() {
   loadsiaran();
   loadvideo();
   loadaduan();
-
   $('#kirim-laporan').on('click', function(){
     var name = $('#name').val();
     var email = $('#email').val();
@@ -107,7 +106,8 @@ function loadsiaran(param){
     });
 }
 
-function loadaduan(param){
+function loadaduan(){
+
     $.ajax({
         type: 'post',
         dataType: 'json',
@@ -116,6 +116,7 @@ function loadaduan(param){
                 param      : 'all',
          },
         success: function(result){
+
                 var dt = $('#data-aduan').DataTable({
                     "paging": true,
                     "lengthChange": false,
@@ -124,7 +125,7 @@ function loadaduan(param){
                     "info": false,
                     "autoWidth": false,
                     "responsive": true,
-                    "pageLength": 5,
+                    "pageLength": 3,
                     "dom": '<"top"i>rt<"bottom"flp><"clear">',
                     "autoWidth": true,
                     aaData: result,
@@ -137,7 +138,6 @@ function loadaduan(param){
                     aoColumnDefs:[
                       {
                           "mRender": function ( data, type, row ) {
-                            console.log(row);
                             var el =
                             `<div class="direct-chat-msg">
                                 <div class="direct-chat-infos clearfix">

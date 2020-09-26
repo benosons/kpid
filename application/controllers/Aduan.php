@@ -66,7 +66,6 @@ class Aduan extends CI_Controller {
 	}
 
 	public function listDataAduanGlobal()	{
-		if ($this->logged){
 
 			$params = $columns = $totalRecords = $data = array();
 			$params = $_REQUEST;
@@ -86,10 +85,10 @@ class Aduan extends CI_Controller {
 				$row['create_date'] = (!empty($proses->create_date) ? $proses->create_date : "NULL");
 
 				$data[] = $row;
+
 			}
-			header('Content-Type: application/json');
-			echo json_encode($data);
-	}
+	header('Content-Type: application/json');
+	echo json_encode($data);
 }
 
 public function listDataAduan()	{
