@@ -92,8 +92,10 @@ class Model_siaran extends CI_Model {
         $id = $this->db->escape_str($nama);
         if ($role == '10') {
             $query = $this->db->query("select * from mperizinan where jenisLP like '%".$param."%' order by id desc")->result();
+        }else if ($role == '30'){
+          $query = $this->db->query("select * from mperizinan order by id desc")->result();
         }else{
-            $query = $this->db->query("select * from pangan where created_by = '".$id."' order by id desc")->result();
+            $query = $this->db->query("select * from mperizinan order by id desc")->result();
         }
         return $query;
     }

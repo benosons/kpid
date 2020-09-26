@@ -82,13 +82,13 @@
       <div class="modal-body">
         <input id="id" hidden>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Username</label>
               <input id="username" name="user-input" type="text" class="form-control" placeholder="Username ...">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label>Password</label>
             <div class="input-group input-group-xs">
               <input id="password" name="user-input" type="password" class="form-control" placeholder="Password ..." >
@@ -100,23 +100,22 @@
             </div>
 
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Kota/ Kabupaten</label>
               <select id="kota-kab" class="form-control select2" style="width: 100%;">
               </select>
             </div>
           </div>
-
-          <div class="col-md-3">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
             <label>Status</label>
             <div class="form-group">
               <input id="stat" type="checkbox" name="user-input" checked data-bootstrap-switch data-off-color="warning" data-on-color="primary" data-on-label="Ready" data-off-label="Not Ready">
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <label>Kategori</label>
 
             <div class="form-group">
@@ -127,9 +126,15 @@
                 </label>
               </div>
               <div class="icheck-primary d-inline">
-                <input type="radio" id="admin" name="role" value="20" checked>
+                <input type="radio" id="admin" name="role" value="20" >
                 <label for="admin">
                   Admin
+                </label>
+              </div>
+              <div class="icheck-primary d-inline">
+                <input type="radio" id="user" name="role" value="30" checked>
+                <label for="user">
+                  User
                 </label>
               </div>
             </div>

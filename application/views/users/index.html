@@ -1,10 +1,53 @@
 {% extends "users/layout.html" %} {% block content %}
 
+<!-- ======= Counts Section ======= -->
+<section class="counts section-bg">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up">
+        <div class="count-box">
+          <i class="icofont-monitor" style="color: #20b38e;"></i>
+          <span data-toggle="counter-up">232</span>
+          <p>Total Siaran Televisi</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="count-box">
+          <i class="icofont-radio" style="color: #c042ff;"></i>
+          <span data-toggle="counter-up">521</span>
+          <p>Total Siaran Radio</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="count-box">
+          <i class="icofont-live-support" style="color: #46d1ff;"></i>
+          <span data-toggle="counter-up">63</span>
+          <p>Total Laporan/ Pengaduan</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="600">
+        <div class="count-box">
+          <i class="icofont-youtube-play" style="color: #c8151a;"></i>
+          <span data-toggle="counter-up">15</span>
+          <p>Total Video Tutorial</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Counts Section -->
+
   <section id="penyiaran">
     <div class="container">
       <div class="row">
         <div class="col-lg-7">
-          <div class="card card-danger card-outline" style="height: 42em;">
+          <div class="card card-danger card-outline" style="height: 50em;">
             <div class="card-header">
               <div class="section-title">
                 <h2>Lembaga Penyiaran</h2>
@@ -12,75 +55,55 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="row">
-                <div class="col-5 col-sm-3">
+              <table id="data-siaran" class="table table-bordered table-hover">
+                <thead style="background-color:#001f3f;color:white;">
+                <tr>
+                  <th style="width:10%;">No</th>
+                  <th style="width:50%;">Lembaga Penyiaran</th>
+                  <th>Alamat</th>
+                </tr>
+                </thead>
+              </table>
+              <!-- <div class="row">
+                <div class="col-5 col-sm-2">
                   <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="true">Televisi</a>
                     <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false">Radio</a>
                   </div>
                 </div>
-                <div class="col-7 col-sm-9">
+                <div class="col-7 col-sm-10">
                   <div class="tab-content" id="vert-tabs-tabContent">
                     <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                      <table id="example2" class="table table-bordered table-hover">
-                        <thead>
+                      <table id="data-televisi" class="table table-bordered table-hover">
+                        <thead style="background-color:#001f3f;color:white;">
                         <tr>
-                          <th style="width:10%;"></th>
-                          <th>TV</th>
-                          <th>Keterangan</th>
+                          <th style="width:10%;">No</th>
+                          <th style="width:50%;">Lembaga Penyiaran</th>
+                          <th>Alamat</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                          <td>NET TV</td>
-                          <td>Internet
-                            Explorer 4.0
-                          </td>
-                          <td>Win 95+</td>
-                        </tr>
-                        <tr>
-                          <td>RTV</td>
-                          <td>Internet
-                            Explorer 5.0
-                          </td>
-                          <td>Win 95+</td>
-                        </tr>
-                        <tr>
-                          <td>INDOSIAR</td>
-                          <td>Internet
-                            Explorer 5.0
-                          </td>
-                          <td>Win 95+</td>
-                        </tr>
-                        <tr>
-                          <td>RCTI</td>
-                          <td>Internet
-                            Explorer 5.0
-                          </td>
-                          <td>Win 95+</td>
-                        </tr>
-                        <tr>
-                          <td>SCTV</td>
-                          <td>Internet
-                            Explorer 5.0
-                          </td>
-                          <td>Win 95+</td>
-                        </tr>
-                        </tbody>
                       </table>
                     </div>
                     <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                       Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                      <table id="data-radio" class="table table-bordered table-hover">
+                        <thead style="background-color:#001f3f;color:white;">
+                        <tr>
+                          <th style="width:10%;">No</th>
+                          <th style="width:50%;">Lembaga Penyiaran</th>
+                          <th>Alamat</th>
+                        </tr>
+                        </thead>
+                      </table>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- /.card -->
           </div>
         </div>
         <div class="col-lg-5">
-          <div class="card card-danger card-outline" style="height: 42em;">
+          <div class="card card-danger card-outline" style="height: 50em;">
             <div class="card-header">
               <div class="section-title">
                 <h2>Laporan Pengaduan</h2>
@@ -89,134 +112,13 @@
             </div>
 
             <div class="card-body">
-              <table id="example22" class="table table-bordered table-hover">
-                <thead>
+              <table id="data-aduan" class="table table-bordered table-hover">
+                <thead style="background-color:#001f3f;color:white;">
                 <tr>
-                  <th>Nama</th>
-                  <th>Judul</th>
-                  <th>tanggal</th>
+                  <th>No</th>
+                  <th>Laporan Pengaduan</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.0
-                  </td>
-                  <td>Win 95+</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.5
-                  </td>
-                  <td>Win 95+</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 6
-                  </td>
-                  <td>Win 98+</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet Explorer 7</td>
-                  <td>Win XP SP2+</td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>AOL browser (AOL desktop)</td>
-                  <td>Win XP</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.5</td>
-                  <td>OSX.3+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape 7.2</td>
-                  <td>Win 95+ / Mac OS 8.6-9.2</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Browser 8</td>
-                  <td>Win 98SE+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Navigator 9</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.1</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.2</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.3</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.4</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.5</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.6</td>
-                  <td>Win 95+ / OSX.1+</td>
-                </tr>
-                </tbody>
               </table>
             </div>
             <!-- /.card -->
@@ -227,7 +129,7 @@
   </section>
 
   <section id="video-tutorial" class="portfolio section-bg">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
 
       <div class="section-title">
         <h2>Video Tutorial</h2>
@@ -236,169 +138,19 @@
 
           <div class="row align-items-start">
               <div class="col-lg-12 m-15px-tb">
-                  <div class="row">
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/FFB6C1/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/D3D3D3/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
+                  <div class="row" id="video-grid">
 
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/87CEFA/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
-
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/D3D3D3/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
-
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/E0FFFF/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="blog-grid">
-                              <div class="blog-img">
-                                  <div class="date">
-                                      <span>04</span>
-                                      <label>FEB</label>
-                                  </div>
-                                  <a href="#">
-                                      <!-- <img class="tutor" src="https://via.placeholder.com/400x200/FFF0F5/000000" title="" alt=""> -->
-                                      <iframe class="tutor" src="//www.youtube.com/embed/zB4I68XVPzQ"></iframe>
-                                  </a>
-                              </div>
-                              <div class="blog-info">
-                                  <h5><a href="#">Prevent 75% of visitors from google analytics</a></h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                  <div class="btn-bar">
-                                      <a href="#" class="px-btn-arrow">
-                                          <span>Read More</span>
-                                          <i class="arrow"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-12">
-                          <ul class="pagination justify-content-center">
-                              <li class="page-item disabled">
-                                  <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                              </li>
-                              <li class="page-item"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item active">
-                                  <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                              </li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item">
-                                  <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                              </li>
-                          </ul>
-                      </div>
+                  </div>
+                  <div class="col-12">
+                      <ul class="pagination justify-content-center">
+                          <li class="page-item">
+                              <a class="page-link" href="javascript:prevPage()" id="btn_prev"><i class="fas fa-chevron-left"></i></a>
+                          </li>
+                          <li class="page-item active"><a class="page-link" href="#"><span id="page">1</span></a></li>
+                          <li class="page-item">
+                              <a class="page-link" href="javascript:nextPage()" id="btn_next" ><i class="fas fa-chevron-right"></i></a>
+                          </li>
+                      </ul>
                   </div>
               </div>
           </div>
@@ -407,7 +159,7 @@
   </section><!-- End Our Portfolio Section -->
 
   <!-- ======= About Lists Section ======= -->
-  <section class="about-lists">
+  <section class="about-lists" hidden>
     <div class="container">
 
       <div class="row no-gutters">
@@ -453,51 +205,8 @@
     </div>
   </section><!-- End About Lists Section -->
 
-  <!-- ======= Counts Section ======= -->
-  <section class="counts section-bg">
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up">
-          <div class="count-box">
-            <i class="icofont-simple-smile" style="color: #20b38e;"></i>
-            <span data-toggle="counter-up">232</span>
-            <p>Happy Clients</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="count-box">
-            <i class="icofont-document-folder" style="color: #c042ff;"></i>
-            <span data-toggle="counter-up">521</span>
-            <p>Projects</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="400">
-          <div class="count-box">
-            <i class="icofont-live-support" style="color: #46d1ff;"></i>
-            <span data-toggle="counter-up">1,463</span>
-            <p>Hours Of Support</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="600">
-          <div class="count-box">
-            <i class="icofont-users-alt-5" style="color: #ffb459;"></i>
-            <span data-toggle="counter-up">15</span>
-            <p>Hard Workers</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Counts Section -->
-
   <!-- ======= Our Portfolio Section ======= -->
-  <section id="portfolio" class="portfolio section-bg">
+  <section id="portfolio" class="portfolio section-bg" hidden>
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
       <div class="section-title">
@@ -791,7 +500,7 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Contact Us</h2>
+        <h2>Kirimkan Laporan/ Pengaduan</h2>
       </div>
 
       <div class="row">
@@ -820,32 +529,35 @@
           </div>
         </div>
 
-        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+        <div class="col-lg-12">
+          <form role="form" class="php-email-form">
             <div class="form-row">
               <div class="col-lg-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <input value="{{username}}" type="text" name="name" class="form-control" id="name" placeholder="username" data-rule="minlen:4" data-msg="" disabled/>
                 <div class="validate"></div>
               </div>
-              <div class="col-lg-6 form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+              <!-- <div class="col-lg-6 form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" data-rule="email" data-msg="Tuliskan Alamat EMail Anda" />
                 <div class="validate"></div>
-              </div>
+              </div> -->
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Judul" data-rule="minlen:4" data-msg="Tuliskan Judul Laporan Anda." />
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <textarea class="form-control" name="message" rows="5" id="message" data-rule="required" data-msg="Tuliskan Laporan Anda." placeholder="Tulis pesan"></textarea>
               <div class="validate"></div>
             </div>
             <div class="mb-3">
               <div class="loading">Loading</div>
-              <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
             </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
+            {% if role == 30 %}
+            <div class="text-center"><button type="submit" id="kirim-laporan">Kirim</button></div>
+            {% else %}
+            <div class="text-center"><button class="btn btn-success" >Login</button></div>
+            {% endif %}
           </form>
         </div>
 
@@ -897,7 +609,7 @@
 
     </div>
   </section><!-- End Services Section -->
-  
+
   <!-- ======= About Us Section ======= -->
   <section id="about" class="about">
     <div class="container">
@@ -935,5 +647,5 @@
 
     {% endblock %}
     {% block js %}
-
+    <script type="text/javascript" src="{{base_url}}assets/js/action/user/index.js"></script>
     {% endblock %}

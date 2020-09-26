@@ -32,7 +32,8 @@ class Sys extends CI_Controller {
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
-			"username" => $this->username
+			"username" => $this->username,
+			"role" => $this->role
 		);
 
 	}
@@ -42,8 +43,10 @@ class Sys extends CI_Controller {
 	{
 		if ( $this->logged)
 		{
-			if( $this->role == '10' || $this->role == '20'){
+			if( $this->role == '10' || $this->role == '20' || $this->role == '30'){
 				$this->twig->display('admin/index.html', $this->content);
+			}else{
+				redirect("/");
 			}
 		}else{
 			redirect("logout");
@@ -106,7 +109,7 @@ class Sys extends CI_Controller {
 				redirect("dashboard");
 			}
 		}else{
-			redirect("login");
+			redirect("logout");
 		}
 	}
 

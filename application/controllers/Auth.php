@@ -26,9 +26,11 @@ class Auth extends CI_Controller {
 		$this->logs = $this->session->all_userdata();
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
+		$this->role = $this->session->userdata('role');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
+			"role" => $this->role
 		);
 
 	}
@@ -36,20 +38,27 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
-
 		if ($this->logged)
 		{
-			redirect("dashboard");
+			if($this->role == '10' || $this->role = '20'){
+				redirect("dashboard");
+			}else if ($this->role == '30'){
+				redirect("/");
+			}
 		} else {
 			if($_POST){
 				$params = (object)$this->input->post();
 				$valid = $this->Model_auth->loginAuth($params->username, $params->password);
-
-				if ($valid)
-					redirect("dashboard");
-				else
+				if ($valid->valid){
+					if($valid->role == '10' || $valid->role == '20'){
+						redirect("dashboard");
+					}else if($valid->role == '30'){
+						redirect("/");
+					}
+				}else{
 					// jang status muncul alert
-					redirect("logout");
+					redirect("/");
+				}
 			}
 
 			$this->twig->display("admin/login.html", $this->content);

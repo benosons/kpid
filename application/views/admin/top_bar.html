@@ -148,7 +148,11 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-danger elevation-4">
 	<!-- Brand Logo -->
+	{% if role == 30 %}
+	<a href="/" class="brand-link">
+	{% else %}
 	<a href="dashboard" class="brand-link">
+	{% endif %}
 		<img src="{{base_url}}assets/dokumen/gambar/kpid.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
 		<!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
 	</a>
@@ -161,6 +165,16 @@
 			<ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 						 with font-awesome or any other icon font library -->
+				{% if role == 30 %}
+				<li class="nav-item" id="depan">
+					<a href="{{base_url}}" class="nav-link">
+						<i class="nav-icon fas fa-home"></i>
+						<p>
+							Halaman Depan
+						</p>
+					</a>
+				</li>
+				{% endif %}
 				<li class="nav-item" id="dash">
 					<a href="{{base_url}}dashboard" class="nav-link">
 						<i class="nav-icon fas fa-chart-pie"></i>
@@ -169,6 +183,7 @@
 						</p>
 					</a>
 				</li>
+				{% if role == 10 or role == 20 %}
 				<li class="nav-item" id="siar">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-satellite-dish"></i>
@@ -192,6 +207,7 @@
 						</li>
 					</ul>
 				</li>
+				{% endif %}
 				<li class="nav-item" id="aduan">
 					<a href="{{base_url}}listaduan" class="nav-link">
 						<i class="nav-icon fas fa-comments"></i>
@@ -201,6 +217,7 @@
 						</p>
 					</a>
 				</li>
+				{% if role == 10 or role == 20 %}
 				<li class="nav-item" id="video-tutor">
 					<a href="{{base_url}}listvideo" class="nav-link">
 						<i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -209,6 +226,8 @@
 						</p>
 					</a>
 				</li>
+				{% endif %}
+				{% if role == 10 %}
 				<li class="nav-item" id="users">
 					<a href="{{base_url}}listuser" class="nav-link">
 						<i class="nav-icon fas fa-users"></i>
@@ -217,6 +236,7 @@
 						</p>
 					</a>
 				</li>
+				{% endif %}
 
 
 

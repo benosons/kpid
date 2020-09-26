@@ -23,6 +23,7 @@ class Model_auth extends CI_Model {
                     'role'   => $data->role,
                     'userLogged' => TRUE
                 );
+
                 $valid = TRUE;
                 $this->db->set("islogin", '1');
                 $this->db->where('id', $data->id);
@@ -30,9 +31,17 @@ class Model_auth extends CI_Model {
 
                 $this->session->set_userdata($session);
 
+                $response = (object) array(
+                  'valid' => true,
+                  'role'  => $data->role,
+                );
+        }else{
+          $response = (object) array(
+            'valid' => false,
+            'role'  => 0
+          );
         }
-
-        return $valid;
+        return $response;
     }
 
     public function updateislogin($id){

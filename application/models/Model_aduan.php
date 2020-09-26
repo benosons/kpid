@@ -1,7 +1,7 @@
 <?php
-class Model_video extends CI_Model {
+class Model_aduan extends CI_Model {
 
-    var $table = 'videotutorial';
+    var $table = 'aduan';
     var $column = array('nama','tgl','jenisPangan'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $column_search = array('nama','tgl','jenisPangan');
     var $order = array('id' => 'desc'); // default order
@@ -84,50 +84,99 @@ class Model_video extends CI_Model {
     }
 
 
-    public function listDataVideo()
+    public function listDataAduan()
     {
         $nama = $this->session->userdata('id');
         $kategori = $this->session->userdata('kategori');
+        $kotakab = $this->session->userdata('kotaKab');
         $role = $this->session->userdata('role');
         $id = $this->db->escape_str($nama);
         if ($role == '10') {
             $query = $this->db->query("select * from videotutorial order by id desc")->result();
         }else if ($role == '20'){
-            $query = $this->db->query("select * from videotutorial where create_by = '".$id."' order by id desc")->result();
-        }else{
-            $query = $this->db->query("select * from videotutorial order by id desc")->result();
+            $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where a.id_kota = ".$kotakab." order by a.id desc")->result();
+        }else if ($role == '30'){
+          $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where id_user = '".$id."' order by a.id desc")->result();
         }
 
+        return $query;
+    }
+
+    public function listDataAduanGlobal()
+    {
+        $query = $this->db->query("select a.*, m.name from aduan a
+                                   inner join muser m on m.id = a.id_user order by a.id desc")->result();
+        return $query;
+    }
+
+    public function cekBalasan($id)
+    {
+      // var_dump((int)$id);die;
+        $query = $this->db->query("select b.*, mu.name as nama_pelapor, ma.name as nama_admin from balasan b
+                                    inner join muser mu on b.id_user = mu.id
+                                    inner join muser ma on b.id_admin = ma.id
+                                    where id_parent = ".$id." order by b.id asc")->result();
         return $query;
     }
 
 
     public function save($params = NULL)
     {
-        $valid = false;
-            $this->db->set("judul", $params->judul);
-            $this->db->set("desc", $params->desc);
-            $this->db->set("url", $params->url);
-            $this->db->set("create_by", $this->session->userdata('id'));
+        $valid = true;
+        $nama = $this->session->userdata('id');
+        $kotakab = $this->session->userdata('kotaKab');
+        $id = $this->db->escape_str($nama);
+
+            $this->db->set("id_user", $id);
+            $this->db->set("judul", $params->subject);
+            $this->db->set("isi", $params->message);
             $this->db->set("create_date", date("Y-m-d H:i:s"));
             $this->db->set("update_date", date("Y-m-d H:i:s"));
-            $valid = $this->db->insert('videotutorial');
+            $this->db->set("status", '0');
+            $this->db->set("id_kota", $kotakab);
+            $valid = $this->db->insert('aduan');
 
         return $valid;
 
     }
 
-    public function update($params = NULL)
+    public function saveBalasan($params = NULL)
+    {
+        $valid = true;
+        $nama = $this->session->userdata('id');
+        $kotakab = $this->session->userdata('kotaKab');
+        $id = $this->db->escape_str($nama);
+
+            $this->db->set("id_parent", $params->id_parent);
+            $this->db->set("id_user", $params->id_user);
+            $this->db->set("id_admin", $params->id_admin);
+            $this->db->set("rep_admin", $params->rep_admin);
+            $this->db->set("rep_user", $params->rep_user);
+            $this->db->set("create_date", date("Y-m-d H:i:s"));
+            $this->db->set("status", '0');
+            $this->db->set("isi", $params->isi);
+            $valid = $this->db->insert('balasan');
+
+        return $valid;
+
+    }
+
+    public function updateAduan($params = NULL)
     {
         $valid = false;
-
-            $this->db->set("judul", $params->judul);
-            $this->db->set("url", $params->url);
-            $this->db->set("desc", $params->desc);
-            $this->db->set("create_by", $this->session->userdata('id'));
+        $nama = $this->session->userdata('id');
+        $id = $this->db->escape_str($nama);
+            $this->db->set("id_admin", $id);
+            $this->db->set("status", $params->status);
             $this->db->set("update_date", date("Y-m-d H:i:s"));
-            $this->db->where('id', $params->id);
-            $valid = $this->db->update('videotutorial');
+            $this->db->where('id', $params->id_parent);
+            $valid = $this->db->update('aduan');
 
         return $valid;
 

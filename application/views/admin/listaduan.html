@@ -22,21 +22,6 @@
     <div class="row">      <!-- /.col -->
       <div class="col-md-12">
         <div class="card card-danger card-outline">
-          <div class="card-header">
-            <h3 class="card-title"></h3>
-
-            <div class="card-tools">
-              <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Cari Pesan">
-                <div class="input-group-append">
-                  <div class="btn btn-warning">
-                    <i class="fas fa-search"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.card-tools -->
-          </div>
           <!-- /.card-header -->
           <div class="card-body p-0">
             <div class="mailbox-controls">
@@ -58,23 +43,22 @@
               <button type="button" class="btn btn-default btn-sm">
                 <i class="fas fa-sync-alt"></i>
               </button>
-              <div class="float-right">
-                1-50/200
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
-                <!-- /.btn-group -->
-              </div>
               <!-- /.float-right -->
             </div>
             <div class="table-responsive mailbox-messages">
-              <table class="table table-hover table-striped">
-                <tbody>
+              <table class="table table-hover" id="list-aduan">
+                <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Status</th>
+                      <th>Pelapor</th>
+                      <th>Judul</th>
+                      <th>Lokasi</th>
+                      <th>Tanggal</th>
+                      <th>Action</th>
+                  </tr>
+                </thead>
+                <!-- <tbody>
                 <tr>
                   <td>
                     <div class="icheck-primary">
@@ -126,53 +110,62 @@
 
 
 
-                </tbody>
+                </tbody> -->
               </table>
               <!-- /.table -->
             </div>
             <!-- /.mail-box-messages -->
           </div>
           <!-- /.card-body -->
-          <div class="card-footer p-0">
-            <div class="mailbox-controls">
-              <!-- Check all button -->
-              <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                <i class="far fa-square"></i>
-              </button>
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="fas fa-reply"></i>
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="fas fa-share"></i>
-                </button>
-              </div>
-              <!-- /.btn-group -->
-              <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-sync-alt"></i>
-              </button>
-              <div class="float-right">
-                1-50/200
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
-                <!-- /.btn-group -->
-              </div>
-              <!-- /.float-right -->
-            </div>
-          </div>
+
         </div>
         <!-- /.card -->
       </div>
       <!-- /.col -->
+    </div>
+
+    <div class="modal fade" id="modal-default">
+      <div class="modal-dialog modal-lg card card-danger card-outline">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <input id="id" hidden>
+          <div class="modal-body">
+            <div class="card direct-chat direct-chat-primary">
+              <div class="card-body" style="display: block;">
+                  <input id="id-parent" hidden>
+                  <input id="id-pelapor" hidden>
+                  <input id="id-admin" hidden>
+                  <input id="nama-pelapor" hidden>
+                  <input id="date-laporan" hidden>
+                  <input id="isi-laporan" hidden>
+                  <input id="status-laporan" hidden>
+                  <div class="direct-chat-messages" id="percakapan" style="height: 400px;">
+
+                  </div>
+                </div>
+                <div class="card-footer" style="display: block;">
+                  <form action="#" method="post">
+                    <div class="input-group">
+                      <input type="text" id="pesan-balasan" name="message" placeholder="Balasan ..." class="form-control">
+                      <span class="input-group-append">
+                        <button type="button" class="btn btn-primary" id="kirim-balasan">Kirim</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+          </div>
+
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
     </div>
     <!-- /.row -->
   </section>

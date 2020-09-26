@@ -32,6 +32,7 @@ class Users extends CI_Controller {
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
+			"role" => $this->role
 		);
 
 	}
@@ -41,7 +42,12 @@ class Users extends CI_Controller {
 	{
 		if ($this->logged)
 		{
-			redirect("dashboard");
+			
+			if($this->role == '10' || $this->role == '20'){
+				redirect("dashboard");
+			}else{
+				$this->twig->display("users/index.html", $this->content);
+			}
 		}else{
 			$this->twig->display("users/index.html", $this->content);
 		}
@@ -50,7 +56,7 @@ class Users extends CI_Controller {
 
 	public function logout()
 	{
-		$valid = $this->session->sess_destroy();
+		$this->session->sess_destroy();
 		// session_destroy();
 		redirect("/");
 	}
