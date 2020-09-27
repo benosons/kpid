@@ -76,14 +76,30 @@ function loadaduan(param){
                       {
                           "mRender": function ( data, type, row ) {
                             var el = '';
-                            if(row.status == "NULL"){
-                              el ='<span class="badge badge-info">new</span>';
-                            }else if (row.status == "1"){
-                              el = '<span class="badge badge-success">reply</span>';
-                            }else if (row.status == "2"){
-                              el = '<span class="badge badge-danger">close</span>';
+                            if($('#role').val() == '30'){
+                              if(row.status == "NULL"){
+                                el ='<span class="badge badge-info">belum dibaca</span>';
+                              }else if (row.status == "1"){
+                                el = '<span class="badge badge-success">dibalas admin</span>';
+                              }else if (row.status == "3"){
+                                el = '<span class="badge badge-default">sudah dibaca</span>';
+                              }else if (row.status == "4"){
+                                el = '<span class="badge badge-danger">close</span>';
+                              }else if (row.status == "2"){
+                                el = '<span class="badge badge-default">terkirim</span>';
+                              }
                             }else{
-                              el = '<span class="badge badge-defaule">no reply</span>';
+                              if(row.status == "NULL"){
+                                el ='<span class="badge badge-info">pesan baru</span>';
+                              }else if (row.status == "4"){
+                                el = '<span class="badge badge-danger">close</span>';
+                              }else if (row.status == "2"){
+                                el = '<span class="badge badge-success">dibalas user</span>';
+                              }else if(row.status == "3"){
+                                el = '<span class="badge badge-default">sudah dibaca</span>';
+                              }else if(row.status == "1"){
+                                el = '<span class="badge badge-default">terkirim</span>';
+                              }
                             }
 
                               return el;
@@ -102,7 +118,7 @@ function loadaduan(param){
                                         </div>
                                       </div>
                                         `;
-                              if(row.status == "2"){
+                              if(row.status == "4"){
                                 el = 'close';
                               }else{
                                 el = el;

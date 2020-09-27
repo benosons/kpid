@@ -65,6 +65,24 @@ class Aduan extends CI_Controller {
 		}
 	}
 
+	public function hitungStatus()
+	{
+			if($this->role == '30'){
+				$status = "1";
+				$col = "id_user";
+				$and = "";
+			}else{
+				$status = "2";
+				$col = "id_admin";
+				$and = "and status is null or status = '0'";
+			}
+
+			$data = $this->Model_aduan->hitungStatus($this->session->userdata('id'), $col, $status, $and);
+			
+				header('Content-Type: application/json');
+				echo json_encode($data);
+	}
+
 	public function listDataAduanGlobal()	{
 
 			$params = $columns = $totalRecords = $data = array();
@@ -153,6 +171,7 @@ public function cekBalasan()	{
 			$params['status'] = '3';
 			$update = $this->Model_aduan->updateAduan((object)$params);
 		}
+
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
@@ -174,6 +193,11 @@ public function saveBalasan()
 
 			$data = $this->Model_aduan->saveBalasan((object)$params);
 			if($data){
+				if($this->role == 30){
+					$params['status'] = '2';
+				}else{
+					$params['status'] = '1';
+				}
 				$update = $this->Model_aduan->updateAduan((object)$params);
 			}
 			header('Content-Type: application/json');

@@ -199,10 +199,10 @@ class Model_aduan extends CI_Model {
         return $query;
     }
 
-    public function cek($kd)
+    public function hitungStatus($id, $col, $stat, $and)
     {
-        $query = $this->db->query("select * FROM pangan WHERE id = '".$this->db->escape_like_str($kd)."' ");
-
+        $query = $this->db->query("select count(*) as total from aduan
+                                   where $col = '".$id."' and status = ".$stat." ".$and)->row();
         return $query;
     }
 
