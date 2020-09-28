@@ -104,6 +104,25 @@ class Model_sys extends CI_Model {
 
     }
 
+    public function saveRegis($params = NULL)
+    {
+        $valid = true;
+        $this->db->set("username", $params->username_regis);
+        $this->db->set("password", md5($params->password_regis));
+        $this->db->set("kotaKab", $params->kota_kab_regis);
+        $this->db->set("kategori", 'user');
+        $this->db->set("created_by", '');
+        $this->db->set("created_at", date("Y-m-d H:i:s"));
+        $this->db->set("role", '30');
+        $this->db->set("islogin", 0);
+        $this->db->set("status", '1');
+        $this->db->set("name", $params->name_regis);
+        $valid = $this->db->insert('muser');
+
+        return $valid;
+
+    }
+
     public function update($params = NULL)
     {
         $valid = false;

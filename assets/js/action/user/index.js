@@ -26,6 +26,8 @@ $.ajax({
      },
     success: function(result){
 
+      window.location.href = "/dashboard";
+
     }
   });
 }

@@ -185,6 +185,18 @@ class Model_aduan extends CI_Model {
 
     }
 
+    public function closeAduan($params = NULL)
+    {
+        $valid = true;
+        $this->db->set("status", '4');
+        $this->db->set("update_date", date("Y-m-d H:i:s"));
+        $this->db->where('id', $params->id);
+        $valid = $this->db->update('aduan');
+
+        return $valid;
+
+    }
+
     public function delete($id)
     {
         $ids = $this->db->escape_str($id);

@@ -114,7 +114,7 @@ function loadaduan(param){
                                           <button onclick="replylaporan(`+row.id+`,'`+row.nama_pelapor+`','`+row.id_user+`','`+row.isi+`','`+row.create_date+`','`+row.id_admin+`','1')" type="button" class="btn btn-block btn-success btn-sm"><i class="fas fa-reply"></i></button>
                                         </div>
                                         <div class="col-md-4">
-                                          <button type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-ban"></i></button>
+                                          <button onclick="closelaporan(`+row.id+`)" type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-ban"></i></button>
                                         </div>
                                       </div>
                                         `;
@@ -225,4 +225,18 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
       }
     });
 
+}
+
+function closelaporan(id){
+  $.ajax({
+      type: 'post',
+      dataType: 'json',
+      url: 'closeAduan',
+      data : {
+              id      : id,
+       },
+      success: function(result){
+        window.location = '/dashboard';
+      }
+    });
 }

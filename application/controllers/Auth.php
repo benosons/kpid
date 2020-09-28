@@ -23,6 +23,7 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Model_auth');
+		$this->load->model('Model_sys');
 		$this->logs = $this->session->all_userdata();
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
@@ -63,6 +64,28 @@ class Auth extends CI_Controller {
 
 			$this->twig->display("admin/login.html", $this->content);
 		}
+
+	}
+
+	public function register()
+	{
+			if($_POST){
+				$params = (object)$this->input->post();
+				$data = $this->Model_sys->saveRegis($params);
+				if($data){
+					redirect("auth");
+				}
+			}
+
+	}
+
+	public function cekusername()
+	{
+
+				$params = (object)$this->input->post();
+				$valid = $this->Model_auth->cekUname($params->username);
+				header('Content-Type: application/json');
+				echo json_encode($valid);
 
 	}
 

@@ -54,9 +54,7 @@ class Sys extends CI_Controller {
 	}
 
 	public function loadkota(){
-		if ($this->logged)
-		{
-			if($this->role == '10' || $this->role == '20'){
+
 			$params = $columns = $totalRecords = $data = array();
 			$params = $_REQUEST;
 			$postData = $this->input->post('param');
@@ -71,33 +69,10 @@ class Sys extends CI_Controller {
 				$row['id_provinsi'] = (!empty($proses->id_provinsi) ? $proses->id_provinsi : "NULL");
 				$row['nama'] = (!empty($proses->nama) ? $proses->nama : "NULL");
 
-				// if ($this->kategori == 'superAdmin') {
-					// $row[] = '<a href="'.base_url().'formPangan/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
-				// }else{
-				// 	$row[] = '<a href="javascript:void(0)" class="btn btn-sm btn-success" title="Hasil" onclick="view('."'".$proses->id."'".')" id="view"><i class="fa fa-eye"></i> View </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
-				// }
-
-
-
-				//add html for action
 				$data[] = $row;
 			}
-
-      //           $output = array(
-    	// 		                "draw" => $_POST['draw'],
-      //                           "recordsTotal" => $this->Model_siaran->count_all(),
-      //                           "recordsFiltered" => $this->Model_siaran->count_filtered(),
-    	//                          "data" => $data
-    	//                          );
-			// //output to json format
 			header('Content-Type: application/json');
 			echo json_encode($data);
-		}
-
-		}else{
-			redirect("dashboard");
-		}
-
 	}
 
 	public function listUser()

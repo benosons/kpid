@@ -78,7 +78,7 @@ class Aduan extends CI_Controller {
 			}
 
 			$data = $this->Model_aduan->hitungStatus($this->session->userdata('id'), $col, $status, $and);
-			
+
 				header('Content-Type: application/json');
 				echo json_encode($data);
 	}
@@ -205,6 +205,13 @@ public function saveBalasan()
 	} else {
 		redirect("logout");
 	}
+}
+
+public function closeAduan(){
+	$params = $this->input->post();
+	$update = $this->Model_aduan->closeAduan((object)$params);
+	header('Content-Type: application/json');
+	echo json_encode(array("status" => TRUE));
 }
 
 }
