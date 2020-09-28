@@ -236,7 +236,7 @@ function closelaporan(id){
               id      : id,
        },
       success: function(result){
-        window.location = '/dashboard';
+        window.location = $('#baseurl').val()+'listaduan';
       }
     });
 }

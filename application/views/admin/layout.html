@@ -54,6 +54,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+  <input id="baseurl" value="{{base_url}}">
 	<div class="wrapper">
 		{% include "admin/top_bar.html" %}
 		<div class="content-wrapper">
@@ -123,7 +124,7 @@
 
   cekStatus();
   function cekStatus(){
-    
+
       $.ajax({
           type: 'post',
           dataType: 'json',

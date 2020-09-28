@@ -555,6 +555,7 @@
             </div>
             {% if role == 30 %}
             <div class="text-center"><button type="submit" id="kirim-laporan">Kirim</button></div>
+            <input id="baseurl" value="{{base_url}}" hidden>
             {% else %}
             <div class="text-center"><button class="btn btn-success" href={{base_url}}auth >Login</button></div>
             {% endif %}

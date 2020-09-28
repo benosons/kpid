@@ -26,7 +26,7 @@ $.ajax({
      },
     success: function(result){
 
-      window.location.href = "/dashboard";
+      window.location.href = $('#baseurl').val()+"dashboard";
 
     }
   });
