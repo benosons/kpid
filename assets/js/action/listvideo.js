@@ -26,6 +26,11 @@ $( document ).ready(function() {
     $('#videoModal').is(':visible');
   });
 
+  $('#tutup-view').on('click', function(){
+    $('#iframe-video').empty();
+    $('#videoModal').is(':visible');
+  });
+
     loadvideo();
 
     $('#btn-play-vid').on('click', function(){
