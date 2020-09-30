@@ -16,6 +16,16 @@ $( document ).ready(function() {
     simpanvideo();
   });
 
+  $('#close-view-video').on('click', function(){
+    $('#iframe-video').empty();
+    $('#videoModal').is(':visible');
+  });
+
+  $('#close-tambah-video').on('click', function(){
+    $('#iframe-video-add').empty();
+    $('#videoModal').is(':visible');
+  });
+
     loadvideo();
 
     $('#btn-play-vid').on('click', function(){
