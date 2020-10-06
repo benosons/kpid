@@ -44,6 +44,9 @@
                             No
                         </th>
                         <th>
+                            Foto
+                        </th>
+                        <th>
                             Username
                         </th>
                         <th>
@@ -84,7 +87,15 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label>Username</label>
+              <label>Nama Lengkap</label>
+              <input id="name" name="user-input" type="text" class="form-control" placeholder="Nama Lengkap ...">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label id="lbl-unm">Username</label>
+              <label id="warning" style="display:none"><i>Username sudah ada !!</i></label>
               <input id="username" name="user-input" type="text" class="form-control" placeholder="Username ...">
             </div>
           </div>
@@ -100,6 +111,8 @@
             </div>
 
           </div>
+          </div>
+          <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label>Kota/ Kabupaten</label>
@@ -107,30 +120,30 @@
               </select>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
+
+          <div class="col-md-4">
             <label>Status</label>
             <div class="form-group">
               <input id="stat" type="checkbox" name="user-input" checked data-bootstrap-switch data-off-color="warning" data-on-color="primary" data-on-label="Ready" data-off-label="Not Ready">
             </div>
           </div>
-          <div class="col-md-6">
+
+          <div class="col-md-4">
             <label>Kategori</label>
 
             <div class="form-group">
               <div class="icheck-primary d-inline">
                 <input type="radio" id="super-admin" name="role" value="10" >
                 <label for="super-admin">
-                  Super Admin
+                  Admin
                 </label>
               </div>
-              <div class="icheck-primary d-inline">
+              <!-- <div class="icheck-primary d-inline">
                 <input type="radio" id="admin" name="role" value="20" >
                 <label for="admin">
                   Admin
                 </label>
-              </div>
+              </div> -->
               <div class="icheck-primary d-inline">
                 <input type="radio" id="user" name="role" value="30" checked>
                 <label for="user">
@@ -140,11 +153,72 @@
             </div>
 
           </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="custom-file" style="margin-bottom: 10px;margin-top: 10px;">
+              <input type="file" class="custom-file-input" id="foto-user" name="user-input">
+              <label class="custom-file-label" for="foto-user">Pilih foto</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-center">
+                <img id="blah" class="profile-user-img img-fluid img-circle" src="assets/dokumen/gambar/user/default.jpg" alt="User profile picture">
+                <canvas hidden id="myCanvas"/>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Tutup</button> -->
-        <button id="save-user" type="button" class="btn btn-success" data-dismiss="modal"><i class="fas fa-check"> </i> Simpan</button>
+        <button id="save-user" type="button" class="btn btn-success" ><i class="fas fa-check"> </i> Simpan</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- modal detail user -->
+<div class="modal fade" id="modal-detail">
+  <div class="modal-dialog modal-sm card card-danger card-outline">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detail</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <img id="detail-foto" class="profile-user-img img-fluid img-circle" src="assets/dokumen/gambar/user/default.jpg" alt="User profile picture">
+            </div>
+
+            <h3 class="profile-username text-center" id="detail-name">Nina Mcintire</h3>
+
+            <p class="text-muted text-center" id="detail-username">Software Engineer</p>
+
+            <ul class="list-group list-group-unbordered mb-3">
+              <li class="list-group-item">
+                <b>Kota/ Kabupaten</b> <a class="float-right" id="detail-kotakab">1,322</a>
+              </li>
+              <li class="list-group-item">
+                <b>Status</b> <a class="float-right" id="detail-status">543</a>
+              </li>
+              <li class="list-group-item">
+                <b>Jenis User</b> <a class="float-right" id="detail-role">13,287</a>
+              </li>
+            </ul>
+
+            <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+          </div>
+          <!-- /.card-body -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Tutup</button> -->
+        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-times"> </i> Tutup</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -154,12 +228,17 @@
 <!-- /.card -->
 
 </section>
+
 <!-- /.content -->
 
 
-<!-- End Bootstrap modal -->
-
 {% endblock %}
 {% block js %}
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
 <script type="text/javascript" src="{{base_url}}assets/js/action/listuser.js"></script>
+<script type="text/javascript" src="{{base_url}}assets/lte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 {% endblock %}

@@ -19,18 +19,18 @@
 <header id="header">
   <div class="container">
 
-    <div class="logo float-left">
-      <h1 class="text-light"><a href="index.html"><img src="{{base_url}}assets/dokumen/gambar/kpid.png"></img></a></h1>
+    <div class="logo float-left" style="margin-top: -1%;">
+      <h1 class="text-light"><a href="index.html"><img src="{{base_url}}assets/img/logo/SIPPII.png"></img></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
 
     <nav class="nav-menu float-right d-none d-lg-block">
       <ul>
-        <li class="active"><a href="/"><b>Home</b></a></li>
+        <li class="active"><a href="/"><b>Beranda</b></a></li>
         <li><a href="#penyiaran"><b>Penyiaran</b></a></li>
         <li><a href="#video-tutorial"><b>Tutorial</b></a></li>
-        <li><a href="#team"><b>Team</b></a></li>
+        <!-- <li><a href="#team"><b>Team</b></a></li> -->
         <!-- <li class="drop-down"><a href=""><b>Drop Down</b></a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>
@@ -50,13 +50,13 @@
         </li> -->
         <li><a href="#contact"><b>Lapor</b></a></li>
         <!-- <li><a href="#services"><b>Services</b></a></li> -->
-        <li><a href="#about"><b>About Us</b></a></li>
+        <li><a href="#about"><b>Tentang</b></a></li>
         <li class="drop-down"><a href="#"><b><i class="fas fa-user"></i></b></a>
           <ul>
             {% if username == NULL %}
             <li><a href="{{base_url}}auth">Login</a></li>
             {% else %}
-            <li><a><span>Selamat Datang, <p><b>{{username}}</b></p></span></a></li>
+            <li><a><span>Selamat Datang, <p><b>{{name}}</b></p></span></a></li>
             <hr></hr>
             <li><a href="{{base_url}}dashboard">Dashboard</a></li>
             <li><a href="{{base_url}}logout">Logout</a></li>

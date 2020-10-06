@@ -28,10 +28,14 @@ class Auth extends CI_Controller {
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
 		$this->role = $this->session->userdata('role');
+		$this->name = $this->session->userdata('name');
+		$this->foto = $this->session->userdata('foto');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
-			"role" => $this->role
+			"role" => $this->role,
+			"name" => $this->name,
+			"foto" => $this->foto
 		);
 
 	}
@@ -50,6 +54,7 @@ class Auth extends CI_Controller {
 			if($_POST){
 				$params = (object)$this->input->post();
 				$valid = $this->Model_auth->loginAuth($params->username, $params->password);
+
 				if ($valid->valid){
 					if($valid->role == '10' || $valid->role == '20'){
 						redirect("dashboard");
@@ -58,10 +63,15 @@ class Auth extends CI_Controller {
 					}
 				}else{
 					// jang status muncul alert
-					redirect("/");
+
+					$this->session->set_flashdata('msg', 'User atau Password salah silahkan cek kembali!');
+					redirect("auth");
 				}
 			}
-
+			$message = $this->session->flashdata('msg');
+			if($message){
+				$this->content['message'] = $message;
+			}
 			$this->twig->display("admin/login.html", $this->content);
 		}
 

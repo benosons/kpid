@@ -28,12 +28,16 @@ class Aduan extends CI_Controller {
 		$this->kategori = $this->session->userdata('kategori');
 		$this->username = $this->session->userdata('username');
 		$this->kotaKab = $this->session->userdata('kotaKab');
+		$this->name = $this->session->userdata('name');
 		$this->role = $this->session->userdata('role');
+		$this->foto = $this->session->userdata('foto');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
-			"role" => $this->role
+			"role" => $this->role,
+			"name" => $this->name,
+			"foto" => $this->foto
 		);
 
 	}
@@ -45,6 +49,49 @@ class Aduan extends CI_Controller {
 			if($this->role == '10' || $this->role == '20' || $this->role = '30'){
 
 				$this->twig->display('admin/listaduan.html', $this->content);
+			}
+		}else{
+			redirect("Dashboard");
+		}
+	}
+
+	public function new()
+	{
+		if ( $this->logged)
+		{
+			if($this->role == '10' || $this->role == '20' ){
+
+				$this->twig->display('admin/aduannew.html', $this->content);
+
+			}else if($this->role = '30'){
+
+				$this->twig->display('admin/aduan.html', $this->content);
+			}
+		}else{
+			redirect("Dashboard");
+		}
+	}
+
+	public function reply()
+	{
+		if ( $this->logged)
+		{
+			if($this->role == '10' || $this->role == '20' || $this->role = '30'){
+
+				$this->twig->display('admin/aduanreply.html', $this->content);
+			}
+		}else{
+			redirect("Dashboard");
+		}
+	}
+
+	public function close()
+	{
+		if ( $this->logged)
+		{
+			if($this->role == '10' || $this->role == '20' || $this->role = '30'){
+
+				$this->twig->display('admin/aduanclose.html', $this->content);
 			}
 		}else{
 			redirect("Dashboard");
@@ -67,6 +114,7 @@ class Aduan extends CI_Controller {
 
 	public function hitungStatus()
 	{
+
 			if($this->role == '30'){
 				$status = "1";
 				$col = "id_user";

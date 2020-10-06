@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="{{base_url}}assets/dokumen/gambar/favicon.ico">
-  <title>KPID | Jabar </title>
+	<link rel="shortcut icon" href="{{base_url}}assets/img/logo/kpid.ico">
+  <title>SIPP KPID JAWARA</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -48,6 +48,11 @@
     }
     .select2-container--default .select2-selection--single .select2-selection__arrow {
       height: 100%!important;
+    }
+
+    .swal2-actions > button {
+      margin: 3%!important;
+      width: 20%!important;
     }
 
 	</style>
@@ -119,18 +124,35 @@
   <script src="{{base_url}}assets/lte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="{{base_url}}assets/lte/plugins/select2/js/select2.full.min.js"></script>
   <script src="{{base_url}}assets/lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <script src="{{base_url}}assets/lte/swal/swal.js"></script>
   <script>
   $( document ).ready(function() {
 
-  cekStatus();
-  function cekStatus(){
+    var isshow = localStorage.getItem('isshow');
+    if (isshow == null) {
+        localStorage.setItem('isshow', 1);
+        Swal.fire({
+          title: 'Selamat Datang!',
+          text: '',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
+        });
+    }
+
+    $('#logout-btn').on('click', function(){
+      localStorage.clear();
+    });
+
+  cekStatus(0);
+  function cekStatus(param){
 
       $.ajax({
           type: 'post',
           dataType: 'json',
           url: 'hitungStatus',
           data : {
-                  param      : 'all',
+                  param      : param,
            },
           success: function(result){
 
@@ -139,18 +161,19 @@
       					<span class="float-right text-muted text-sm"></span>`
               );
               $('#badge-total').html(result.total);
-              $('#badge-menu').html(result.total);
+              $('#badge-menu-new').html(result.total);
 
               if(result.total == 0){
                 $('#badge-total').hide();
-                $('#badge-menu').hide();
+                $('#badge-menu-new').hide();
               }else{
                 $('#badge-total').show();
-                $('#badge-menu').show();
+                $('#badge-menu-new').show();
               }
           }
         })
       };
+
     });
   </script>
 	{% block js %}

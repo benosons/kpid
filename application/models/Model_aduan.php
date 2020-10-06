@@ -84,7 +84,7 @@ class Model_aduan extends CI_Model {
     }
 
 
-    public function listDataAduan()
+    public function listDataAduan($param)
     {
         $nama = $this->session->userdata('id');
         $kategori = $this->session->userdata('kategori');
@@ -94,7 +94,8 @@ class Model_aduan extends CI_Model {
         if ($role == '10') {
             $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
-                                      inner join kabupaten_kota k on k.id = a.id_kota order by a.id desc")->result();
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where a.status = ".$param." order by a.id desc")->result();
         }else if ($role == '20'){
             $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
@@ -104,7 +105,7 @@ class Model_aduan extends CI_Model {
           $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
-                                      where id_user = '".$id."' order by a.id desc")->result();
+                                      where id_user = '".$id."' and a.status = ".$param." order by a.id desc")->result();
         }
 
         return $query;

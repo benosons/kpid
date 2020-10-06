@@ -1,7 +1,20 @@
 $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
+  $('#aduan').attr('class','menu-open nav-item');
   $('#aduan > a').attr('class','nav-link active');
-  loadaduan();
+  const param = $("#param").val();
+
+  if(param == '0'){
+    $('#new-msg').attr('class','nav-link active');
+    $('#new-msg > i').attr('class','far fa-circle nav-icon text-danger');
+  }else if(param == '2'){
+    $('#reply-msg').attr('class','nav-link active');
+    $('#reply-msg > i').attr('class','far fa-circle nav-icon text-danger');
+  }else if(param == '4'){
+    $('#close-msg').attr('class','nav-link active');
+    $('#close-msg > i').attr('class','far fa-circle nav-icon text-danger');
+  }
+  loadaduan(param);
 
   $('#kirim-balasan').on('click', function(){
     $.ajax({
@@ -36,10 +49,10 @@ function loadaduan(param){
         dataType: 'json',
         url: 'listDataAduan',
         data : {
-                param      : 'all',
+                param      : param,
          },
         success: function(result){
-                var dt = $('#list-aduan').DataTable({
+                var dt = $('#list-aduan-'+param).DataTable({
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
@@ -239,4 +252,23 @@ function closelaporan(id){
         window.location = $('#baseurl').val()+'listaduan';
       }
     });
+}
+
+function kirimlaporan(name,email,subject,message){
+$.ajax({
+    type: 'post',
+    dataType: 'json',
+    url: 'saveAduan',
+    data : {
+            name        : name,
+            email       : email,
+            subject      : subject,
+            message      : message,
+     },
+    success: function(result){
+
+      window.location.href = $('#baseurl').val()+"dashboard";
+
+    }
+  });
 }

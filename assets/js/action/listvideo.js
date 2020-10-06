@@ -48,8 +48,10 @@ $( document ).ready(function() {
 
     if($('#id').val()){
       var act = 'updatevideo';
+      var msg = 'Update Video';
     }else{
       var act = 'addvideo';
+      var msg = 'Tambah Video';
     }
 
     $.ajax({
@@ -63,6 +65,13 @@ $( document ).ready(function() {
                 desc      : $('#desc').val(),
          },
         success: function(result){
+          Swal.fire({
+            title: 'Sukses!',
+            text: msg,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+          });
           $("[name='video-input']").val('');
           loadvideo();
         }
@@ -149,17 +158,45 @@ $( document ).ready(function() {
     }
 
   function deletevideo(id){
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        url: 'deletevideo',
-        data : {
-                param      : id,
-         },
-        success: function(result){
-          loadvideo();
-        }
-      });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: 'Anda yakin, hapus video ini?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '<i class="fas fa-check"></i> Ya',
+      cancelButtonText: '<i class="fas fa-times"></i> Tidak',
+      reverseButtons: true
+    }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'deletevideo',
+          data : {
+                  param      : id,
+           },
+          success: function(result){
+            Swal.fire({
+              title: 'Sukses!',
+              text: 'Hapus Video',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            loadvideo();
+          }
+        });
+      };
+    });
   }
 
   function editvideo(id, judul, url, desc){

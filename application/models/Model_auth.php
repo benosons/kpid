@@ -11,17 +11,19 @@ class Model_auth extends CI_Model {
         $password = md5($password);
 
         $check = $this->db->get_where("muser", array("username" => $username,"password" => $password));
-
+        
             if ($check->num_rows() > 0) {
             $data = $check->row();
                 $session = array(
                     'id' => $data->id,
-                    'username' => $data->username,
-                    'kategori' => $data->kategori,
-                    'password' => $data->password,
-                    'kotaKab'   => $data->kotaKab,
-                    'role'   => $data->role,
-                    'userLogged' => TRUE
+                    'username'    => $data->username,
+                    'kategori'    => $data->kategori,
+                    'password'    => $data->password,
+                    'kotaKab'     => $data->kotaKab,
+                    'role'        => $data->role,
+                    'name'        => $data->name,
+                    'foto'        => $data->foto,
+                    'userLogged'  => TRUE
                 );
 
                 $valid = TRUE;
@@ -37,7 +39,7 @@ class Model_auth extends CI_Model {
                 );
         }else{
           $response = (object) array(
-            'valid' => false,
+            'valid' => 0,
             'role'  => 0
           );
         }

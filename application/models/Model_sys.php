@@ -89,6 +89,7 @@ class Model_sys extends CI_Model {
     {
         $valid = false;
 
+        $this->db->set("name", $params->name);
         $this->db->set("username", $params->username);
         $this->db->set("password", md5($params->password));
         $this->db->set("kotaKab", $params->kotaKab);
@@ -98,6 +99,7 @@ class Model_sys extends CI_Model {
         $this->db->set("role", $params->role);
         $this->db->set("islogin", 0);
         $this->db->set("status", $params->status);
+        $this->db->set("foto", $params->foto);
         $valid = $this->db->insert('muser');
 
         return $valid;
@@ -134,11 +136,15 @@ class Model_sys extends CI_Model {
         //     $this->db->set("password", md5($params->password));
         // }
         $this->db->set("username", $params->username);
+        $this->db->set("name", $params->name);
         $this->db->set("kotaKab", $params->kotaKab);
         $this->db->set("updated_by", $this->session->userdata('username'));
         $this->db->set("updated_at", date("Y-m-d H:i:s"));
         $this->db->set("role", $params->role);
         $this->db->set("status", $params->status);
+        if($params->foto){
+          $this->db->set("foto", $params->foto);
+        }
         $this->db->where('id', $params->id);
         $valid = $this->db->update('muser');
 

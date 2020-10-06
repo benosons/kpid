@@ -68,9 +68,9 @@
 		</li>
 
 		<div class="user-block" style="padding-left: 4%;">
-			<img class="img-circle img-bordered-sm" src="{{base_url}}assets/lte/dist/img/user2-160x160.jpg" alt="User Image">
+			<img class="img-circle img-bordered-sm" src="{{base_url}}{{foto}}" alt="User Image">
 			<span class="username">
-				<a href="#">{{username}}</a>
+				<a href="#">{{name}}</a>
 			</span>
 			<span class="description text-success">online</span>
 		</div>
@@ -84,7 +84,7 @@
 					<i class="fas fa-user-circle mr-2"></i> Profile
 				</a>
 				<div class="dropdown-divider"></div>
-				<a href="{{base_url}}logout" class="dropdown-item">
+				<a href="{{base_url}}logout" class="dropdown-item" id="logout-btn">
 					<i class="fas fa-power-off mr-2"></i> Logout
 				</a>
 			</div>
@@ -105,9 +105,9 @@
 	{% if role == 30 %}
 	<a href="/" class="brand-link">
 	{% else %}
-	<a href="dashboard" class="brand-link">
+	<a href="dashboard" class="brand-link" style="padding:.2rem .2rem;">
 	{% endif %}
-		<img src="{{base_url}}assets/dokumen/gambar/kpid.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+		<img src="{{base_url}}assets/img/logo/SIPPII.png" alt="AdminLTE Logo" class="brand-image" style="width:145px;margin-left: 1.0rem;margin-top: 0px;max-height: 50px;">
 		<!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
 	</a>
 
@@ -163,13 +163,38 @@
 				</li>
 				{% endif %}
 				<li class="nav-item" id="aduan">
-					<a href="{{base_url}}listaduan" class="nav-link">
+					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-comments"></i>
 						<p>
 							Pengaduan
-							<span class="badge badge-info right" id="badge-menu">3</span>
+							<!-- <span class="badge badge-info right" id="badge-menu">3</span> -->
+							<i class="fas fa-angle-left right"></i>
 						</p>
 					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{base_url}}new" class="nav-link" id="new-msg">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Pesan Baru
+									<span class="badge badge-info right" id="badge-menu-new">3</span>
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{base_url}}reply" class="nav-link" id="reply-msg">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Pesan Balasan
+									<!-- <span class="badge badge-info right" id="badge-menu">3</span> -->
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{base_url}}close" class="nav-link" id="close-msg">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Close</p>
+							</a>
+						</li>
+					</ul>
 				</li>
 				{% if role == 10 or role == 20 %}
 				<li class="nav-item" id="video-tutor">

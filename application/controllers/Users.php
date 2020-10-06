@@ -27,12 +27,16 @@ class Users extends CI_Controller {
 		$this->logged = $this->session->userdata('userLogged');
 		$this->kategori = $this->session->userdata('kategori');
 		$this->username = $this->session->userdata('username');
+		$this->name = $this->session->userdata('name');
 		$this->role = $this->session->userdata('role');
+		$this->foto = $this->session->userdata('foto');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
-			"role" => $this->role
+			"role" => $this->role,
+			"name" => $this->name,
+			"foto" => $this->foto
 		);
 
 	}
@@ -42,7 +46,7 @@ class Users extends CI_Controller {
 	{
 		if ($this->logged)
 		{
-			
+
 			if($this->role == '10' || $this->role == '20'){
 				redirect("dashboard");
 			}else{

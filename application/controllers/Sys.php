@@ -29,11 +29,15 @@ class Sys extends CI_Controller {
 		$this->role = $this->session->userdata('role');
 		$this->username = $this->session->userdata('username');
 		$this->kotaKab = $this->session->userdata('kotaKab');
+		$this->name = $this->session->userdata('name');
+		$this->foto = $this->session->userdata('foto');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
-			"role" => $this->role
+			"role" => $this->role,
+			"name" => $this->name,
+			"foto" => $this->foto
 		);
 
 	}
@@ -103,6 +107,7 @@ class Sys extends CI_Controller {
 				$x++;
 				$row = array();
 				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['name'] = (!empty($proses->name) ? $proses->name : "NULL");
 				$row['username'] = (!empty($proses->username) ? $proses->username : "NULL");
 				$row['kategori'] = (!empty($proses->kategori) ? $proses->kategori : "NULL");
 				$row['kotaKab'] = (!empty($proses->kotaKab) ? $proses->kotaKab : "NULL");
@@ -111,6 +116,7 @@ class Sys extends CI_Controller {
 				$row['islogin'] = (!empty($proses->islogin) ? $proses->islogin : "NULL");
 				$row['role'] = (!empty($proses->role) ? $proses->role : "NULL");
 				$row['role_desc'] = (!empty($proses->role_desc) ? $proses->role_desc : "NULL");
+				$row['foto'] = (!empty($proses->foto) ? $proses->foto : "assets/dokumen/gambar/user/default.jpg");
 
 				// if ($this->kategori == 'superAdmin') {
 					// $row[] = '<a href="'.base_url().'formPangan/?id='.$proses->id.'" class="btn btn-sm btn-info" title="Edit" id="Edit"><i class="fa fa-edit"></i> Edit </a> <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="deleteData('."'".$proses->id."'".')"><i class="fa fa-trash"></i> Delete</a> ';
@@ -143,6 +149,13 @@ class Sys extends CI_Controller {
 	public function saveUser()
 	{
 		$params = (object)$this->input->post();
+		// remove the part that we don't need from the provided image and decode it
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->img));
+
+		$filepath = "assets/dokumen/gambar/user/".$params->username.".png"; // or image.jpg
+		file_put_contents($filepath,$data);
+		$params->foto = $filepath;
+
 		$data = $this->Model_sys->save($params);
 		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));
@@ -152,6 +165,14 @@ class Sys extends CI_Controller {
 	public function updateUser()
 	{
 		$params = (object)$this->input->post();
+		// remove the part that we don't need from the provided image and decode it
+		if($params->img){
+			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->img));
+			$filepath = "assets/dokumen/gambar/user/".$params->username.".png"; // or image.jpg
+			file_put_contents($filepath,$data);
+			$params->foto = $filepath;
+		}
+
 		$data = $this->Model_sys->update($params);
 		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));

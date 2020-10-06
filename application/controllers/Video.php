@@ -29,11 +29,15 @@ class Video extends CI_Controller {
 		$this->username = $this->session->userdata('username');
 		$this->kotaKab = $this->session->userdata('kotaKab');
 		$this->role = $this->session->userdata('role');
+		$this->name = $this->session->userdata('name');
+		$this->foto = $this->session->userdata('foto');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
-			"role" => $this->role
+			"role" => $this->role,
+			"name" => $this->name,
+			"foto" => $this->foto
 		);
 
 	}
