@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 27/09/2020 03:42:03
+ Date: 07/10/2020 02:17:41
 */
 
 SET NAMES utf8mb4;
@@ -30,17 +30,19 @@ CREATE TABLE `aduan`  (
   `kategori` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `create_date` datetime(0) NULL DEFAULT NULL,
   `update_date` datetime(0) NULL DEFAULT NULL,
-  `status` int(8) NULL DEFAULT NULL COMMENT '0= belum dibaca, 1=sudah dibaca, 2=close',
+  `status` int(8) NULL DEFAULT NULL COMMENT '0= belum dibaca, 1=dibalas admin, 2=dibalas user, 3=dibaca, 4=close',
   `id_kota` int(16) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of aduan
 -- ----------------------------
-INSERT INTO `aduan` VALUES (1, 21, 24, 'judul', 't, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', NULL, '2020-09-26 13:54:50', '2020-09-26 20:11:01', 3, 3273);
-INSERT INTO `aduan` VALUES (2, 22, 1, 'ini adalah judul', 'Lorem ipsum disebut juga dengan greeking (melatinkanmeyunanikan) karena kalimat ini berasal dari bahasa Latin. ... Teks lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet, consectetur adipisicing eli', NULL, '2020-09-26 14:34:16', '2020-09-26 20:41:16', 3, 3273);
-INSERT INTO `aduan` VALUES (3, 23, 24, 'lorem ipsum', 'lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet', NULL, '2020-09-26 14:48:07', '2020-09-26 20:11:27', 1, 3273);
+INSERT INTO `aduan` VALUES (1, 21, 1, 'judul', 't, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', NULL, '2020-09-26 13:54:50', '2020-09-28 06:45:35', 4, 3273);
+INSERT INTO `aduan` VALUES (2, 22, 24, 'ini adalah judul', 'Lorem ipsum disebut juga dengan greeking (melatinkanmeyunanikan) karena kalimat ini berasal dari bahasa Latin. ... Teks lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet, consectetur adipisicing eli', NULL, '2020-09-26 14:34:16', '2020-09-28 06:46:03', 4, 3273);
+INSERT INTO `aduan` VALUES (3, 23, 1, 'lorem ipsum', 'lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet', NULL, '2020-09-26 14:48:07', '2020-10-05 16:05:16', 1, 3273);
+INSERT INTO `aduan` VALUES (4, 25, 25, 'izin melaporkan', 'saya izin melaporkan', NULL, '2020-09-28 06:06:29', '2020-09-28 06:19:16', 4, 3273);
+INSERT INTO `aduan` VALUES (5, 25, NULL, 'ini laporan ke 2', 'mantap', NULL, '2020-09-28 06:21:43', '2020-09-28 06:22:00', 0, 3273);
 
 -- ----------------------------
 -- Table structure for balasan
@@ -57,14 +59,20 @@ CREATE TABLE `balasan`  (
   `status` int(255) NULL DEFAULT NULL,
   `isi` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of balasan
 -- ----------------------------
-INSERT INTO `balasan` VALUES (17, 3, 23, 24, 0, 1, '2020-09-26 20:08:31', 0, 'bisa ');
-INSERT INTO `balasan` VALUES (18, 3, 23, 24, 1, 0, '2020-09-26 20:09:36', 0, 'bisa apa');
-INSERT INTO `balasan` VALUES (19, 3, 23, 24, 0, 1, '2020-09-26 20:11:27', 0, 'apa aja boleh ');
+INSERT INTO `balasan` VALUES (20, 3, 23, 24, 0, 1, '2020-09-27 08:30:05', 0, 'ada apa');
+INSERT INTO `balasan` VALUES (21, 3, 23, 24, 1, 0, '2020-09-27 08:31:30', 0, 'bantu saya');
+INSERT INTO `balasan` VALUES (22, 3, 23, 24, 0, 1, '2020-09-27 08:34:35', 0, 'bantu apa kak');
+INSERT INTO `balasan` VALUES (23, 3, 23, 23, 1, 0, '2020-09-27 08:37:39', 0, 'apa aja boleh kan');
+INSERT INTO `balasan` VALUES (24, 3, 23, 24, 0, 1, '2020-09-27 08:41:11', 0, 'silahkan kak');
+INSERT INTO `balasan` VALUES (25, 3, 23, 24, 1, 0, '2020-09-27 09:02:53', 0, 'jadi gini');
+INSERT INTO `balasan` VALUES (26, 3, 23, 24, 0, 1, '2020-09-27 09:09:39', 0, 'boleh kak');
+INSERT INTO `balasan` VALUES (27, 3, 23, 24, 1, 0, '2020-09-27 09:10:12', 0, 'siap kak');
+INSERT INTO `balasan` VALUES (28, 3, 23, 24, NULL, NULL, '2020-10-05 16:05:16', 0, 'ok kawan');
 
 -- ----------------------------
 -- Table structure for kabupaten_kota
@@ -511,7 +519,7 @@ CREATE TABLE `muser`  (
   `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `kotaKab` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `kategori` enum('superAdmin','admin') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `kategori` enum('admin','user') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
@@ -520,29 +528,19 @@ CREATE TABLE `muser`  (
   `islogin` int(1) NULL DEFAULT NULL,
   `status` int(5) NULL DEFAULT NULL COMMENT '0 = nonactive, 1= active,',
   `name` varchar(24) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `no_telp` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `email` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `foto` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 25 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 33 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of muser
 -- ----------------------------
-INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', 'superAdmin', NULL, NULL, NULL, NULL, 10, 1, 1, NULL);
-INSERT INTO `muser` VALUES (5, 'saya', '827ccb0eea8a706c4c34a16891f84e7b', '3204', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', '2020-09-09 17:35:20', 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (6, 'user', '827ccb0eea8a706c4c34a16891f84e7b', '3273', 'admin', 'admin', 'admin', '2020-09-05 06:16:29', NULL, 20, 1, 1, NULL);
-INSERT INTO `muser` VALUES (7, 'sayaadalah', '827ccb0eea8a706c4c34a16891f84e7b', '3279', 'admin', 'admin', NULL, '2020-09-24 17:03:22', NULL, 20, 0, 1, NULL);
-INSERT INTO `muser` VALUES (21, 'usertest', '827ccb0eea8a706c4c34a16891f84e7b', '3274', 'admin', 'admin', NULL, '2020-09-26 02:27:37', NULL, 30, 0, 1, 'User Test');
-INSERT INTO `muser` VALUES (11, 'test4', '827ccb0eea8a706c4c34a16891f84e7b', '3216', 'admin', 'admin', NULL, '2020-09-24 17:15:37', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (12, 'test5', '827ccb0eea8a706c4c34a16891f84e7b', '3211', 'admin', 'admin', NULL, '2020-09-24 17:16:58', NULL, 20, 0, 1, NULL);
-INSERT INTO `muser` VALUES (13, 'test6', '827ccb0eea8a706c4c34a16891f84e7b', '3278', 'admin', 'admin', NULL, '2020-09-24 17:21:40', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (14, 'test7', '827ccb0eea8a706c4c34a16891f84e7b', '3214', 'admin', 'admin', NULL, '2020-09-24 17:22:20', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (15, 'test8', '827ccb0eea8a706c4c34a16891f84e7b', '3279', 'admin', 'admin', NULL, '2020-09-24 17:23:39', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (16, 'test9', '827ccb0eea8a706c4c34a16891f84e7b', '3213', 'admin', 'admin', NULL, '2020-09-24 17:24:15', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (17, 'test10', '827ccb0eea8a706c4c34a16891f84e7b', '3210', 'admin', 'admin', NULL, '2020-09-24 17:25:29', NULL, 20, 0, 0, NULL);
-INSERT INTO `muser` VALUES (18, 'sons', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', 'superAdmin', 'admin', 'admin', '2020-09-24 17:26:48', '2020-09-24 18:19:36', 10, 0, 1, NULL);
-INSERT INTO `muser` VALUES (19, 'benosons', '2d0e971d4f2b6a781c937bcfc9b8e6db', '3273', 'admin', 'admin', NULL, '2020-09-24 18:23:39', NULL, 10, 0, 1, NULL);
-INSERT INTO `muser` VALUES (23, 'userbandung', '827ccb0eea8a706c4c34a16891f84e7b', '3273', 'admin', 'benosons', NULL, '2020-09-26 14:45:07', NULL, 30, 1, 1, 'User Bandung');
-INSERT INTO `muser` VALUES (22, 'usertest1', '827ccb0eea8a706c4c34a16891f84e7b', '3276', 'admin', 'admin', NULL, '2020-09-26 14:33:02', NULL, 30, 0, 1, 'User Test 1');
-INSERT INTO `muser` VALUES (24, 'adminbandung', '827ccb0eea8a706c4c34a16891f84e7b', '3273', 'admin', 'benosons', NULL, '2020-09-26 14:46:10', NULL, 20, 0, 1, 'Admin Bandung');
+INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', NULL, NULL, NULL, NULL, NULL, 10, 1, 1, 'admin', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
+INSERT INTO `muser` VALUES (18, 'sons', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', NULL, 'admin', 'admin', '2020-09-24 17:26:48', '2020-09-24 18:19:36', 10, 0, 1, NULL, NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
+INSERT INTO `muser` VALUES (28, 'benosons', '827ccb0eea8a706c4c34a16891f84e7b', '3278', 'admin', 'admin', 'admin', '2020-10-06 15:52:28', '2020-10-06 16:54:55', 10, 0, 1, 'beno sons', NULL, NULL, 'assets/dokumen/gambar/user/benosons.png');
+INSERT INTO `muser` VALUES (30, 'simpantas', '827ccb0eea8a706c4c34a16891f84e7b', '3279', 'admin', 'admin', 'admin', '2020-10-06 16:56:22', '2020-10-06 17:36:11', 30, 0, 1, 'epantas', NULL, NULL, 'assets/dokumen/gambar/user/simpantas.png');
 
 -- ----------------------------
 -- Table structure for pangan
@@ -580,7 +578,7 @@ CREATE TABLE `role`  (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (10, 'superadmin', 'Super Admin');
+INSERT INTO `role` VALUES (10, 'admin', 'Admin');
 INSERT INTO `role` VALUES (20, 'Admin', 'Admin');
 INSERT INTO `role` VALUES (30, 'User', 'User Biasa');
 
@@ -598,7 +596,7 @@ CREATE TABLE `videotutorial`  (
   `create_date` datetime(0) NULL DEFAULT NULL,
   `update_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of videotutorial
@@ -609,6 +607,6 @@ INSERT INTO `videotutorial` VALUES (11, 'Tutorial menarik', 'ini adalah tutorial
 INSERT INTO `videotutorial` VALUES (12, 'tutorial belajar gitar', 'belajar gitar dong asik lah', 'https://www.youtube.com/watch?v=M7vB4qwkQE0', NULL, 1, '2020-09-23 17:44:58', '2020-09-23 17:47:32');
 INSERT INTO `videotutorial` VALUES (13, 'tutorial hijab', 'ini adalah cara memakai hijab ', 'https://www.youtube.com/watch?v=3sjSHPTXesU', NULL, 1, '2020-09-26 08:00:37', '2020-09-26 08:00:37');
 INSERT INTO `videotutorial` VALUES (14, 'tutial memasak', 'ini alah cara memasak tahu', 'https://www.youtube.com/watch?v=VzKYc2OxVc8', NULL, 1, '2020-09-26 08:01:20', '2020-09-26 08:01:20');
-INSERT INTO `videotutorial` VALUES (15, 'ustad abdul somad', 'ini adalah video ustad abdul somad', 'https://www.youtube.com/watch?v=issRwOQHgQw', NULL, 1, '2020-09-26 12:30:52', '2020-09-26 12:30:52');
+INSERT INTO `videotutorial` VALUES (15, 'ustad abdul somad', 'ini adalah video ustad abdul somad', 'https://www.youtube.com/watch?v=issRwOQHgQw', NULL, 1, '2020-09-26 12:30:52', '2020-10-06 17:53:07');
 
 SET FOREIGN_KEY_CHECKS = 1;
