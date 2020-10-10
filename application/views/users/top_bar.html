@@ -51,15 +51,21 @@
         <li><a href="#contact"><b>Lapor</b></a></li>
         <!-- <li><a href="#services"><b>Services</b></a></li> -->
         <li><a href="#about"><b>Tentang</b></a></li>
-        <li class="drop-down"><a href="#"><b><i class="fas fa-user"></i></b></a>
+        <li class="drop-down">
+          {% if username != NULL %}
+          <a><span><b><i>{{name}}</i></b></span></a>
           <ul>
-            {% if username == NULL %}
-            <li><a href="{{base_url}}auth">Login</a></li>
-            {% else %}
-            <li><a><span>Selamat Datang, <p><b>{{name}}</b></p></span></a></li>
             <hr></hr>
+            <input hidden id="user_id" value="{{id}}">
             <li><a href="{{base_url}}dashboard">Dashboard</a></li>
-            <li><a href="{{base_url}}logout">Logout</a></li>
+            <li><a id="logout-btn" href="{{base_url}}logout">Logout</a></li>
+          </ul>
+
+          {% else %}
+          <a href="#"><b><i class="fas fa-user"></i></b></a>
+          <ul>
+            <li><a href="{{base_url}}auth">Login</a></li>
+            <li>
             {% endif %}
           </ul>
         <!-- <li class=""><a href="{{base_url}}auth"><b><i class="fas fa-user"></i> Login </b></a> -->

@@ -3,6 +3,7 @@ $( document ).ready(function() {
   loadsiaran();
   loadvideo();
   loadaduan();
+
   $('#kirim-laporan').on('click', function(){
     var name = $('#name').val();
     var email = $('#email').val();
@@ -10,6 +11,27 @@ $( document ).ready(function() {
     var message = $('#message').val();
     kirimlaporan(name,email,subject,message)
   });
+
+  $('#logout-btn').on('click', function(){
+    localStorage.clear();
+  });
+
+  if($('#user_id').val()){
+    var isuser = localStorage.getItem('isuser');
+    if (isuser == null) {
+      localStorage.setItem('isuser', 1);
+        Swal.fire({
+          icon  : 'success',
+          title : 'Login Berhasil',
+          text  : 'Selamat Datang',
+          confirmButtonText: '<i class="fas fa-check"></i>'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // localStorage.setItem('isuser', null);
+          }
+        });
+      }
+    }
 
 });
 

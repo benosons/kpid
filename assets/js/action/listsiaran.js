@@ -1,5 +1,6 @@
 $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
+  
   $('#siar').attr('class','menu-open nav-item');
   $('#siar > a').attr('class','nav-link active');
   const param = $("#param").val();
@@ -10,6 +11,10 @@ $( document ).ready(function() {
     $('#radio').attr('class','nav-link active');
     $('#radio > i').attr('class','far fa-circle nav-icon text-danger');
   }
+
+  $('#add-lembaga').on('click', function(){
+    window.location.href='lembaga';
+  });
 
   loadsiaran();
   function loadsiaran(){
@@ -58,7 +63,7 @@ $( document ).ready(function() {
                                                     <button onclick="modaldetail('`+row.namaBadanHukum+`','`+row.pimpinan+`','`+row.alamat+`','`+row.email+`','`+row.frekuensi+`','`+row.wilayahLayanan+`','`+row.kontak+`','`+row.koor+`')" type="button" class="btn btn-block btn-success btn-sm"><i class="far fa-eye"></i></button>
                                                   </div>
                                                   <div class="col-md-4">
-                                                    <button type="button" class="btn btn-block btn-warning btn-sm"><i class="far fa-edit"></i></button>
+                                                    <button onclick="editlembaga(`+row.id+`,'`+param+`')" type="button" class="btn btn-block btn-warning btn-sm"><i class="far fa-edit"></i></button>
                                                   </div>
                                                   <div class="col-md-4">
                                                     <button type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
@@ -193,4 +198,8 @@ function modaldetail(nama, pimpinan, alamat, email, frekuensi, wilayah, kontak, 
       src = "https://maps.google.com/maps?q=`+koor+`&hl=es;z=14&amp;output=embed"></iframe>`
     );
 
+}
+
+function editlembaga(id, param){
+  window.location.href='editlembaga?ids='+id+'&par='+param;
 }

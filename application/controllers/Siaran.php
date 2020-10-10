@@ -42,6 +42,21 @@ class Siaran extends CI_Controller {
 
 	}
 
+	public function editlembaga()
+	{
+		if ( $this->logged)
+		{
+			if($this->role == '10' || $this->role == '20'){
+				$this->content['lembaga_id'] = $this->input->get('ids');
+				$this->content['lembaga_type'] = $this->input->get('par');
+				$this->twig->display('admin/editlembaga.html', $this->content);
+
+			}
+		}else{
+			redirect("dashboard");
+		}
+	}
+
 	public function listtelevisi()
 	{
 		if ( $this->logged)
@@ -128,6 +143,114 @@ class Siaran extends CI_Controller {
 			header('Content-Type: application/json');
 			echo json_encode($data);
 		}
+	}
+
+	public function loadsiaran()
+	{
+		$params = $columns = $totalRecords = $data = array();
+		$params = $_REQUEST;
+		$postData = $this->input->post('id');
+		$query = $this->Model_siaran->loadsiaran($postData);
+
+		$x = 0;
+		$i=0;
+		foreach ($query as $proses) {
+			$x++;
+			$row = array();
+			$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+			$row['kode'] = (!empty($proses->kode) ? $proses->kode : "NULL");
+			$row['jenisLP'] = (!empty($proses->jenisLP) ? $proses->jenisLP : "NULL");
+			$row['namaBadanHukum'] = (!empty($proses->namaBadanHukum) ? $proses->namaBadanHukum : "NULL");
+			$row['noIPP'] = (!empty($proses->noIPP) ? $proses->noIPP : "NULL");
+			$row['sebutanDiUdara'] = (!empty($proses->sebutanDiUdara) ? $proses->sebutanDiUdara : "NULL");
+			$row['pimpinan'] = (!empty($proses->pimpinan) ? $proses->pimpinan : "NULL");
+			$row['alamat'] = (!empty($proses->alamat) ? $proses->alamat : "NULL");
+			$row['kota'] = (!empty($proses->kota) ? $proses->kota : "NULL");
+			$row['tlp'] = (!empty($proses->tlp) ? $proses->tlp : "NULL");
+			$row['fax'] = (!empty($proses->fax) ? $proses->fax : "NULL");
+			$row['email'] = (!empty($proses->email) ? $proses->email : "NULL");
+			$row['frekuensi'] = (!empty($proses->frekuensi) ? $proses->frekuensi : "NULL");
+			$row['wilayahLayanan'] = (!empty($proses->wilayahLayanan) ? $proses->wilayahLayanan : "NULL");
+			$row['kontak'] = (!empty($proses->kontak) ? $proses->kontak : "NULL");
+			$row['koor'] = (!empty($proses->koor) ? $proses->koor : "NULL");
+			$row['logo'] = (!empty($proses->logo) ? $proses->logo : "assets/dokumen/gambar/user/default.jpg");
+			$row['foto'] = (!empty($proses->foto) ? $proses->foto : "assets/dokumen/gambar/user/default.jpg");
+			$row['website'] = (!empty($proses->website) ? $proses->website : "NULL");
+			$row['streaming'] = (!empty($proses->streaming) ? $proses->streaming : "NULL");
+			$row['instagram'] = (!empty($proses->instagram) ? $proses->instagram : "NULL");
+			$row['twitter'] = (!empty($proses->twitter) ? $proses->twitter : "NULL");
+
+			$data[] = $row;
+		}
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	public function loadkota_lembaga(){
+
+			$params = $columns = $totalRecords = $data = array();
+			$params = $_REQUEST;
+			$postData = $this->input->post('param');
+
+			$query = $this->Model_siaran->loadkota($postData);
+			$x = 0;
+			$i=0;
+			foreach ($query as $proses) {
+				$x++;
+				$row = array();
+				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['name'] = (!empty($proses->name) ? $proses->name : "NULL");
+				$row['desc'] = (!empty($proses->desc) ? $proses->desc : "NULL");
+
+				$data[] = $row;
+			}
+			header('Content-Type: application/json');
+			echo json_encode($data);
+	}
+
+	public function loadLP(){
+
+			$params = $columns = $totalRecords = $data = array();
+			$params = $_REQUEST;
+			$postData = $this->input->post('param');
+
+			$query = $this->Model_siaran->loadLP($postData);
+			$x = 0;
+			$i=0;
+			foreach ($query as $proses) {
+				$x++;
+				$row = array();
+				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['name'] = (!empty($proses->name) ? $proses->name : "NULL");
+
+				$data[] = $row;
+			}
+			header('Content-Type: application/json');
+			echo json_encode($data);
+	}
+
+	public function updateLembaga()
+	{
+		$params = (object)$this->input->post();
+		// remove the part that we don't need from the provided image and decode it
+		if($params->logo){
+			$data_logo = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->logo));
+			$filepath = "assets/dokumen/gambar/lembaga/logo/".$params->id.".jpg"; // or image.jpg
+			file_put_contents($filepath,$data_logo);
+			$params->logo = $filepath;
+		}
+
+		if($params->foto){
+			$data_foto = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->foto));
+			$filepath = "assets/dokumen/gambar/lembaga/foto/".$params->id.".jpg"; // or image.jpg
+			file_put_contents($filepath,$data_foto);
+			$params->foto = $filepath;
+		}
+
+		$data = $this->Model_siaran->updateLembaga($params);
+		header('Content-Type: application/json');
+		echo json_encode(array("status" => TRUE));
+
 	}
 
 }

@@ -59,7 +59,8 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-  <input id="baseurl" value="{{base_url}}">
+  <input hidden id="baseurl" value="{{base_url}}">
+  <input hidden id="role-user" value="{{role}}">
 	<div class="wrapper">
 		{% include "admin/top_bar.html" %}
 		<div class="content-wrapper">
@@ -128,21 +129,25 @@
   <script>
   $( document ).ready(function() {
 
-    var isshow = localStorage.getItem('isshow');
-    if (isshow == null) {
-        localStorage.setItem('isshow', 1);
-        Swal.fire({
-          title: 'Selamat Datang!',
-          text: '',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 1500
-        });
+    var isadmin = localStorage.getItem('isadmin');
+    if($('#role-user').val() == '10'){
+      if (isadmin == null) {
+          localStorage.setItem('isadmin', 1);
+          Swal.fire({
+            title: 'Login Berhasil',
+            text: 'Selamat Datang, {{name}}',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonText: '<i class="fas fa-check"></i>',
+            // timer: 2500
+          });
+        }
     }
 
     $('#logout-btn').on('click', function(){
       localStorage.clear();
     });
+
 
   cekStatus(0);
   function cekStatus(param){

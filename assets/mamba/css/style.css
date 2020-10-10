@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 }
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
-  color: #dc3545;
+  color: #f00;
   text-decoration: none;
 }
 
@@ -1333,16 +1333,16 @@ section {
 }
 
 #footer {
-  background: #587187;
+  background: #f00;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
 }
 
 #footer .footer-top {
-  background: #5c768d;
-  border-top: 1px solid #768fa6;
-  border-bottom: 1px solid #67839c;
+  background: #001f3f;
+  border-top: 1px solid #001f3f;
+  border-bottom: 1px solid #001f3f;
   padding: 60px 0 30px 0;
 }
 

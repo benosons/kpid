@@ -59,18 +59,23 @@ class Auth extends CI_Controller {
 					if($valid->role == '10' || $valid->role == '20'){
 						redirect("dashboard");
 					}else if($valid->role == '30'){
+						$this->session->set_flashdata('msg', 'Login Berhasil!');
+						$this->session->set_flashdata('cd', '1');
 						redirect("/");
 					}
 				}else{
 					// jang status muncul alert
 
 					$this->session->set_flashdata('msg', 'User atau Password salah silahkan cek kembali!');
+					$this->session->set_flashdata('cd', '3');
 					redirect("auth");
 				}
 			}
 			$message = $this->session->flashdata('msg');
-			if($message){
+			$code = $this->session->flashdata('cd');
+			if($code){
 				$this->content['message'] = $message;
+				$this->content['code'] = $code;
 			}
 			$this->twig->display("admin/login.html", $this->content);
 		}
@@ -83,6 +88,8 @@ class Auth extends CI_Controller {
 				$params = (object)$this->input->post();
 				$data = $this->Model_sys->saveRegis($params);
 				if($data){
+					$this->session->set_flashdata('msg', 'Registrasi Berhasil!');
+					$this->session->set_flashdata('cd', '2');
 					redirect("auth");
 				}
 			}
