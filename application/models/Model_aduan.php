@@ -116,11 +116,18 @@ class Model_aduan extends CI_Model {
                                       inner join kabupaten_kota k on k.id = a.id_kota
                                       where a.id_kota = ".$kotakab." order by a.id desc")->result();
         }else if ($role == '30'){
-
-          $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+          if($param == 4){
+            $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where id_user = '".$id."' and a.status in ('4') order by a.id desc")->result();
+          }else{
+            $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
                                       where id_user = '".$id."' and a.status in (".$param.", '1', '2') order by a.id desc")->result();
+
+          }
         }
 
         return $query;

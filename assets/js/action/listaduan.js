@@ -190,8 +190,41 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
       data : {
               id      : id,
        },
-      success: function(result){
+      success: function(response){
+        var result = response.data;
+        var lampiran = response.lampiran;
 
+        var attch = '';
+        if(lampiran.length != 0){
+            attch += `<div>
+                          <i class="fas fa-paperclip bg-warning"></i>
+
+                          <div class="timeline-item">
+                            <h3 class="timeline-header"> Lampiran</h3>
+
+                            <div class="timeline-body">
+                              <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+
+                            `;
+          for (var i = 0; i < lampiran.length; i++) {
+            // attch += `<img src="`+lampiran[i].url+`" alt="..." style="width: 30%;">`;
+            attch += `<li>
+                        <div class="mailbox-attachment-info" style="background: #ffffff;">
+                          <a href="#" class="mailbox-attachment-name" style="font-size: 12px;"><i class="fas fa-paperclip"></i> `+lampiran[i].filename+`</a>
+                              <span class="mailbox-attachment-size clearfix mt-1">
+                                <span>1,245 KB</span>
+                                <a href="`+lampiran[i].url+`" download="`+lampiran[i].filename+`" class="btn btn-default btn-sm float-right"><i class="fas fa-download"></i></a>
+
+                              </span>
+                        </div>
+                      </li>`;
+          }
+
+          attch += `</ul>
+                    </div>
+                  </div>
+                </div>`;
+        }
         $('#timeline').empty();
         var timeline = `<div class="time-label">
                           <span class="bg-danger">
@@ -212,6 +245,7 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
 
                           </div>
                         </div>`;
+                        timeline += attch;
         var bg = '', name = '', alltgl = [];
         for (var i = 0; i < result.length; i++) {
 

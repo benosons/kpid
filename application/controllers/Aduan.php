@@ -111,6 +111,7 @@ class Aduan extends CI_Controller {
 				foreach ($params->lampiran as $key => $value) {
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value['src']));
 					$filepath = "assets/dokumen/lampiran/".$value['filename']; // or image.jpg
+					chmod($filepath,0777);
 					file_put_contents($filepath,$data);
 					$params->url = $filepath;
 					$params->lastid = $lastid;
@@ -258,7 +259,7 @@ public function cekBalasan()	{
 		$result = array();
 		$result['data'] = $data;
 		$result['lampiran'] = $lampiran;
-		
+
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}

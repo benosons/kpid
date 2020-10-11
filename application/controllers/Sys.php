@@ -153,6 +153,7 @@ class Sys extends CI_Controller {
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->img));
 
 		$filepath = "assets/dokumen/gambar/user/".$params->username.".png"; // or image.jpg
+		chmod($filepath,0777);
 		file_put_contents($filepath,$data);
 		$params->foto = $filepath;
 

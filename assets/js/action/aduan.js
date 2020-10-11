@@ -34,8 +34,7 @@ function kirimlaporan(name,email,subject,message, telepon, email){
     upload[i] = xfile;
 
   }
-  console.log(upload);
-  alert();
+
 $.ajax({
     type: 'post',
     dataType: 'json',

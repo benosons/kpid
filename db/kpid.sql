@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 10/10/2020 16:53:39
+ Date: 11/10/2020 13:19:20
 */
 
 SET NAMES utf8mb4;
@@ -33,16 +33,13 @@ CREATE TABLE `aduan`  (
   `status` int(8) NULL DEFAULT NULL COMMENT '0= belum dibaca, 1=dibalas admin, 2=dibalas user, 3=dibaca, 4=close',
   `id_kota` int(16) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of aduan
 -- ----------------------------
-INSERT INTO `aduan` VALUES (1, 21, 1, 'judul', 't, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', NULL, '2020-09-26 13:54:50', '2020-09-28 06:45:35', 4, 3273);
-INSERT INTO `aduan` VALUES (2, 22, 24, 'ini adalah judul', 'Lorem ipsum disebut juga dengan greeking (melatinkanmeyunanikan) karena kalimat ini berasal dari bahasa Latin. ... Teks lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet, consectetur adipisicing eli', NULL, '2020-09-26 14:34:16', '2020-09-28 06:46:03', 4, 3273);
-INSERT INTO `aduan` VALUES (3, 23, 1, 'lorem ipsum', 'lorem ipsum yang lazim digunakan adalah: Lorem ipsum dolor sit amet', NULL, '2020-09-26 14:48:07', '2020-10-05 16:05:16', 1, 3273);
-INSERT INTO `aduan` VALUES (4, 25, 25, 'izin melaporkan', 'saya izin melaporkan', NULL, '2020-09-28 06:06:29', '2020-09-28 06:19:16', 4, 3273);
-INSERT INTO `aduan` VALUES (5, 25, NULL, 'ini laporan ke 2', 'mantap', NULL, '2020-09-28 06:21:43', '2020-09-28 06:22:00', 0, 3273);
+INSERT INTO `aduan` VALUES (7, 37, 1, 'ini aduan saya', 'tolong saya ini kak kenapa ya', NULL, '2020-10-10 16:00:32', '2020-10-10 16:10:33', 4, 3272);
+INSERT INTO `aduan` VALUES (22, 37, NULL, 'wdaweaw', 'dwsda', NULL, '2020-10-11 05:19:20', '2020-10-11 05:19:20', 0, 3272);
 
 -- ----------------------------
 -- Table structure for balasan
@@ -59,20 +56,23 @@ CREATE TABLE `balasan`  (
   `status` int(255) NULL DEFAULT NULL,
   `isi` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of balasan
 -- ----------------------------
-INSERT INTO `balasan` VALUES (20, 3, 23, 24, 0, 1, '2020-09-27 08:30:05', 0, 'ada apa');
-INSERT INTO `balasan` VALUES (21, 3, 23, 24, 1, 0, '2020-09-27 08:31:30', 0, 'bantu saya');
-INSERT INTO `balasan` VALUES (22, 3, 23, 24, 0, 1, '2020-09-27 08:34:35', 0, 'bantu apa kak');
-INSERT INTO `balasan` VALUES (23, 3, 23, 23, 1, 0, '2020-09-27 08:37:39', 0, 'apa aja boleh kan');
-INSERT INTO `balasan` VALUES (24, 3, 23, 24, 0, 1, '2020-09-27 08:41:11', 0, 'silahkan kak');
-INSERT INTO `balasan` VALUES (25, 3, 23, 24, 1, 0, '2020-09-27 09:02:53', 0, 'jadi gini');
-INSERT INTO `balasan` VALUES (26, 3, 23, 24, 0, 1, '2020-09-27 09:09:39', 0, 'boleh kak');
-INSERT INTO `balasan` VALUES (27, 3, 23, 24, 1, 0, '2020-09-27 09:10:12', 0, 'siap kak');
-INSERT INTO `balasan` VALUES (28, 3, 23, 24, NULL, NULL, '2020-10-05 16:05:16', 0, 'ok kawan');
+INSERT INTO `balasan` VALUES (32, NULL, 37, NULL, 1, 0, '2020-10-10 15:24:24', 0, 'makasih');
+INSERT INTO `balasan` VALUES (33, NULL, 37, NULL, 1, 0, '2020-10-10 15:24:36', 0, '');
+INSERT INTO `balasan` VALUES (34, NULL, 37, NULL, 1, 0, '2020-10-10 15:25:14', 0, 'makasih');
+INSERT INTO `balasan` VALUES (35, NULL, 37, NULL, 1, 0, '2020-10-10 15:30:44', 0, 'test');
+INSERT INTO `balasan` VALUES (36, NULL, 37, NULL, 1, 0, '2020-10-10 15:31:46', 0, 'ok');
+INSERT INTO `balasan` VALUES (37, NULL, 37, NULL, 1, 0, '2020-10-10 15:32:10', 0, 'test');
+INSERT INTO `balasan` VALUES (38, 6, 37, 1, 1, 0, '2020-10-10 15:33:19', 0, 'mantap ka');
+INSERT INTO `balasan` VALUES (39, 6, 37, 1, 0, 1, '2020-10-10 15:33:33', 0, 'enjoy kawan');
+INSERT INTO `balasan` VALUES (40, 6, 37, 1, 1, 0, '2020-10-10 15:34:37', 0, 'asik makasih');
+INSERT INTO `balasan` VALUES (41, 7, 37, 1, 0, 1, '2020-10-10 16:06:13', 0, 'kenapa apanya kak');
+INSERT INTO `balasan` VALUES (42, 7, 37, 1, 1, 0, '2020-10-10 16:06:42', 0, 'ini gatel ih');
+INSERT INTO `balasan` VALUES (43, 22, 37, 1, 0, 1, '2020-10-10 16:07:12', 0, 'garukin sini');
 
 -- ----------------------------
 -- Table structure for jenis_lp
@@ -82,7 +82,7 @@ CREATE TABLE `jenis_lp`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jenis_lp
@@ -146,7 +146,7 @@ CREATE TABLE `kota`  (
   `name` varchar(24) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `desc` varchar(24) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of kota
@@ -178,6 +178,27 @@ INSERT INTO `kota` VALUES (24, 'Kota_Cirebon', 'Kota Cirebon');
 INSERT INTO `kota` VALUES (25, 'Kota_Depok', 'Kota Depok');
 INSERT INTO `kota` VALUES (26, 'Kota_Sukabumi', 'Kota Sukabumi');
 INSERT INTO `kota` VALUES (27, 'Kota_Tasikmalaya', 'Kota Tasikmalaya');
+
+-- ----------------------------
+-- Table structure for lampiran
+-- ----------------------------
+DROP TABLE IF EXISTS `lampiran`;
+CREATE TABLE `lampiran`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_aduan` int(64) NULL DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `size` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `filename` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `create_date` datetime(0) NULL DEFAULT NULL,
+  `update_date` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of lampiran
+-- ----------------------------
+INSERT INTO `lampiran` VALUES (7, 22, 'assets/dokumen/lampiran/SIPP III.png', '0', 'SIPP III.png', '2020-10-11 05:19:52', '2020-10-11 05:19:52');
+INSERT INTO `lampiran` VALUES (8, 22, 'assets/dokumen/lampiran/SIPP III.png', '0', 'SIPP III.png', '2020-10-11 05:19:52', '2020-10-11 05:19:52');
 
 -- ----------------------------
 -- Table structure for mperizinan
@@ -606,8 +627,8 @@ CREATE TABLE `muser`  (
 -- ----------------------------
 -- Records of muser
 -- ----------------------------
-INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', NULL, NULL, NULL, NULL, NULL, 10, 1, 1, 'admin', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
-INSERT INTO `muser` VALUES (37, 'usertest', '827ccb0eea8a706c4c34a16891f84e7b', '3272', 'user', '', NULL, '2020-10-09 08:23:48', NULL, 30, 0, 1, 'usertest', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
+INSERT INTO `muser` VALUES (1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', NULL, NULL, NULL, NULL, NULL, 10, 0, 1, 'admin', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
+INSERT INTO `muser` VALUES (37, 'usertest', '827ccb0eea8a706c4c34a16891f84e7b', '3272', 'user', '', NULL, '2020-10-09 08:23:48', NULL, 30, 1, 1, 'usertest', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
 INSERT INTO `muser` VALUES (18, 'sons', '827ccb0eea8a706c4c34a16891f84e7b', 'Admnistrator', NULL, 'admin', 'admin', '2020-09-24 17:26:48', '2020-09-24 18:19:36', 10, 0, 1, NULL, NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
 INSERT INTO `muser` VALUES (33, '12345', 'd41d8cd98f00b204e9800998ecf8427e', '0', 'user', '', NULL, '2020-10-09 07:18:42', NULL, 30, 0, 1, 'admin', NULL, NULL, 'assets/dokumen/gambar/user/default.jpg.');
 INSERT INTO `muser` VALUES (28, 'benosons', '827ccb0eea8a706c4c34a16891f84e7b', '3278', 'admin', 'admin', 'admin', '2020-10-06 15:52:28', '2020-10-06 16:54:55', 10, 0, 1, 'beno sons', NULL, NULL, 'assets/dokumen/gambar/user/benosons.png');
@@ -667,7 +688,7 @@ CREATE TABLE `videotutorial`  (
   `create_date` datetime(0) NULL DEFAULT NULL,
   `update_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of videotutorial
