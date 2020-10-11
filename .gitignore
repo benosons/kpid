@@ -8,6 +8,9 @@ application/logs/*
 
 !application/*/.htaccess
 
+assets/dokumen/lampiran/*
+assets/dokumen/gambar/lembaga/*
+
 composer.lock
 
 user_guide_src/build/*
