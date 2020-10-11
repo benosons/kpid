@@ -160,21 +160,50 @@
                   param      : param,
            },
           success: function(result){
+            //user ---------
+            var pesan_baru_user          = parseInt(result[0].total);
+            var pesan_balas_admin   = parseInt(result[1].total);
+            var pesan_dibaca_admin  = parseInt(result[3].total);
+            var total_semua_user   = pesan_baru_user+pesan_balas_admin;
+            $('#badge-total-user').html(total_semua_user);
 
-              $('#tot-pesan-baru').html(
-                `<i class="fas fa-envelope mr-2"></i> `+result.total+` pesan baru
-      					<span class="float-right text-muted text-sm"></span>`
-              );
-              $('#badge-total').html(result.total);
-              $('#badge-menu-new').html(result.total);
+            $('#total-pesan-baru-user').html(pesan_baru_user);
+            $('#total-pesan-balasan-user').html(pesan_balas_admin);
+            $('#badge-menu-total-user').html(total_semua_user);
 
-              if(result.total == 0){
-                $('#badge-total').hide();
-                $('#badge-menu-new').hide();
-              }else{
-                $('#badge-total').show();
-                $('#badge-menu-new').show();
-              }
+            if(total_semua_user == 0){
+              $('#badge-total-user').hide();
+            }
+
+            if(pesan_baru_user == 0 && pesan_balas_admin == 0){
+              $('#badge-menu-total-user').hide();
+            }
+
+            //admin ---------
+            var pesan_baru_admin   = parseInt(result[0].total);
+            var pesan_balas_user   = parseInt(result[2].total);
+            var pesan_dibaca_saya  = parseInt(result[3].total);
+            var total_semua_admin  = pesan_baru_admin+pesan_balas_user;
+            $('#badge-total-admin').html(total_semua_admin);
+
+            $('#total-pesan-baru-admin').html(pesan_baru_admin);
+            $('#total-pesan-dibalas-admin').html(pesan_balas_user);
+            $('#badge-menu-pesan-admin').html(pesan_baru_admin);
+            $('#badge-menu-balasan-admin').html(pesan_balas_user  + pesan_dibaca_saya);
+
+            if(total_semua_admin == 0){
+              $('#badge-total-admin').hide();
+            }
+
+            if(pesan_baru_admin == 0){
+              $('#badge-menu-pesan-admin').hide();
+            }
+
+            if(pesan_balas_user == 0 && pesan_dibaca_saya == 0){
+              $('#badge-menu-balasan-admin').hide();
+            }
+
+
           }
         })
       };

@@ -134,16 +134,12 @@ class Aduan extends CI_Controller {
 	{
 
 			if($this->role == '30'){
-				$status = "1";
-				$col = "id_user";
-				$and = "";
+				$data = $this->Model_aduan->hitungStatus_user($this->session->userdata('id'));
+
 			}else{
-				$status = "2";
-				$col = "id_admin";
-				$and = "and status is null or status = '0'";
+				$data = $this->Model_aduan->hitungStatus_admin($this->session->userdata('id'));
 			}
 
-			$data = $this->Model_aduan->hitungStatus($this->session->userdata('id'), $col, $status, $and);
 
 				header('Content-Type: application/json');
 				echo json_encode($data);

@@ -189,4 +189,15 @@ class Model_sys extends CI_Model {
         return $query;
     }
 
+    public function hitungAll()
+    {
+        $query = array();
+        $query['tv']    = $this->db->query("select count(*) as total from mperizinan where jenisLP like '%Televisi%'")->result();
+        $query['radio'] = $this->db->query("select count(*) as total from mperizinan where jenisLP like '%Radio%'")->result();
+        $query['aduan'] = $this->db->query("select count(*) as total from aduan")->result();
+        $query['video'] = $this->db->query("select count(*) as total from videotutorial")->result();
+
+        return $query;
+    }
+
 }

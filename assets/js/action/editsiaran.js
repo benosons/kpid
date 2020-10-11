@@ -2,7 +2,9 @@ $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
   $('.select2').select2();
   window.logo = '';
+  window.type_logo = '';
   window.foto = '';
+  window.type_foto = '';
   loadkota();
   loadLP();
   $('#siar').attr('class','menu-open nav-item');
@@ -78,6 +80,7 @@ function loadsiaran(id){
         reader.onload = function(e) {
           $('#blah1').attr('src', e.target.result);
           window.logo = e.target.result;
+          window.type_logo = input.files[0].type;
         }
         reader.readAsDataURL(input.files[0]); // convert to base64 string
       }
@@ -90,6 +93,7 @@ function loadsiaran(id){
         reader.onload = function(e) {
           $('#blah2').attr('src', e.target.result);
           window.foto = e.target.result;
+          window.type_foto = input.files[0].type;
         }
         reader.readAsDataURL(input.files[0]); // convert to base64 string
       }
@@ -97,7 +101,9 @@ function loadsiaran(id){
 
     function updateLembaga(){
       var logo = window.logo;
-      var foto = window.foto;
+      var type_logo = window.type_logo;
+      var foto = window.type_foto;
+      var type_foto = window.type_foto;
 
         $.ajax({
             type: 'post',
@@ -121,7 +127,9 @@ function loadsiaran(id){
               wilayahLayanan  : $('#wilayah').val(),
               koor            : $('#koordinat').val(),
               foto            : foto,
+              type_foto       : type_foto,
               logo            : logo,
+              type_logo       : type_logo,
               website         : $('#website').val(),
               streaming       : $('#stream').val(),
               instagram       : $('#instagram').val(),
@@ -136,7 +144,7 @@ function loadsiaran(id){
                 confirmButtonText: '<i class="fas fa-check"></i>'
               }).then((result) => {
               if (result.isConfirmed) {
-                location.reload(); 
+                location.reload();
                 }
               });
 

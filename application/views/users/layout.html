@@ -141,6 +141,25 @@
 
       <script>
         $(function () {
+          counttotal();
+          function counttotal(){
+
+              $.ajax({
+                  type: 'post',
+                  dataType: 'json',
+                  url: 'hitungAll',
+                  data : {
+                          param      : '',
+                   },
+                  success: function(result){
+                    console.log($('#total-tv'));
+                    $('#total-tv').text(result.tv[0].total);
+                    $('#total-radio').text(result.radio[0].total);
+                    $('#total-aduan').text(result.aduan[0].total);
+                    $('#total-video').text(result.video[0].total);
+                  }
+                });
+              }
 
           $('#example2').DataTable({
             "paging": true,

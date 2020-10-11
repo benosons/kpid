@@ -190,5 +190,13 @@ class Sys extends CI_Controller {
 		echo json_encode(array("status" => TRUE));
 	}
 
+	public function hitungAll(){
+
+		$update = $this->Model_sys->hitungAll();
+		header('Content-Type: application/json');
+		echo json_encode($update);
+	}
+
+
 
 }

@@ -234,16 +234,35 @@ class Siaran extends CI_Controller {
 		$params = (object)$this->input->post();
 		// remove the part that we don't need from the provided image and decode it
 		if($params->logo){
+
+			switch ($params->type_logo) {
+				case 'image/png':
+					$ext = 'png';
+					break;
+				case 'image/jpeg':
+					$ext = 'jpg';
+					break;
+			}
+
 			$data_logo = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->logo));
-			$filepath = "assets/dokumen/gambar/lembaga/logo/".$params->id.".jpg"; // or image.jpg
+			$filepath = "assets/dokumen/gambar/lembaga/logo/".$params->id.".".$ext; // or image.jpg
 			chmod($filepath,0777);
 			file_put_contents($filepath,$data_logo);
 			$params->logo = $filepath;
 		}
 
 		if($params->foto){
+
+			switch ($params->type_foto) {
+				case 'image/png':
+					$ext = 'png';
+					break;
+				case 'image/jpeg':
+					$ext = 'jpg';
+					break;
+			}
 			$data_foto = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->foto));
-			$filepath = "assets/dokumen/gambar/lembaga/foto/".$params->id.".jpg"; // or image.jpg
+			$filepath = "assets/dokumen/gambar/lembaga/foto/".$params->id.".".$ext; // or image.jpg
 			chmod($filepath,0777);
 			file_put_contents($filepath,$data_foto);
 			$params->foto = $filepath;

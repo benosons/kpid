@@ -125,7 +125,7 @@ class Model_aduan extends CI_Model {
             $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
-                                      where id_user = '".$id."' and a.status in (".$param.", '1', '2') order by a.id desc")->result();
+                                      where id_user = '".$id."' and a.status in (".$param.", '1', '2', '3') order by a.id desc")->result();
 
           }
         }
@@ -263,10 +263,25 @@ class Model_aduan extends CI_Model {
         return $query;
     }
 
-    public function hitungStatus($id, $col, $stat, $and)
+    public function hitungStatus_user($id)
     {
-        $query = $this->db->query("select count(*) as total from aduan
-                                   where $col = '".$id."' and status = ".$stat." ".$and)->row();
+        $query = array();
+        $query[0] = $this->db->query("select count(*) as total from aduan where id_user = ".$id." and status = 0")->row();
+        $query[1] = $this->db->query("select count(*) as total from aduan where id_user = ".$id." and status = 1")->row();
+        $query[2] = null;
+        $query[3] = $this->db->query("select count(*) as total from aduan where id_user = ".$id." and status = 3")->row();
+        return $query;
+    }
+
+    public function hitungStatus_admin($id)
+    {
+        $query = array();
+        $query[0] = $this->db->query("select count(*) as total from aduan where status = 0")->row();
+        $query[1] = $this->db->query("select count(*) as total from aduan where id_admin = ".$id." and status = 1")->row();
+        $query[2] = $this->db->query("select count(*) as total from aduan where id_admin = ".$id." and status = 2")->row();
+        $query[3] = $this->db->query("select count(*) as total from aduan where id_admin = ".$id." and status = 3")->row();
+
+
         return $query;
     }
 
