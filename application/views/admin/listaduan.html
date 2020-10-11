@@ -1,6 +1,7 @@
 {% extends "admin/layout.html" %} {% block content %}
   <!-- Content Header (Page header) -->
   <input id="role" value="{{role}}" hidden>
+  <input id="status_aduan" value="{{status_aduan}}" hidden>
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -45,8 +46,8 @@
               </button>
               <!-- /.float-right -->
             </div>
-            <div class="table-responsive mailbox-messages">
-              <table class="table table-hover" id="list-aduan">
+            <div class="table-responsive ">
+              <table class="table table-hover" id="list-aduan-{{status_aduan}}">
                 <thead>
                   <tr>
                       <th>#</th>
@@ -135,6 +136,69 @@
           </div>
           <input id="id" hidden>
           <div class="modal-body">
+            <div class="timeline timeline-inverse"  id="timeline">
+              <!-- timeline time label -->
+              <div class="time-label">
+                <span class="bg-danger">
+                  10 Feb. 2014
+                </span>
+              </div>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-envelope bg-warning"></i>
+
+                <div class="timeline-item">
+                  <span class="time"><i class="far fa-clock"></i> 12:05</span>
+
+                  <h3 class="timeline-header"><a href="#">pelapor</a></h3>
+
+                  <div class="timeline-body">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                    quora plaxo ideeli hulu weebly balihoo...
+                  </div>
+
+                </div>
+              </div>
+              <div>
+                <i class="fas fa-paperclip bg-warning"></i>
+
+                <div class="timeline-item">
+                  <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
+
+                  <h3 class="timeline-header"> Lampiran</h3>
+
+                  <div class="timeline-body">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                  </div>
+                </div>
+              </div>
+              <div>
+                <i class="fas fa-envelope bg-info"></i>
+
+                <div class="timeline-item">
+                  <span class="time"><i class="far fa-clock"></i> 12:05</span>
+
+                  <h3 class="timeline-header"><a href="#">Admin</a></h3>
+
+                  <div class="timeline-body">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                    quora plaxo ideeli hulu weebly balihoo...
+                  </div>
+
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <div>
+                <i class="far fa-clock bg-gray"></i>
+              </div>
+            </div>
             <div class="card direct-chat direct-chat-primary">
               <div class="card-body" style="display: block;">
                   <input id="id-parent" hidden>
@@ -144,9 +208,9 @@
                   <input id="date-laporan" hidden>
                   <input id="isi-laporan" hidden>
                   <input id="status-laporan" hidden>
-                  <div class="direct-chat-messages" id="percakapan" style="height: 400px;">
+                  <!-- <div class="direct-chat-messages" id="percakapan" style="height: 400px;">
 
-                  </div>
+                  </div> -->
                 </div>
                 <div class="card-footer" style="display: block;">
                   <form action="#" method="post">

@@ -91,21 +91,36 @@ class Model_aduan extends CI_Model {
         $kotakab = $this->session->userdata('kotaKab');
         $role = $this->session->userdata('role');
         $id = $this->db->escape_str($nama);
+
         if ($role == '10') {
-            $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+
+            if($param == 0){
+              $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
                                       where a.status = ".$param." order by a.id desc")->result();
+            }else if($param == '4'){
+              $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where a.status = '4' order by a.id desc")->result();
+            }else{
+              $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
+                                      inner join muser m on m.id = a.id_user
+                                      inner join kabupaten_kota k on k.id = a.id_kota
+                                      where a.status in ('1','2', '3') order by a.id desc")->result();
+            }
         }else if ($role == '20'){
             $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
                                       where a.id_kota = ".$kotakab." order by a.id desc")->result();
         }else if ($role == '30'){
+
           $query = $this->db->query("select a.*, m.name as nama_pelapor, k.nama as nama_kota from aduan a
                                       inner join muser m on m.id = a.id_user
                                       inner join kabupaten_kota k on k.id = a.id_kota
-                                      where id_user = '".$id."' and a.status = ".$param." order by a.id desc")->result();
+                                      where id_user = '".$id."' and a.status in (".$param.", '1', '2') order by a.id desc")->result();
         }
 
         return $query;
@@ -129,6 +144,15 @@ class Model_aduan extends CI_Model {
         return $query;
     }
 
+    public function cekLampiran($id)
+    {
+      // var_dump((int)$id);die;
+        $query = $this->db->query("select a.id, l.id as id_lampiran, l.filename, l.url, l.size from aduan a
+                                  inner join lampiran l on l.id_aduan = a.id
+                                  where a.id = ".$id)->result();
+        return $query;
+    }
+
 
     public function save($params = NULL)
     {
@@ -145,8 +169,28 @@ class Model_aduan extends CI_Model {
             $this->db->set("status", '0');
             $this->db->set("id_kota", $kotakab);
             $valid = $this->db->insert('aduan');
+            $insert_id = $this->db->insert_id();
 
-        return $valid;
+        return $insert_id;
+
+    }
+
+    public function save_lampiran($params = NULL)
+    {
+        $valid = true;
+        $nama = $this->session->userdata('id');
+        $kotakab = $this->session->userdata('kotaKab');
+        $id = $this->db->escape_str($nama);
+            $this->db->set("id_aduan", $params->lastid);
+            $this->db->set("url", $params->url);
+            $this->db->set("size", $params->size);
+            $this->db->set("filename", $params->filename);
+            $this->db->set("create_date", date("Y-m-d H:i:s"));
+            $this->db->set("update_date", date("Y-m-d H:i:s"));
+            $valid = $this->db->insert('lampiran');
+            $insert_id = $this->db->insert_id();
+
+        return $insert_id;
 
     }
 

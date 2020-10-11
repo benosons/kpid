@@ -2,20 +2,16 @@ $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
   $('#aduan').attr('class','menu-open nav-item');
   $('#aduan > a').attr('class','nav-link active');
-  const status_aduan = $("#status_aduan").val();
+  const param = $("#param").val();
 
-  if(status_aduan == '0'){
-    $('#new-msg').attr('class','nav-link active');
-    $('#new-msg > i').attr('class','far fa-circle nav-icon text-danger');
-  }else if(status_aduan == '2'){
-    $('#reply-msg').attr('class','nav-link active');
-    $('#reply-msg > i').attr('class','far fa-circle nav-icon text-danger');
-  }else if(status_aduan == '4'){
-    $('#close-msg').attr('class','nav-link active');
-    $('#close-msg > i').attr('class','far fa-circle nav-icon text-danger');
+  if(param == '0'){
+    $('#reply-msg-user').attr('class','nav-link active');
+    $('#reply-msg-user > i').attr('class','far fa-circle nav-icon text-danger');
+  }else if(param == '4'){
+    $('#close-msg-user').attr('class','nav-link active');
+    $('#close-msg-user > i').attr('class','far fa-circle nav-icon text-danger');
   }
-
-  loadaduan(status_aduan);
+  loadaduan(param);
 
   $('#kirim-balasan').on('click', function(){
     $.ajax({
@@ -124,10 +120,10 @@ function loadaduan(param){
                           "mRender": function ( data, type, row ) {
                             var el = `
                                       <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                           <button onclick="replylaporan(`+row.id+`,'`+row.nama_pelapor+`','`+row.id_user+`','`+row.isi+`','`+row.create_date+`','`+row.id_admin+`','1')" type="button" class="btn btn-block btn-success btn-sm"><i class="fas fa-reply"></i></button>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                           <button onclick="closelaporan(`+row.id+`)" type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-ban"></i></button>
                                         </div>
                                       </div>
@@ -190,7 +186,41 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
       data : {
               id      : id,
        },
-      success: function(result){
+      success: function(response){
+        var result = response.data;
+        var lampiran = response.lampiran;
+
+        var attch = '';
+        if(lampiran.length != 0){
+            attch += `<div>
+                          <i class="fas fa-paperclip bg-warning"></i>
+
+                          <div class="timeline-item">
+                            <h3 class="timeline-header"> Lampiran</h3>
+
+                            <div class="timeline-body">
+                              <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+
+                            `;
+          for (var i = 0; i < lampiran.length; i++) {
+            // attch += `<img src="`+lampiran[i].url+`" alt="..." style="width: 30%;">`;
+            attch += `<li>
+                        <div class="mailbox-attachment-info" style="background: #ffffff;">
+                          <a href="#" class="mailbox-attachment-name" style="font-size: 12px;"><i class="fas fa-paperclip"></i> `+lampiran[i].filename+`</a>
+                              <span class="mailbox-attachment-size clearfix mt-1">
+                                <span>1,245 KB</span>
+                                <a href="`+lampiran[i].url+`" download="`+lampiran[i].filename+`" class="btn btn-default btn-sm float-right"><i class="fas fa-download"></i></a>
+
+                              </span>
+                        </div>
+                      </li>`;
+          }
+
+          attch += `</ul>
+                    </div>
+                  </div>
+                </div>`;
+        }
 
         $('#timeline').empty();
         var timeline = `<div class="time-label">
@@ -212,6 +242,7 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
 
                           </div>
                         </div>`;
+              timeline += attch;
         var bg = '', name = '', alltgl = [];
         for (var i = 0; i < result.length; i++) {
 
@@ -248,19 +279,18 @@ function replylaporan(id, nama_pelapor, id_pelapor, isi, date, id_admin, status)
                       </div>`;
 
         }
+        if(status == '4'){
+          timeline += `<div>
+                        <i class="fas fa-ban bg-danger"></i>
+                      </div>`;
 
-          if(status == '4'){
-            timeline += `<div>
-                          <i class="fas fa-ban bg-danger"></i>
-                        </div>`;
-
-              $('.direct-chat').hide();
-          }else{
-            timeline += `<div>
-                          <i class="far fa-clock bg-gray"></i>
-                        </div>`;
-            $('.direct-chat').show();
-          }
+            $('.direct-chat').hide();
+        }else{
+          timeline += `<div>
+                        <i class="far fa-clock bg-gray"></i>
+                      </div>`;
+          $('.direct-chat').show();
+        }
           $('#timeline').append(timeline);
 
         // $('#pesan-balasan').val("");
@@ -345,6 +375,7 @@ function closelaporan(id){
                   id      : id,
            },
           success: function(result){
+
             Swal.fire({
               icon  : 'success',
               title : 'Pengaduan Selesai',
@@ -355,11 +386,11 @@ function closelaporan(id){
                 location.reload();
               }
             });
+
           }
         });
-    }
-  });
-
+      }
+    });
 
 }
 

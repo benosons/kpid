@@ -107,7 +107,7 @@
 	{% else %}
 	<a href="dashboard" class="brand-link" style="padding:.2rem .2rem;">
 	{% endif %}
-		<img src="{{base_url}}assets/img/logo/SIPPII.png" alt="AdminLTE Logo" class="brand-image" style="width:145px;margin-left: 1.0rem;margin-top: 0px;max-height: 50px;">
+		<img src="{{base_url}}assets/img/logo/SIPPIII.png" alt="AdminLTE Logo" class="brand-image" style="width:145px;margin-left: 1.0rem;margin-top: 0px;max-height: 50px;">
 		<!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
 	</a>
 
@@ -172,8 +172,9 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						{% if role== 10 %}
 						<li class="nav-item">
-							<a href="{{base_url}}new" class="nav-link" id="new-msg">
+							<a href="{{base_url}}listaduan?par=0" class="nav-link" id="new-msg">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Pesan Baru
 									<span class="badge badge-info right" id="badge-menu-new">3</span>
@@ -181,7 +182,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{base_url}}reply" class="nav-link" id="reply-msg">
+							<a href="{{base_url}}listaduan?par=2" class="nav-link" id="reply-msg">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Pesan Balasan
 									<!-- <span class="badge badge-info right" id="badge-menu">3</span> -->
@@ -189,11 +190,36 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{base_url}}close" class="nav-link" id="close-msg">
+							<a href="{{base_url}}listaduan?par=4" class="nav-link" id="close-msg">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Close</p>
 							</a>
 						</li>
+						{% endif %}
+						{% if role== 30 %}
+						<li class="nav-item">
+							<a href="{{base_url}}new" class="nav-link" id="new-msg-user">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Pesan Baru
+									<span class="badge badge-info right" id="badge-menu-new">3</span>
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{base_url}}reply" class="nav-link" id="reply-msg-user">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Pesan Balasan
+									<!-- <span class="badge badge-info right" id="badge-menu">3</span> -->
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{base_url}}close" class="nav-link" id="close-msg-user">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Close</p>
+							</a>
+						</li>
+						{% endif %}
 					</ul>
 				</li>
 				{% if role == 10 or role == 20 %}
@@ -212,6 +238,14 @@
 						<i class="nav-icon fas fa-users"></i>
 						<p>
 							Users
+						</p>
+					</a>
+				</li>
+				<li class="nav-item" id="setting">
+					<a href="{{base_url}}listuser" class="nav-link">
+						<i class="nav-icon fas fa-gear"></i>
+						<p>
+							Setting
 						</p>
 					</a>
 				</li>

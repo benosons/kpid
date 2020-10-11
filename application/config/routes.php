@@ -61,3 +61,4 @@ $route['^(listaduan|listDataAduanGlobal|listDataAduan|cekBalasan|saveAduan|saveB
 $route['^(listtelevisi|listradio|listDataSiaran|loadsiaran|loadkota_lembaga|loadLP|updateLembaga)(/:any)?$'] = "siaran/$0";
 $route['^(listvideo|addvideo|listDataVideo|deletevideo|updatevideo)(/:any)?$'] = "video/$0";
 $route['editlembaga'] = "siaran/editlembaga";
+$route['listaduan'] = "aduan/listaduan";

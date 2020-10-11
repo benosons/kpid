@@ -31,12 +31,14 @@ class Aduan extends CI_Controller {
 		$this->name = $this->session->userdata('name');
 		$this->role = $this->session->userdata('role');
 		$this->foto = $this->session->userdata('foto');
+		$this->id = $this->session->userdata('id');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
 			"role" => $this->role,
 			"name" => $this->name,
+			"id" => $this->id,
 			"foto" => $this->foto
 		);
 
@@ -46,8 +48,8 @@ class Aduan extends CI_Controller {
 	{
 		if ( $this->logged)
 		{
-			if($this->role == '10' || $this->role == '20' || $this->role = '30'){
-
+			if($this->role == '10' || $this->role == '20' ){
+				$this->content['status_aduan'] = $this->input->get('par');
 				$this->twig->display('admin/listaduan.html', $this->content);
 			}
 		}else{
@@ -103,7 +105,22 @@ class Aduan extends CI_Controller {
 		if ( $this->logged){
 			if($this->role == '30'){
 				$params = (object)$this->input->post();
-	 	    $data = $this->Model_aduan->save($params);
+
+				$lastid = $this->Model_aduan->save($params);
+
+				foreach ($params->lampiran as $key => $value) {
+					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value['src']));
+					$filepath = "assets/dokumen/lampiran/".$value['filename']; // or image.jpg
+					file_put_contents($filepath,$data);
+					$params->url = $filepath;
+					$params->lastid = $lastid;
+					$params->filename = $value['filename'];
+					$params->size = '0';
+
+					$lampiran = $this->Model_aduan->save_lampiran($params);
+				}
+
+
 				header('Content-Type: application/json');
 				echo json_encode(array("status" => TRUE));
 			}
@@ -198,6 +215,8 @@ public function cekBalasan()	{
 
 		$x = 0;
 		$i=0;
+		$data = [];
+		$lampiran = [];
 		foreach ($query as $proses) {
 			$x++;
 			$row = array();
@@ -212,16 +231,36 @@ public function cekBalasan()	{
 			$row['nama_pelapor'] = (!empty($proses->nama_pelapor) ? $proses->nama_pelapor : "NULL");
 			$row['nama_admin'] = (!empty($proses->nama_admin) ? $proses->nama_admin : "NULL");
 
-			$data[] = $row;
-		}
-		if(!$data){
-			$params['id_parent'] = $this->input->post('id');
-			$params['status'] = '3';
-			$update = $this->Model_aduan->updateAduan((object)$params);
+			array_push($data, $row);
+
 		}
 
+		if(!$data){
+			if($this->role == '10'){
+				$params['id_parent'] = $this->input->post('id');
+				$params['status'] = '3';
+				$update = $this->Model_aduan->updateAduan((object)$params);
+			}
+		}
+
+		$query2 = $this->Model_aduan->cekLampiran($postData);
+		foreach ($query2 as $key => $value) {
+			$filex = array();
+			$filex['id_lampiran'] = $value->id_lampira;
+			$filex['filename'] = $value->filename;
+			$filex['filename'] = $value->filename;
+			$filex['url'] = $value->url;
+			$filex['size'] = $value->size;
+			array_push($lampiran, $filex);
+
+		}
+
+		$result = array();
+		$result['data'] = $data;
+		$result['lampiran'] = $lampiran;
+		
 		header('Content-Type: application/json');
-		echo json_encode($data);
+		echo json_encode($result);
 	}
 }
 
@@ -229,7 +268,7 @@ public function saveBalasan()
 {
 	if ( $this->logged){
 			$params = $this->input->post();
-			if($this->session->userdata('role') == '20'){
+			if($this->session->userdata('role') == '10'){
 				$params['id_admin'] = $this->session->userdata('id');
 				$params['rep_admin'] = '1';
 				$params['rep_user'] = '0';
