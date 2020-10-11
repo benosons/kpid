@@ -236,6 +236,7 @@ class Siaran extends CI_Controller {
 		if($params->logo){
 			$data_logo = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->logo));
 			$filepath = "assets/dokumen/gambar/lembaga/logo/".$params->id.".jpg"; // or image.jpg
+			chmod($filepath,0777);
 			file_put_contents($filepath,$data_logo);
 			$params->logo = $filepath;
 		}
@@ -243,6 +244,7 @@ class Siaran extends CI_Controller {
 		if($params->foto){
 			$data_foto = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->foto));
 			$filepath = "assets/dokumen/gambar/lembaga/foto/".$params->id.".jpg"; // or image.jpg
+			chmod($filepath,0777);
 			file_put_contents($filepath,$data_foto);
 			$params->foto = $filepath;
 		}
