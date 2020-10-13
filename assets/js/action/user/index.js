@@ -1,8 +1,10 @@
 $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
-  loadsiaran();
+  $('.select2').select2();
+  loadsiaran(0);
   loadvideo();
-  loadaduan();
+  // loadaduan();
+  loadkota();
 
   $('#kirim-laporan').on('click', function(){
     var name = $('#name').val();
@@ -33,6 +35,10 @@ $( document ).ready(function() {
       }
     }
 
+    $('#kota_front').on('change', function(){
+      loadsiaran(this.value);
+    });
+
 });
 
 function kirimlaporan(name,email,subject,message){
@@ -60,10 +66,11 @@ function loadsiaran(param){
         dataType: 'json',
         url: 'listDataSiaran',
         data : {
-                param      : 'all',
+                param      : param,
          },
         success: function(result){
                 var dt = $('#data-siaran').DataTable({
+                    "bDestroy": true,
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
@@ -77,8 +84,9 @@ function loadsiaran(param){
                     aaData: result,
                     aoColumns: [
                         { 'mDataProp': 'id'},
+                        { 'mDataProp': 'logo'},
                         { 'mDataProp': 'sebutanDiUdara'},
-                        // { 'mDataProp': 'frekuensi'},
+                        { 'mDataProp': 'website'},
                         { 'mDataProp': 'alamat'},
 
                     ],
@@ -96,7 +104,39 @@ function loadsiaran(param){
     													</div>`;
                               return el;
                           },
+                          "aTargets": [ 2 ]
+                      },
+                      {
+                          "mRender": function ( data, type, row ) {
+                            var el =
+                            `<div class="media-left media-middle">
+  														<a href="#!"><img src="`+row.logo+`" class="img-circle img-xs" alt=""></a>
+  													</div>`;
+                              return el;
+                          },
                           "aTargets": [ 1 ]
+                      },
+                      {
+                          "mRender": function ( data, type, row ) {
+                            var el =
+                            `<div class="row">
+                              <div class="col-md-3">
+                                <a href="#"><img class="sosmed" src="assets/img/logo/tw.png"></img></a>
+                              </div>
+
+                              <div class="col-md-3">
+                                <a href="#"><img class="sosmed" src="assets/img/logo/ig.png"></img></a>
+                              </div>
+
+                              <div class="col-md-3">
+                                <a href="#"><img class="sosmed" src="assets/img/logo/fb.png"></img></a>
+                              </div>
+
+                            </div>`
+                            ;
+                              return el;
+                          },
+                          "aTargets": [ 3 ]
                       }
                     ],
 
@@ -382,4 +422,24 @@ function loadvideo(){
     function numPages()
     {
         return Math.ceil(data.length / records_per_page);
+    }
+
+function loadkota(){
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'loadkota_lembaga',
+        data : {
+            param: 'a'
+         },
+        success: function(result){
+          $('#kota_front').empty();
+          var option ='<option value="0">-Pilih-</option>';
+          for (var i = 0; i < result.length; i++) {
+            option += '<option value="'+result[i].name+'">'+result[i].desc+'</option>';
+          }
+          $('#kota_front').append(option);
+
+        }
+      });
     }

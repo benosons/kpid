@@ -111,9 +111,15 @@ class Siaran extends CI_Controller {
 					$row['wilayahLayanan'] = (!empty($proses->wilayahLayanan) ? $proses->wilayahLayanan : "NULL");
 					$row['kontak'] = (!empty($proses->kontak) ? $proses->kontak : "NULL");
 					$row['koor'] = (!empty($proses->koor) ? $proses->koor : "NULL");
+					$row['logo'] = (!empty($proses->logo) ? $proses->logo : "assets/dokumen/user/default.jpg");
+					$row['twitter'] = (!empty($proses->twitter) ? $proses->twitter : "NULL");
+					$row['instagram'] = (!empty($proses->instagram) ? $proses->instagram : "NULL");
+					$row['website'] = (!empty($proses->website) ? $proses->website : "NULL");
+					$row['streaming'] = (!empty($proses->streaming) ? $proses->streaming : "NULL");
 
 					$data[] = $row;
 				}
+
 				header('Content-Type: application/json');
 				echo json_encode($data);
 			}
@@ -137,9 +143,16 @@ class Siaran extends CI_Controller {
 				$row['wilayahLayanan'] = (!empty($proses->wilayahLayanan) ? $proses->wilayahLayanan : "NULL");
 				$row['kontak'] = (!empty($proses->kontak) ? $proses->kontak : "NULL");
 				$row['koor'] = (!empty($proses->koor) ? $proses->koor : "NULL");
+				$row['logo'] = (!empty($proses->logo) ? $proses->logo : "assets/dokumen/user/default.jpg");
+				$row['twitter'] = (!empty($proses->logo) ? $proses->twitter : "NULL");
+				$row['instagram'] = (!empty($proses->logo) ? $proses->instagram : "NULL");
+				$row['website'] = (!empty($proses->logo) ? $proses->website : "NULL");
+				$row['streaming'] = (!empty($proses->streaming) ? $proses->streaming : "NULL");
 
 				$data[] = $row;
 			}
+
+
 			header('Content-Type: application/json');
 			echo json_encode($data);
 		}

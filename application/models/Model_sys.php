@@ -200,4 +200,11 @@ class Model_sys extends CI_Model {
         return $query;
     }
 
+    public function loaduser($id)
+    {
+        $query    = $this->db->query("select * from muser where id = $id order by id desc")->result();
+
+        return $query;
+    }
+
 }

@@ -31,6 +31,7 @@ class Sys extends CI_Controller {
 		$this->kotaKab = $this->session->userdata('kotaKab');
 		$this->name = $this->session->userdata('name');
 		$this->foto = $this->session->userdata('foto');
+		$this->id 	= $this->session->userdata('id');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
@@ -55,6 +56,52 @@ class Sys extends CI_Controller {
 		}else{
 			redirect("logout");
 		}
+	}
+
+	public function profile()
+	{
+		if ( $this->logged)
+		{
+			if( $this->role == '10' || $this->role == '20' || $this->role == '30'){
+				$this->twig->display('admin/userprofile.html', $this->content);
+			}else{
+				redirect("/");
+			}
+		}else{
+			redirect("logout");
+		}
+	}
+
+	public function loaduser(){
+
+			$params = $columns = $totalRecords = $data = array();
+			$params = $_REQUEST;
+			$postData = $this->input->post('param');
+
+			$query = $this->Model_sys->loaduser($this->id);
+
+			$x = 0;
+			$i=0;
+			foreach ($query as $proses) {
+				$x++;
+				$row = array();
+				$row['id'] = (!empty($proses->id) ? $proses->id : "NULL");
+				$row['username'] = (!empty($proses->username) ? $proses->username : "NULL");
+				$row['kotaKab'] = (!empty($proses->kotaKab) ? $proses->kotaKab : "NULL");
+				$row['kategori'] = (!empty($proses->kategori) ? $proses->kategori : "NULL");
+				$row['created_at'] = (!empty($proses->created_at) ? $proses->created_at : "NULL");
+				$row['updated_at'] = (!empty($proses->updated_at) ? $proses->updated_at : "NULL");
+				$row['role'] = (!empty($proses->role) ? $proses->role : "NULL");
+				$row['status'] = (!empty($proses->status) ? $proses->status : "NULL");
+				$row['name'] = (!empty($proses->name) ? $proses->name : "NULL");
+				$row['no_telp'] = (!empty($proses->no_telp) ? $proses->no_telp : "NULL");
+				$row['email'] = (!empty($proses->email) ? $proses->email : "NULL");
+				$row['foto'] = (!empty($proses->foto) ? $proses->foto : "assets/dokumen/gambar/user/default.jpg");
+
+				$data[] = $row;
+			}
+			header('Content-Type: application/json');
+			echo json_encode($data);
 	}
 
 	public function loadkota(){
@@ -196,7 +243,5 @@ class Sys extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($update);
 	}
-
-
 
 }

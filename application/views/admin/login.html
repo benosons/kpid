@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login - SIPP KPID JAWARA</title>
-  <link href="{{base_url}}assets/dokumen/gambar/favicon.ico" rel="icon">
+  <link href="{{base_url}}assets/img/logo/favicon.ico" rel="icon">
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -83,20 +83,69 @@
 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 100%!important;
 }
+
+.card-signin {
+  border: 0;
+  border-bottom-right-radius:2rem;
+  border-top-right-radius:2rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  background: #001f3f;
+  width:60%;
+}
+
+.logo-login {
+  height:100px!important;
+  position: absolute;
+  z-index: 1;
+}
+
+@media (max-width: 575px) {
+  .card-signin {
+    width:100%;
+  }
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
   </style>
 </head>
 <body>
   <main>
-    <div class="container-fluid">
+    <div class="container-fluid" style="background:url('assets/login/images/big-bg.png')">
+
       <div class="row">
-        <div class="col-sm-6 login-section-wrapper">
-          <div class="brand-wrapper">
+        <div class="brand-wrapper">
+          <a href="{{base_url}}">
+            <img src="{{base_url}}assets/img/logo/SIPPIII.png" alt="logo" class="logo logo-login">
+          </a>
+        </div>
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+
+                <div class="login-img">
+
+                  <img src="assets/login/images/mic.png" alt="login image" class="" style="padding: 15% 9px 18px 46%;height:77%;">
+                </div>
+
+        </div>
+
+        <div class="col-sm-6 login-section-wrapper" style="padding-left: 0px;background-color: #fff0;">
+          <!-- <div class="brand-wrapper">
             <a href="{{base_url}}">
-              <img src="{{base_url}}assets/img/logo/SIPPII.png" alt="logo" class="logo" style="height:100px;">
+              <img src="{{base_url}}assets/img/logo/SIPPIII.png" alt="logo" class="logo" style="height:100px;">
             </a>
-          </div>
-          <div class="login-wrapper my-auto" id="login-form">
-            <h1 class="login-title">Log in</h1>
+          </div> -->
+          <div class="card card-signin my-5">
+            <div class="card-body col-md-12">
+          <div class="login-wrapper my-auto" id="login-form" style="width: 100%;">
+            <h1 class="login-title" style="color: #fff;">Log in</h1>
+
             <form method="post" action="{{ base_url }}auth/">
               <div class="form-group">
                 <label for="email">Username</label>
@@ -112,10 +161,10 @@
               <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Login">
             </form>
             <!-- <a href="#!" class="forgot-password-link">Forgot password?</a> -->
-            <p class="login-wrapper-footer-text">Belum punya akun? <a href="#!" id ="goto-register" class="text-reset">Register</a></p>
+            <p class="login-wrapper-footer-text" style="color: #fff;">Belum punya akun? <a href="#!" id ="goto-register" class="text-reset"><i>Register</i></a></p>
           </div>
           <div class="login-wrapper my-auto" id="register-form" style="display:none;">
-            <h1 class="login-title">Register user baru</h1>
+            <h1 class="login-title" style="color: #fff;">Register user baru</h1>
             <form method="post" action="{{ base_url }}register/">
               <div class="form-group">
                 <label for="email">Nama Lengkap</label>
@@ -145,15 +194,17 @@
               <input name="login" id="register" class="btn btn-block login-btn" type="submit" value="Register">
             </form>
             <!-- <a href="#!" class="forgot-password-link">Forgot password?</a> -->
-            <p class="login-wrapper-footer-text">Sudah punya akun? <a href="#!" id="goto-login" class="text-reset">Log in</a></p>
+            <p class="login-wrapper-footer-text" style="color: #fff;">Sudah punya akun? <a href="#!" id="goto-login" class="text-reset"><i>Log in</i></a></p>
+          </div>
+          </div>
           </div>
         </div>
 
-        <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="assets/login/images/bg.png" alt="login image" class="login-img">
-        </div>
+
       </div>
     </div>
+
+
   </main>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

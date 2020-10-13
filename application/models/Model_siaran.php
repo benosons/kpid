@@ -86,6 +86,7 @@ class Model_siaran extends CI_Model {
 
     public function listDataSiaran($param)
     {
+        
         $nama = $this->session->userdata('username');
         $kategori = $this->session->userdata('kategori');
         $role = $this->session->userdata('role');
@@ -93,9 +94,9 @@ class Model_siaran extends CI_Model {
         if ($role == '10') {
             $query = $this->db->query("select * from mperizinan where jenisLP like '%".$param."%' order by id desc")->result();
         }else if ($role == '30'){
-          $query = $this->db->query("select * from mperizinan order by id desc")->result();
+          $query = $this->db->query("select * from mperizinan where kota = '$param' order by id desc")->result();
         }else{
-            $query = $this->db->query("select * from mperizinan order by id desc")->result();
+            $query = $this->db->query("select * from mperizinan where kota = '$param' order by id desc")->result();
         }
         return $query;
     }

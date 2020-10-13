@@ -26,12 +26,12 @@
 				<!-- small box -->
 				<div class="small-box bg-info">
 					<div class="inner">
-						<h3>150</h3>
+						<h3 id="total-tv">150</h3>
 
-						<p>New Orders</p>
+						<p>Siaran Televisi</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-bag"></i>
+						<i class="ion ion-monitor"></i>
 					</div>
 					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -41,12 +41,12 @@
 				<!-- small box -->
 				<div class="small-box bg-success">
 					<div class="inner">
-						<h3>53<sup style="font-size: 20px">%</sup></h3>
+						<h3 id="total-radio">53</h3>
 
-						<p>Bounce Rate</p>
+						<p>Siaran Radio</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-stats-bars"></i>
+						<i class="ion ion-radio-waves"></i>
 					</div>
 					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -56,9 +56,9 @@
 				<!-- small box -->
 				<div class="small-box bg-warning">
 					<div class="inner">
-						<h3>44</h3>
+						<h3 id="total-aduan">44</h3>
 
-						<p>User Registrations</p>
+						<p>Laporan User</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
@@ -71,12 +71,12 @@
 				<!-- small box -->
 				<div class="small-box bg-danger">
 					<div class="inner">
-						<h3>65</h3>
+						<h3 id="total-video">65</h3>
 
-						<p>Unique Visitors</p>
+						<p>Video Tutorial</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-pie-graph"></i>
+						<i class="ion ion-social-youtube"></i>
 					</div>
 					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -602,5 +602,28 @@
 <!-- /.content -->
 {% endblock %}
 {% block js %}
+<script>
+	$(function () {
+	counttotal();
+	function counttotal(){
+
+			$.ajax({
+					type: 'post',
+					dataType: 'json',
+					url: 'hitungAll',
+					data : {
+									param      : '',
+					 },
+					success: function(result){
+
+						$('#total-tv').text(result.tv[0].total);
+						$('#total-radio').text(result.radio[0].total);
+						$('#total-aduan').text(result.aduan[0].total);
+						$('#total-video').text(result.video[0].total);
+					}
+				});
+			}
+		});
+</script>
 <script type="text/javascript" src="{{base_url}}assets/js/action/index.js"></script>
 {% endblock %}

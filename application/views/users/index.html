@@ -59,12 +59,22 @@
               </div>
             </div>
             <div class="card-body">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label>Pilih Kota/ Kabupaten :</label>
+                  <select id="kota_front" name="kota_kab_regis" class="form-control select2" style="width: 100%;">
+                  </select>
+                </div>
+
+              </div>
               <table id="data-siaran" class="table table-bordered table-hover">
                 <thead style="background-color:#001f3f;color:white;">
                 <tr>
                   <th style="width:10%;">No</th>
-                  <th style="width:50%;">Lembaga Penyiaran</th>
-                  <th>Alamat</th>
+                  <th style="width:10%;">Logo</th>
+                  <th style="width:30%;">Lembaga Penyiaran</th>
+                  <th style="width:15%;">medsos</th>
+                  <th style="width:100%;">Alamat</th>
                 </tr>
                 </thead>
               </table>
@@ -502,32 +512,76 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Kirimkan Laporan/ Pengaduan</h2>
+        <h2>Laporan/ Pengaduan</h2>
       </div>
 
       <div class="row">
 
-        <div class="col-lg-6 d-flex align-items-stretch" >
+        <div class="col-lg-3 d-flex align-items-stretch" >
           <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>Our Address</h3>
-            <p>A108 Adam Street, New York, NY 535022</p>
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{base_url}}assets/img/logo/location.png" style="width: 20%;"></img>
+              </div>
+              <div class="col-md-12">
+                <h3>Alamat Kami:</h3>
+              </div>
+              <div class="col-md-12">
+                <p>A108 Adam Street, New York, NY 535022</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="col-lg-3 d-flex align-items-stretch">
           <div class="info-box">
-            <i class="bx bx-envelope"></i>
-            <h3>Email Us</h3>
-            <p>info@example.com<br>contact@example.com</p>
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{base_url}}assets/img/logo/mail.png" style="width: 25%;"></img>
+              </div>
+              <div class="col-md-12">
+                <h3>Email</h3>
+              </div>
+              <div class="col-md-12">
+                <p>info@example.com<br>contact@example.com</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="col-lg-3 d-flex align-items-stretch">
           <div class="info-box ">
-            <i class="bx bx-phone-call"></i>
-            <h3>Call Us</h3>
-            <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{base_url}}assets/img/logo/phone.png" style="width: 20%;"></img>
+              </div>
+              <div class="col-md-12">
+                <h3>Telepon</h3>
+              </div>
+              <div class="col-md-12">
+                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 d-flex align-items-stretch">
+          <div class="info-box ">
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{base_url}}assets/img/logo/send.png" style="width: 25%;"></img>
+              </div>
+              <div class="col-md-12">
+                <h3>Kirim Secara Online</h3>
+              </div>
+              <div class="col-md-12">
+                {% if name %}
+                <a href="{{base_url}}dashboard"><button class="btn btn-success" type="button" name="button">Tampilkan Dashboard <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
+                {% else %}
+                <a href="{{base_url}}auth"><button class="btn btn-danger" type="button" name="button">Login atau Registrasi <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
+                {% endif %}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -616,8 +670,8 @@
 
       <div class="row no-gutters">
         <div class="col-lg-6 video-box">
-          <img src="{{base_url}}assets/mamba/img/about.jpg" class="img-fluid" alt="">
-          <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          <img src="{{base_url}}assets/login/images/bg.png" class="img-fluid" alt="" style="width: 70%;">
+          <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
         </div>
 
         <div class="col-lg-6 d-flex flex-column justify-content-center about-content" style="padding-right: 4%!important;padding-left: 4%!important;">
@@ -629,14 +683,14 @@
           </div>
 
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-fingerprint"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <div class="icon"><img src="{{base_url}}assets/img/logo/kpid-1.png"></img></div>
+            <h4 class="title"><a href="">SEORANG PENYIAR</a></h4>
             <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
           </div>
 
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-gift"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
+            <div class="icon"><img src="{{base_url}}assets/img/logo/kpid-2.png"></img></div>
+            <h4 class="title"><a href="">Teks SIPP KPID JAWARA</a></h4>
             <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
           </div>
 
