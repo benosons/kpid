@@ -102,7 +102,7 @@ function loadsiaran(id){
     function saveLembaga(){
       var logo = window.logo;
       var type_logo = window.type_logo;
-      var foto = window.type_foto;
+      var foto = window.foto;
       var type_foto = window.type_foto;
 
         $.ajax({
