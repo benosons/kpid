@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   console.log('You are running jQuery version: ' + $.fn.jquery);
-  
+
   $('#siar').attr('class','menu-open nav-item');
   $('#siar > a').attr('class','nav-link active');
   const param = $("#param").val();

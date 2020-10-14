@@ -42,6 +42,21 @@ class Siaran extends CI_Controller {
 
 	}
 
+	public function lembaga()
+	{
+		if ( $this->logged)
+		{
+			if($this->role == '10' || $this->role == '20'){
+				$this->content['lembaga_id'] = $this->input->get('ids');
+				$this->content['lembaga_type'] = $this->input->get('par');
+				$this->twig->display('admin/newlembaga.html', $this->content);
+
+			}
+		}else{
+			redirect("dashboard");
+		}
+	}
+
 	public function editlembaga()
 	{
 		if ( $this->logged)
@@ -240,6 +255,51 @@ class Siaran extends CI_Controller {
 			}
 			header('Content-Type: application/json');
 			echo json_encode($data);
+	}
+
+	public function saveLembaga()
+	{
+		$params = (object)$this->input->post();
+		// remove the part that we don't need from the provided image and decode it
+		if($params->logo){
+
+			switch ($params->type_logo) {
+				case 'image/png':
+					$ext = 'png';
+					break;
+				case 'image/jpeg':
+					$ext = 'jpg';
+					break;
+			}
+
+			$data_logo = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->logo));
+			$filepath = "assets/dokumen/gambar/lembaga/logo/".$params->id.".".$ext; // or image.jpg
+			chmod($filepath,0777);
+			file_put_contents($filepath,$data_logo);
+			$params->logo = $filepath;
+		}
+
+		if($params->foto){
+
+			switch ($params->type_foto) {
+				case 'image/png':
+					$ext = 'png';
+					break;
+				case 'image/jpeg':
+					$ext = 'jpg';
+					break;
+			}
+			$data_foto = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->foto));
+			$filepath = "assets/dokumen/gambar/lembaga/foto/".$params->id.".".$ext; // or image.jpg
+			chmod($filepath,0777);
+			file_put_contents($filepath,$data_foto);
+			$params->foto = $filepath;
+		}
+
+		$data = $this->Model_siaran->saveLembaga($params);
+		header('Content-Type: application/json');
+		echo json_encode(array("status" => TRUE));
+
 	}
 
 	public function updateLembaga()

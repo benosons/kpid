@@ -86,7 +86,7 @@ class Model_siaran extends CI_Model {
 
     public function listDataSiaran($param)
     {
-        
+
         $nama = $this->session->userdata('username');
         $kategori = $this->session->userdata('kategori');
         $role = $this->session->userdata('role');
@@ -170,6 +170,49 @@ class Model_siaran extends CI_Model {
     {
         $query = $this->db->query("select * from jenis_lp order by id desc")->result();
         return $query;
+    }
+
+    public function saveLembaga($params = NULL)
+    {
+        $valid = true;
+        // $pass = $params->password;
+        // $query = $this->db->query("select password, id from muser where id = '".$params->id."' ")->row();
+        //
+        // if ($pass != $query->password) {
+        //     $this->db->set("password", md5($params->password));
+        // }
+        $this->db->set("kode", $params->kode);
+        $this->db->set("jenisLP", $params->jenisLP);
+        $this->db->set("namaBadanHukum", $params->namaBadanHukum);
+        $this->db->set("noIPP", $params->noIPP);
+        $this->db->set("sebutanDiUdara", $params->sebutanDiUdara);
+        $this->db->set("pimpinan", $params->pimpinan);
+        $this->db->set("alamat", $params->alamat);
+        $this->db->set("kota", $params->kota);
+        $this->db->set("tlp", $params->tlp);
+        $this->db->set("fax", $params->fax);
+        $this->db->set("email", $params->email);
+        $this->db->set("kontak", $params->kontak);
+        $this->db->set("frekuensi", $params->frekuensi);
+        $this->db->set("wilayahLayanan", $params->wilayahLayanan);
+        $this->db->set("koor", $params->koor);
+        $this->db->set("website", $params->website);
+        $this->db->set("streaming", $params->streaming);
+        $this->db->set("instagram", $params->instagram);
+        $this->db->set("twitter", $params->twitter);
+        $this->db->set("updated_by", $this->session->userdata('username'));
+        $this->db->set("updated_at", date("Y-m-d H:i:s"));
+        if($params->logo){
+          $this->db->set("logo", $params->logo);
+        }
+
+        if($params->foto){
+          $this->db->set("foto", $params->foto);
+        }
+        $valid = $this->db->insert('mperizinan');
+        
+        return $valid;
+
     }
 
     public function updateLembaga($params = NULL)
