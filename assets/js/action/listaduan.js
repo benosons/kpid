@@ -92,11 +92,11 @@ function loadaduan(param){
                             var el = '';
                             if($('#role').val() == '30'){
                               if(row.status == "NULL"){
-                                el ='<span class="badge badge-info">belum dibaca</span>';
+                                el ='<span class="badge badge-default">terkirim</span>';
                               }else if (row.status == "1"){
                                 el = '<span class="badge badge-success">dibalas admin</span>';
                               }else if (row.status == "3"){
-                                el = '<span class="badge badge-default">sudah dibaca</span>';
+                                el = '<span class="badge badge-default">terkirim</span>';
                               }else if (row.status == "4"){
                                 el = '<span class="badge badge-danger">close</span>';
                               }else if (row.status == "2"){
@@ -110,7 +110,7 @@ function loadaduan(param){
                               }else if (row.status == "2"){
                                 el = '<span class="badge badge-success">dibalas user</span>';
                               }else if(row.status == "3"){
-                                el = '<span class="badge badge-default">sudah dibaca</span>';
+                                el = '<span class="badge badge-default">terkirim</span>';
                               }else if(row.status == "1"){
                                 el = '<span class="badge badge-default">terkirim</span>';
                               }

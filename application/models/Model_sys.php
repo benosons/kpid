@@ -119,6 +119,8 @@ class Model_sys extends CI_Model {
         $this->db->set("islogin", 0);
         $this->db->set("status", '1');
         $this->db->set("name", $params->name_regis);
+        $this->db->set("no_telp", $params->telp_regis);
+        $this->db->set("email", $params->email_regis);
         $valid = $this->db->insert('muser');
 
         return $valid;

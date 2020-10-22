@@ -32,13 +32,18 @@ class Sys extends CI_Controller {
 		$this->name = $this->session->userdata('name');
 		$this->foto = $this->session->userdata('foto');
 		$this->id 	= $this->session->userdata('id');
+		$this->notelp 	= $this->session->userdata('notelp');
+		$this->email 	= $this->session->userdata('email');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
 			"username" => $this->username,
 			"role" => $this->role,
 			"name" => $this->name,
-			"foto" => $this->foto
+			"foto" => $this->foto,
+			"kategori" => $this->kategori,
+			"notelp" => $this->notelp,
+			"email" => $this->email
 		);
 
 	}

@@ -32,6 +32,8 @@ class Aduan extends CI_Controller {
 		$this->role = $this->session->userdata('role');
 		$this->foto = $this->session->userdata('foto');
 		$this->id = $this->session->userdata('id');
+		$this->notelp = $this->session->userdata('notelp');
+		$this->email = $this->session->userdata('email');
 		$this->content = array(
 			"base_url" => base_url(),
 			"logs" => $this->session->all_userdata(),
@@ -39,7 +41,9 @@ class Aduan extends CI_Controller {
 			"role" => $this->role,
 			"name" => $this->name,
 			"id" => $this->id,
-			"foto" => $this->foto
+			"foto" => $this->foto,
+			"notelp" => $this->notelp,
+			"email" => $this->email
 		);
 
 	}
@@ -232,13 +236,13 @@ public function cekBalasan()	{
 
 		}
 
-		if(!$data){
-			if($this->role == '10'){
-				$params['id_parent'] = $this->input->post('id');
-				$params['status'] = '3';
-				$update = $this->Model_aduan->updateAduan((object)$params);
-			}
-		}
+		// if(!$data){
+		// 	if($this->role == '10'){
+		// 		$params['id_parent'] = $this->input->post('id');
+		// 		$params['status'] = '3';
+		// 		$update = $this->Model_aduan->updateAduan((object)$params);
+		// 	}
+		// }
 
 		$query2 = $this->Model_aduan->cekLampiran($postData);
 		foreach ($query2 as $key => $value) {
