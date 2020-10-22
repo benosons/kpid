@@ -9,7 +9,9 @@ application/logs/*
 !application/*/.htaccess
 
 assets/dokumen/lampiran/*
+assets/dokumen/gambar/user/*
 assets/dokumen/gambar/lembaga/*
+assets/dokumen/gambar/banner/*
 
 composer.lock
 
