@@ -5,6 +5,8 @@ $( document ).ready(function() {
   loadvideo();
   // loadaduan();
   loadkota();
+  loadbanner();
+  loadsetting();
 
   $('#kirim-laporan').on('click', function(){
     var name = $('#name').val();
@@ -443,3 +445,55 @@ function loadkota(){
         }
       });
     }
+
+    function loadbanner(){
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'listdatabanneruser',
+            data : {
+                    param      : '',
+             },
+            success: function(result){
+              console.log(result)
+              var banner = '';
+              for (var i = 0; i < result.length; i++) {
+                banner +=
+                  `<div class="carousel-item" style="background-image: url('`+result[i].foto+`');">
+                    <div class="carousel-container">
+                      <div class="carousel-content container">
+                        <h2 class="animate__animated animate__fadeInDown">`+result[i].judul+`</h2>
+                        <p class="animate__animated animate__fadeInUp">`+result[i].deskripsi+`</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                      </div>
+                    </div>
+                  </div>`;
+              }
+
+              $('#banner').append(banner);
+              $('#banner > .carousel-item:first').addClass('active');
+
+            }
+          });
+        }
+
+    function loadsetting(){
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'loadsetting',
+            data : {
+                    param      : '',
+             },
+            success: function(result){
+              console.log(result);
+              $('[name="set-alamat"]').html(result[0].alamat);
+              $('[name="set-email"]').html(result[0].email);
+              $('[name="set-notelp"]').html(result[0].notlp);
+              $('[name="set-twitter"]').attr('href', 'https://twitter.com/'+result[0].twitter);
+              $('[name="set-instagram"]').attr('href', 'https://instagram.com/'+result[0].instagram.replace('@', ''));
+              $('[name="set-facebook"]').attr('href', 'https://facebook.com/'+result[0].facebook);
+
+            }
+          });
+        }

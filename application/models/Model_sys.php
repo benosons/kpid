@@ -207,4 +207,91 @@ class Model_sys extends CI_Model {
         return $query;
     }
 
+    public function listbanner($id)
+    {
+        if($id){
+          $query    = $this->db->query("select * from banner where status = $id order by id asc")->result();
+
+        }else{
+          $query    = $this->db->query("select * from banner order by id desc")->result();
+
+        }
+
+        return $query;
+    }
+
+    public function loadsetting($id)
+    {
+        $query    = $this->db->query("select * from setting order by id desc")->result();
+
+        return $query;
+    }
+
+    public function updatesetting($params = NULL)
+    {
+        $valid = true;
+
+        // $this->db->set("updated_by", $this->session->userdata('username'));
+        // $this->db->set("updated_at", date("Y-m-d H:i:s"));
+        $this->db->set("nama", $params->nama);
+        $this->db->set("deskripsi", $params->deskripsi);
+        $this->db->set("alamat", $params->alamat);
+        $this->db->set("email", $params->email);
+        $this->db->set("notlp", $params->notlp);
+        $this->db->set("instagram", $params->ig);
+        $this->db->set("twitter", $params->twit);
+        $this->db->set("facebook", $params->fb);
+        // if($params->foto){
+        //   $this->db->set("foto", $params->foto);
+        // }
+        $this->db->where('id', $params->id);
+        $valid = $this->db->update('setting');
+
+        return $valid;
+
+    }
+
+    public function savebanner($params = NULL)
+    {
+        $valid = true;
+
+        $this->db->set("judul", $params->judul);
+        $this->db->set("deskripsi", $params->deskripsi);
+        $this->db->set("created_by", $this->session->userdata('username'));
+        $this->db->set("created_date", date("Y-m-d H:i:s"));
+        $this->db->set("status", $params->status);
+        $this->db->set("foto", $params->foto);
+        $valid = $this->db->insert('banner');
+
+        return $valid;
+
+    }
+
+    public function updatebanner($params = NULL)
+    {
+        $valid = true;
+
+        $this->db->set("judul", $params->judul);
+        $this->db->set("deskripsi", $params->deskripsi);
+        $this->db->set("created_by", $this->session->userdata('username'));
+        $this->db->set("created_date", date("Y-m-d H:i:s"));
+        $this->db->set("status", $params->status);
+        if($params->foto){
+
+          $this->db->set("foto", $params->foto);
+        }
+        $this->db->where('id', $params->id);
+        $valid = $this->db->update('banner');
+
+        return $valid;
+
+    }
+
+    public function deletebanner($id)
+    {
+        // $idx = $this->db->escape_str($id);
+        $this->db->where('id', $id->id);
+        $this->db->delete('banner');
+    }
+
 }

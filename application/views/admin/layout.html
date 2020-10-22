@@ -36,6 +36,9 @@
   <link rel="stylesheet" href="{{base_url}}assets/lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
 	<style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
 		.navbar-user-badge {
 			padding: 2px 4px;
@@ -135,7 +138,7 @@
           localStorage.setItem('isadmin', 1);
           Swal.fire({
             title: 'Login Berhasil',
-            text: 'Selamat Datang, {{name}}',
+            text: 'Selamat Datang,  {{name}}',
             icon: 'success',
             showConfirmButton: true,
             confirmButtonText: '<i class="fas fa-check"></i>',

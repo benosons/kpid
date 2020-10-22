@@ -67,7 +67,7 @@ body {
     margin-bottom: 14px; }
     .login-wrapper .login-btn:hover {
       border: 1px solid #FF0000;
-      background-color: #fff;
+      background-color: #fff0;
       color: #FF0000; }
   .login-wrapper a.forgot-password-link {
     color: #080808;

@@ -56,7 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['^(logout|loginAdmin|Admin|register|cekusername)(/:any)?$'] = "auth/$0";
-$route['^(dashboard|saveUser|listuser|updateUser|formUser|listDataUser|deleteUser|dataDetailUser|loadkota|hitungAll|profile|loaduser)(/:any)?$'] = "sys/$0";
+$route['^(dashboard|saveUser|listuser|updateUser|formUser|listDataUser|deleteUser|dataDetailUser|loadkota|hitungAll|profile|loaduser|infodata|listdatabanner|listdatabanneruser|loadsetting|simpansetting|savebanner|updatebanner|deletebanner)(/:any)?$'] = "sys/$0";
 $route['^(listaduan|listDataAduanGlobal|listDataAduan|cekBalasan|saveAduan|saveBalasan|updateAduan|hitungStatus|hitungPesanBaru|closeAduan|new|reply|close)(/:any)?$'] = "aduan/$0";
 $route['^(listtelevisi|listradio|listDataSiaran|loadsiaran|loadkota_lembaga|loadLP|updateLembaga|lembaga|saveLembaga)(/:any)?$'] = "siaran/$0";
 $route['^(listvideo|addvideo|listDataVideo|deletevideo|updatevideo)(/:any)?$'] = "video/$0";
