@@ -43,7 +43,8 @@ class Sys extends CI_Controller {
 			"foto" => $this->foto,
 			"kategori" => $this->kategori,
 			"notelp" => $this->notelp,
-			"email" => $this->email
+			"email" => $this->email,
+			"id" => $this->id
 		);
 
 	}
@@ -422,6 +423,30 @@ class Sys extends CI_Controller {
 		$this->Model_sys->deletebanner($params);
 		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));
+	}
+
+	public function updateprofile()
+	{
+
+		$params = (object)$this->input->post();
+		$check = $this->db->get_where("muser", array("username" => $params->username,"password" => md5($params->validasi)));
+		if($check->num_rows() > 0){
+			if($params->img){
+				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $params->img));
+				$filepath = "assets/dokumen/gambar/user/".$params->username.".png"; // or image.jpg
+				chmod($filepath,0777);
+				file_put_contents($filepath,$data);
+				$params->foto = $filepath;
+			}
+
+			$data = $this->Model_sys->updateprofile($params);
+			header('Content-Type: application/json');
+			echo json_encode(array("status" => TRUE));
+		}else{
+			header('Content-Type: application/json');
+			echo json_encode(array("status" => FALSE));
+		}
+
 	}
 
 }

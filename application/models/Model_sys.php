@@ -296,4 +296,29 @@ class Model_sys extends CI_Model {
         $this->db->delete('banner');
     }
 
+    public function updateprofile($params = NULL)
+    {
+        $valid = true;
+
+        $this->db->set("username", $params->username);
+        $this->db->set("name", $params->name);
+        $this->db->set("kotaKab", $params->kotaKab);
+        $this->db->set("updated_by", $this->session->userdata('username'));
+        $this->db->set("updated_at", date("Y-m-d H:i:s"));
+        $this->db->set("no_telp", $params->no_telp);
+        $this->db->set("email", $params->email);
+        if($params->password){
+          $this->db->set("password", md5($params->password));
+        }
+
+        if($params->foto){
+          $this->db->set("foto", $params->foto);
+        }
+        $this->db->where('id', $params->id);
+        $valid = $this->db->update('muser');
+
+        return $valid;
+
+    }
+
 }

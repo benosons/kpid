@@ -33,7 +33,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
+                  <img id="blah" class="profile-user-img img-fluid img-circle"
                        src="{{foto}}"
                        alt="User profile picture">
                 </div>
@@ -73,7 +73,19 @@
                 <div class="tab-content">
 
                   <div class="tab-pane active" id="settings">
-                    <form class="form-horizontal">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                          <div class="custom-file" style="margin-bottom: 10px;margin-top: 10px;">
+                            <input type="file" class="custom-file-input" id="foto-user" name="user-input">
+                            <label class="custom-file-label" for="foto-user">Pilih foto</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="text-center">
+                              <canvas hidden id="myCanvas"/>
+                          </div>
+                        </div>
+                    </div>
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
@@ -104,21 +116,32 @@
                           <input type="text" class="form-control" id="email" placeholder="" >
                         </div>
                       </div>
+
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> saya telah melakukan perubahan data pribadi.
-                            </label>
-                          </div>
+                          <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="ubah-password">
+                          <label for="ubah-password" class="custom-control-label">Ubah Password</label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group row" name="form-pass">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Password Lama</label>
+                        <div class="col-sm-10">
+                          <input type="password" class="form-control" id="pass-lama" placeholder="" >
+                        </div>
+                      </div>
+                      <div class="form-group row" name="form-pass">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Password Baru</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="pass-baru" placeholder="" >
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">simpan perubahan</button>
+                          <button type="submit" class="btn btn-danger" id="simpan-perubahan">simpan perubahan</button>
                         </div>
                       </div>
-                    </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
