@@ -90,6 +90,7 @@ function loadsiaran(param){
                         { 'mDataProp': 'sebutanDiUdara'},
                         { 'mDataProp': 'website'},
                         { 'mDataProp': 'alamat'},
+                        { 'mDataProp': 'alamat'},
 
                     ],
                     order: [[0, 'ASC']],
@@ -117,6 +118,16 @@ function loadsiaran(param){
                               return el;
                           },
                           "aTargets": [ 1 ]
+                      },
+                      {
+                          "mRender": function ( data, type, row ) {
+
+                            var myJSON = JSON.stringify(row);
+                            var el =
+                            `<button onclick='lihatdetail(`+myJSON+`)' type="button" class="btn btn-block btn-outline-info btn-xs">Lihat</button>`;
+                              return el;
+                          },
+                          "aTargets": [ 5 ]
                       },
                       {
                           "mRender": function ( data, type, row ) {
@@ -496,4 +507,23 @@ function loadkota(){
 
             }
           });
+        }
+
+        function lihatdetail(row){
+
+          $('#modal-default').modal({
+            show: true
+          });
+
+          $('#pimpinan').val(row.pimpinan);
+          $('#email').val(row.email);
+          $('#frekuensi').val(row.frekuensi);
+          $('#koor').val(row.koor);
+          $('#alamat').val(row.alamat);
+          $('#kontak').val(row.kontak);
+          $('#maps').html(`<iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+            src = "https://maps.google.com/maps?q=`+row.koor+`&hl=es;z=14&amp;output=embed"></iframe>`
+          );
+
+
         }
