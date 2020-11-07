@@ -89,6 +89,7 @@ function loadsiaran(param){
                         { 'mDataProp': 'logo'},
                         { 'mDataProp': 'sebutanDiUdara'},
                         { 'mDataProp': 'website'},
+                        { 'mDataProp': 'website'},
                         { 'mDataProp': 'alamat'},
                         { 'mDataProp': 'alamat'},
 
@@ -111,6 +112,18 @@ function loadsiaran(param){
                       },
                       {
                           "mRender": function ( data, type, row ) {
+                            var el = '<b>-</b>';
+                            if(row.website){
+                                el = row.website;
+                            }
+
+
+                              return el;
+                          },
+                          "aTargets": [ 4 ]
+                      },
+                      {
+                          "mRender": function ( data, type, row ) {
                             var el =
                             `<div class="media-left media-middle">
   														<a href="#!"><img src="`+row.logo+`" class="img-circle img-xs" alt=""></a>
@@ -127,22 +140,28 @@ function loadsiaran(param){
                             `<button onclick='lihatdetail(`+myJSON+`)' type="button" class="btn btn-block btn-outline-info btn-xs">Lihat</button>`;
                               return el;
                           },
-                          "aTargets": [ 5 ]
+                          "aTargets": [ 6 ]
                       },
                       {
                           "mRender": function ( data, type, row ) {
+                            var tw = '', ig = '';
+                            if(row.twitter){
+                              tw = row.twitter.replace("@", "");
+                            }
+
+                            if(row.instagram){
+                              ig = row.instagram.replace("@", "");
+
+                            }
+
                             var el =
                             `<div class="row">
                               <div class="col-md-3">
-                                <a href="#"><img class="sosmed" src="assets/img/logo/tw.png"></img></a>
+                                <a target="_blank" href="https://twitter.com/`+tw+`"><img class="sosmed" src="assets/img/logo/tw.png"></img></a>
                               </div>
 
                               <div class="col-md-3">
-                                <a href="#"><img class="sosmed" src="assets/img/logo/ig.png"></img></a>
-                              </div>
-
-                              <div class="col-md-3">
-                                <a href="#"><img class="sosmed" src="assets/img/logo/fb.png"></img></a>
+                                <a target="_blank" href="https://www.instagram.com/`+ig+`"><img class="sosmed" src="assets/img/logo/ig.png"></img></a>
                               </div>
 
                             </div>`
