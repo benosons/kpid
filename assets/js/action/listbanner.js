@@ -241,7 +241,7 @@ function deleteData(id)
   });
 
   swalWithBootstrapButtons.fire({
-    title: 'Anda Yakin, hapus user ini?',
+    title: 'Anda Yakin, hapus Banner?',
     text: "",
     icon: 'warning',
     showCancelButton: true,
