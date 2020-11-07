@@ -420,6 +420,15 @@ class Sys extends CI_Controller {
 	{
 
 		$params = (object)$this->input->post();
+		$path = $params->path;
+
+		$files = glob($path.'*'); // get all file names
+		foreach($files as $file){ // iterate files
+		  if(is_file($file))
+		    unlink($file); // delete file
+		    //echo $file.'file deleted';
+		}
+		
 		$this->Model_sys->deletebanner($params);
 		header('Content-Type: application/json');
 		echo json_encode(array("status" => TRUE));

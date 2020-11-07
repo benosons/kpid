@@ -517,6 +517,26 @@
       </div>
 
       <div class="row">
+        <div class="col-lg-3 d-flex align-items-stretch">
+          <div class="info-box">
+
+            <div class="row">
+              <div class="col-md-12">
+                <img src="{{base_url}}assets/img/logo/send.png" style="width: 25%;"></img>
+              </div>
+              <div class="col-md-12">
+                <h3>Konsultasi online</h3>
+              </div>
+              <div class="col-md-12">
+                {% if name %}
+                <a href="{{base_url}}dashboard"><button class="btn btn-success" type="button" name="button">Tampilkan Dashboard <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
+                {% else %}
+                <a href="{{base_url}}auth"><button class="btn btn-danger" type="button" name="button">Login atau Registrasi <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="col-lg-3 d-flex align-items-stretch" >
           <div class="info-box">
@@ -565,27 +585,6 @@
             </div>
           </div>
         </div>
-
-        <div class="col-lg-3 d-flex align-items-stretch">
-          <div class="info-box ">
-            <div class="row">
-              <div class="col-md-12">
-                <img src="{{base_url}}assets/img/logo/send.png" style="width: 25%;"></img>
-              </div>
-              <div class="col-md-12">
-                <h3>Konsultasi online</h3>
-              </div>
-              <div class="col-md-12">
-                {% if name %}
-                <a href="{{base_url}}dashboard"><button class="btn btn-success" type="button" name="button">Tampilkan Dashboard <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
-                {% else %}
-                <a href="{{base_url}}auth"><button class="btn btn-danger" type="button" name="button">Login atau Registrasi <i class="icofont-arrow-right" style="border: none;color: #fff;font-size:20px;"></i></button></a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- <div class="col-lg-12">
           <form role="form" class="php-email-form">
             <div class="form-row">
@@ -714,7 +713,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Penanggung Jawab</label>
+                <label>Direktur</label>
                 <input id="pimpinan" type="text" class="form-control" placeholder="Enter ..." disabled>
               </div>
             </div>

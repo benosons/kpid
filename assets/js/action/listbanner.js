@@ -31,6 +31,7 @@ $( document ).ready(function() {
   });
 
   $('#save-banner').on('click', function(){
+    $(this).attr('disabled');
       savebanner();
   });
 
@@ -98,7 +99,7 @@ $( document ).ready(function() {
                                                       <button onclick="editbanner(`+row.id+`,'`+row.judul+`','`+row.deskripsi+`','`+row.status+`','`+row.foto+`')" type="button" class="btn btn-block btn-warning btn-sm"><i class="far fa-edit"></i></button>
                                                     </div>
                                                     <div class="col-md-4">
-                                                      <button onclick="deleteData(`+row.id+`)" type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                                      <button onclick="deleteData(`+row.id+`,'`+row.foto+`')" type="button" class="btn btn-block btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                                     </div>
                                                   </div>
                                                     `;
@@ -230,7 +231,7 @@ function editbanner(id, judul, deskripsi, status, foto){
 
 }
 
-function deleteData(id)
+function deleteData(id,path)
 {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -256,6 +257,7 @@ function deleteData(id)
       url: 'deletebanner',
       data : {
               id    : id,
+              path : path
             },
       success: function(data)
       {
