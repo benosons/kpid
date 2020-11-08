@@ -114,10 +114,8 @@ function loadsiaran(param){
                           "mRender": function ( data, type, row ) {
                             var el = '<b>-</b>';
                             if(row.website){
-                                el = row.website;
+                                el = `<a href="`+row.website+`" target="_blank">`+row.website+`</a>`;
                             }
-
-
                               return el;
                           },
                           "aTargets": [ 4 ]

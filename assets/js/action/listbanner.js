@@ -14,7 +14,7 @@ $( document ).ready(function() {
   $('.imageBox').bind("mousewheel", function() {
       return false;
   });
-  
+
   $('.bootstrap-switch-handle-on').html('Aktif');
   $('.bootstrap-switch-handle-off').html('Tidak');
 
