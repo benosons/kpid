@@ -215,11 +215,20 @@ function autoPlayYouTubeModal(url) {
   $('#videoModal').modal({
     show: true
   });
+  var part = url.substring(
+    url.lastIndexOf("?v=") + 3,
+    url.lastIndexOf("&")
+  );
   // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
-  $('#iframe-video').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
+  $('#iframe-video').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+part+'?autoplay=0"></iframe>');
 }
 
 function playvideo(url) {
+  var part = url.substring(
+    url.lastIndexOf("?v=") + 3,
+    url.lastIndexOf("&")
+  );
+
   // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
-  $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1"></iframe>');
+  $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+part+'?autoplay=0"></iframe>');
 }

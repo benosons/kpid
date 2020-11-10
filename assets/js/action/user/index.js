@@ -390,6 +390,10 @@ function loadvideo(){
     for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < data.length; i++) {
         var url = data[i].url.split("?v=")[1];
         const d = new Date(data[i].update_date);
+        var part = data[i].url.substring(
+          data[i].url.lastIndexOf("?v=") + 3,
+          data[i].url.lastIndexOf("&")
+        );
         content +=
           `<div class="col-md-4">
             <div class="blog-grid">
@@ -406,7 +410,7 @@ function loadvideo(){
                 <h5><a href="#">`+data[i].judul+`</a></h5>
                 <p>`+data[i].desc+`.</p>
                 <div class="btn-bar">
-                <a href="`+data[i].url+`" class="px-btn-arrow" target="_blank">
+                <a href="`+part+`" class="px-btn-arrow" target="_blank">
                 <span>Tonton Video</span>
                 <i class="arrow"></i>
                 </a>
