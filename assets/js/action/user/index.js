@@ -403,14 +403,14 @@ function loadvideo(){
                 <label>`+monthNames[d.getMonth()]+`</label>
                 </div>
                 <a href="#">
-                <iframe class="tutor" src="//www.youtube.com/embed/`+url+`"></iframe>
+                <iframe class="tutor" src="https://www.youtube.com/embed/`+part+`"></iframe>
                 </a>
                 </div>
                 <div class="blog-info">
                 <h5><a href="#">`+data[i].judul+`</a></h5>
                 <p>`+data[i].desc+`.</p>
                 <div class="btn-bar">
-                <a href="`+part+`" class="px-btn-arrow" target="_blank">
+                <a href="`+data[i].url+`" class="px-btn-arrow" target="_blank">
                 <span>Tonton Video</span>
                 <i class="arrow"></i>
                 </a>
