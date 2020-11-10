@@ -230,5 +230,5 @@ function playvideo(url) {
   );
 
   // $('#iframe-video').attr('src', 'http://www.youtube.com/embed/'+url.split('?v=')[1]+'?autoplay=1');
-  $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="http://www.youtube.com/embed/'+part+'?autoplay=0"></iframe>');
+  $('#iframe-video-add').html('<iframe id="iframe-video" width="100%" height="350" src="https://www.youtube.com/embed/'+part+'?autoplay=0"></iframe>');
 }
